@@ -8,6 +8,7 @@ class Resident : public QObject
     Q_OBJECT
 public:
     explicit Resident(QObject *parent = nullptr);
+private:
 
 signals:
 
