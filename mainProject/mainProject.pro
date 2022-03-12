@@ -17,11 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     feature_resident/resident.cpp \
+    feature_space/space.cpp \
     main.cpp \
     widget.cpp
 
 HEADERS += \
     feature_resident/resident.h \
+    feature_space/space.h \
     widget.h\
 
 FORMS += \
