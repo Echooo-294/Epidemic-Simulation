@@ -21,6 +21,8 @@ SOURCES += \
     feature_virus/feature_virus.cpp \
     feature_virus/virus.cpp \
     feature_virus/virus.cpp \
+    feature_space/space.cpp \
+    feature_virus/virusGrowth.cpp \
     main.cpp \
     v.cpp \
     widget.cpp
@@ -28,9 +30,13 @@ SOURCES += \
 HEADERS += \
     D:/qt doc/untitled1/q.h \
     feature_resident/resident.h \
+<<<<<<< HEAD
     feature_virus/feature_virus.h \
     feature_virus/virus.h \
     feature_virus/virus.h \
+=======
+    feature_space/space.h \
+>>>>>>> 2e8f23cb1e56e8530a33266e7c387777a9c92676
     widget.h\
 
 FORMS += \
