@@ -16,12 +16,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    D:/qt doc/untitled1/q.cpp \
     feature_resident/resident.cpp \
+    feature_virus/feature_virus.cpp \
+    feature_virus/virus.cpp \
+    feature_virus/virus.cpp \
     main.cpp \
+    v.cpp \
     widget.cpp
 
 HEADERS += \
+    D:/qt doc/untitled1/q.h \
     feature_resident/resident.h \
+    feature_virus/feature_virus.h \
+    feature_virus/virus.h \
+    feature_virus/virus.h \
     widget.h\
 
 FORMS += \
