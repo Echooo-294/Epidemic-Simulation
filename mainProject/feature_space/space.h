@@ -1,3 +1,11 @@
+/*
+ * @Description: 建筑类的声明
+ * @Author: 巾可
+ * @Date: 2022-03-03
+ * @Last Modified by: 巾可
+ * @Last Modified time: 2022-03-12
+ */
+
 #ifndef SPACE_H
 #define SPACE_H
 
