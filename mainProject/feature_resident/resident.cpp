@@ -3,14 +3,15 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-03-12
+ * @Last Modified time: 2022-03-15
  */
 
 #include "resident.h"
 
-Resident::Resident(QObject *parent) : QObject(parent)
+Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
+  ,activityStatus(0),vaccine(0),immunity(im)
 {
-
+    //创建时可以选择三种对象：adult,student,senior，仅免疫力不同，其他全部默认
 }
 
 double Resident::getVirusDensity() const
@@ -53,11 +54,9 @@ void Resident::setVaccine(int value)
     vaccine = value;
 }
 
-void Resident::updateHealthStatus()
+void Resident::updateHealthStatus(const Virus &v)
 {
-    double growthRate=0.03;
-    int incubationPeriod=10;
-    double boundary1=incubationPeriod*growthRate;//潜伏与出症状的密度界限
+    double boundary1=0.3;//潜伏与出症状的密度界限
     double boundary2=0.75;//非重症与重症的密度界限
     if(virusDensity==0)
         setHealthStatus(0);//健康
@@ -69,4 +68,14 @@ void Resident::updateHealthStatus()
         setHealthStatus(3);//重症
     else if(virusDensity==1)
         setHealthStatus(4);//死亡
+}
+
+double Resident::getImmunity() const
+{
+    return immunity;
+}
+
+void Resident::setImmunity(double value)
+{
+    immunity = value;
 }
