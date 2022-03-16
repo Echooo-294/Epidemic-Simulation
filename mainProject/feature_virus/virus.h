@@ -6,23 +6,26 @@ class Virus:public QObject
 {
 public:
     Virus();
-    int getInfectivity() const;
-    double getOpenInfection() const;
-    double getCloseInfection() const;
-    int getInfectionDistance() const;
-    double getGrowthRate1() const;
-    double getGrowthRate2() const;
-    double getCureEffectiveness() const;
-    double getMaskEffectiveness() const;
-
+    int getinfectivity() const;
+    double getopenInfection() const;
+    double getcloseInfection() const;
+    int getinfectionDistance() const;
+    double getgrowthRate1() const;
+    double getgrowthRate2() const;
+    double getcureEffectiveness() const;
+    double getmaskEffectiveness() const;
+    double getBoundary1() const;
+    double getBoundary2() const;
 private:
-    int Infectivity;//传染人数上限
-    double OpenInfection,CloseInfection;//感染概率
-    int InfectionDistance;//可感染范围
-    double GrowthRate1;//潜伏期病毒增长率
-    double GrowthRate2;//出症状病毒增长率
-    double CureEffectiveness;//治疗有效性
-    double MaskEffectiveness;//口罩有效性
+    int infectivity;//传染人数上限
+    double openInfection,closeInfection;//感染概率
+    int infectionDistance;//可感染范围
+    double growthRate1;//潜伏期病毒增长率
+    double growthRate2;//出症状病毒增长率
+    double cureEffectiveness;//治疗有效性
+    double maskEffectiveness;//口罩有效性
+    double boundary1;//潜伏期的界限
+    double boundary2;//重症界限
 };
 
 #endif // VIRUS_H

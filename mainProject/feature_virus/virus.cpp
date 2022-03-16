@@ -5,42 +5,52 @@ Virus::Virus()
 
 }
 
-int Virus::getInfectivity() const
+int Virus::getinfectivity() const
 {
-    return Infectivity;
+    return infectivity;
 }
 
-double Virus::getOpenInfection() const
+double Virus::getopenInfection() const
 {
-    return OpenInfection;
+    return openInfection;
 }
 
-double Virus::getCloseInfection() const
+double Virus::getcloseInfection() const
 {
-    return CloseInfection;
+    return closeInfection;
 }
 
-int Virus::getInfectionDistance() const
+int Virus::getinfectionDistance() const
 {
-    return InfectionDistance;
+    return infectionDistance;
 }
 
-double Virus::getGrowthRate1() const
+double Virus::getgrowthRate1() const
 {
-    return GrowthRate1;
+    return growthRate1;
 }
 
-double Virus::getGrowthRate2() const
+double Virus::getgrowthRate2() const
 {
-    return GrowthRate2;
+    return growthRate2;
 }
 
-double Virus::getCureEffectiveness() const
+double Virus::getcureEffectiveness() const
 {
-    return CureEffectiveness;
+    return cureEffectiveness;
 }
 
-double Virus::getMaskEffectiveness() const
+double Virus::getmaskEffectiveness() const
 {
-    return MaskEffectiveness;
+    return maskEffectiveness;
+}
+
+double Virus::getBoundary1() const
+{
+    return boundary1;
+}
+
+double Virus::getBoundary2() const
+{
+    return boundary2;
 }

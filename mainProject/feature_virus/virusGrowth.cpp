@@ -15,8 +15,8 @@
 void virusGrowth(Resident &people,const Virus &v)
 {
     double density=people.getVirusDensity();
-    double growthRate1=v.getGrowthRate1();//0.03
-    double growthRate2=v.getGrowthRate2();//0.05
+    double growthRate1=v.getgrowthRate1();//0.03
+    double growthRate2=v.getgrowthRate2();//0.05
     double boundary1=0.3;//潜伏与出症状的密度界限
     if(density>0&&density<boundary1)
         people.setVirusDensity(density+growthRate1);//潜伏期自然增长
