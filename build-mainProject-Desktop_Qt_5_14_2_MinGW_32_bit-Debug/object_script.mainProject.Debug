@@ -1,0 +1,13 @@
+debug/resident.o
+debug/vaccination.o
+debug/fullyOpen.o
+debug/timeRelevant.o
+debug/treatment.o
+debug/virus.o
+debug/space.o
+debug/virusGrowth.o
+debug/main.o
+debug/widget.o
+debug/moc_resident.o
+debug/moc_space.o
+debug/moc_widget.o
