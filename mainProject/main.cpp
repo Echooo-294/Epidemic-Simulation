@@ -7,6 +7,8 @@
 #include "widget.h"
 #include<feature_virus/virus.h>
 #include <QApplication>
+#include "ctime"
+#include "cstdlib"
 //初始参数（全局变量）
 int Population=3000;//初始总人数
 int InitInfection=1;//初始感染人数

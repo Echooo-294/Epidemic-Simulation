@@ -7,7 +7,7 @@
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
-void getrand();
+double getrand();
 /*
  * 使用前提：病毒密度大于0且小于1，健康状态为非健康和存活，活动状态处于治疗中
  * 参数：居民对象（或数组）和病毒对象

@@ -1,5 +1,6 @@
 release/resident.o
 release/vaccination.o
+release/infectionProbability.o
 release/fullyOpen.o
 release/timeRelevant.o
 release/treatment.o

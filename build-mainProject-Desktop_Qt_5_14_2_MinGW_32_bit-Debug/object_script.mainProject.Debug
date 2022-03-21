@@ -1,5 +1,6 @@
 debug/resident.o
 debug/vaccination.o
+debug/infectionProbability.o
 debug/fullyOpen.o
 debug/timeRelevant.o
 debug/treatment.o
