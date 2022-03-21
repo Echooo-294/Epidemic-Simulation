@@ -1,6 +1,8 @@
 #ifndef VIRUS_H
 #define VIRUS_H
 #include<QObject>
+#include "ctime"
+#include "cstdlib"
 
 class Virus:public QObject
 {

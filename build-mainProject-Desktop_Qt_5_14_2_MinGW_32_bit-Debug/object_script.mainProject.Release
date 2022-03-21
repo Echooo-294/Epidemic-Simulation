@@ -1,0 +1,13 @@
+release/resident.o
+release/vaccination.o
+release/fullyOpen.o
+release/timeRelevant.o
+release/treatment.o
+release/virus.o
+release/space.o
+release/virusGrowth.o
+release/main.o
+release/widget.o
+release/moc_resident.o
+release/moc_space.o
+release/moc_widget.o
