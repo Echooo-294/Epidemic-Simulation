@@ -8,9 +8,19 @@
 
 #include "space.h"
 
-Space::Space(QObject *parent) : QObject(parent)
+Space::Space(QObject *parent) : QObject(parent),accessible(true)
 {
+    //初始化时默认可以进入
+}
 
+int Space::getRestRoom() const
+{
+    return restRoom;
+}
+
+void Space::setRestRoom(int value)
+{
+    restRoom = value;
 }
 
 bool Space::isAccessible() const
@@ -77,11 +87,7 @@ int Space::area()const
 {
     return length * width;
 }
-int Space::restRoom()const
-{
-
-}
-void Space::addResident(int num)
+void Space::addResident(const Resident& r)
 {
 
 }
