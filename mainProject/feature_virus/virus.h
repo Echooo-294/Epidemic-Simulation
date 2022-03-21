@@ -5,7 +5,7 @@
 class Virus:public QObject
 {
 public:
-    Virus();
+    Virus(int a,double b,double c,int d,double e,double f,double g,double h,double i,double j);
     int getinfectivity() const;
     double getopenInfection() const;
     double getcloseInfection() const;
