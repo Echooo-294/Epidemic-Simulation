@@ -13,6 +13,19 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
+  <widget class="QPushButton" name="startBtn">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>370</y>
+     <width>111</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

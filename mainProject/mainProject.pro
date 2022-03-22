@@ -26,15 +26,18 @@ SOURCES += \
     feature_space/space.cpp \
     feature_virus/virusGrowth.cpp \
     main.cpp \
+    mainwindow.cpp \
     widget.cpp
 
 HEADERS += \
     feature_resident/resident.h \
     feature_virus/virus.h \
     feature_space/space.h \
+    mainwindow.h \
     widget.h\
 
 FORMS += \
+    mainwindow.ui \
     widget.ui
 
 # Default rules for deployment.

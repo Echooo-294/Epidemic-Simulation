@@ -8,7 +8,9 @@ release/virus.o
 release/space.o
 release/virusGrowth.o
 release/main.o
+release/mainwindow.o
 release/widget.o
 release/moc_resident.o
 release/moc_space.o
+release/moc_mainwindow.o
 release/moc_widget.o
