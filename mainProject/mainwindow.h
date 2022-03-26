@@ -23,6 +23,9 @@ private:
     //状态栏上的显示
     QLabel *curlocLab;
     QLabel *curbuiLab;
+
+private slots:
+    void get_Mouse_Point(int x,int y);
 };
 
 #endif // MAINWINDOW_H

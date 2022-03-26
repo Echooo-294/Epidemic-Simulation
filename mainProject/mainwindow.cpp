@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "mapwidg.h"
+#include <QPainter>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -27,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
     permanent->setText(tr("<a href=\"https://gitee.com/echooo294/epidemic-simulation\">代码仓库</a>"));
     permanent->setOpenExternalLinks(true);//设置可以打开网站链接
     ui->statusbar->addPermanentWidget(permanent);//显示永久信息
+    //将地图上鼠标位置显示在状态栏中
+    connect(ui->mapWidget,SIGNAL(send_Mouse_Point(int,int)),this,SLOT(get_Mouse_Point(int,int)));
+
+    //地图
 
 
 }
@@ -40,4 +45,9 @@ void MainWindow::on_actionexit_triggered()
 {
     //点击菜单中的退出，退出程序
     this->close();
+}
+
+void MainWindow::get_Mouse_Point(int x, int y)
+{
+      curlocLab->setText(QString::asprintf("当前位置：%d,%d",x,y));
 }

@@ -52,17 +52,17 @@
       <string>左侧区域</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="MapWidg" name="mapWidget" native="true">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>10</y>
-       <width>641</width>
-       <height>441</height>
+       <x>130</x>
+       <y>0</y>
+       <width>651</width>
+       <height>451</height>
       </rect>
      </property>
-     <property name="text">
-      <string>地图区域，为Label控件，可改</string>
+     <property name="mouseTracking">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -97,6 +97,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MapWidg</class>
+   <extends>QWidget</extends>
+   <header location="global">mapwidg.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

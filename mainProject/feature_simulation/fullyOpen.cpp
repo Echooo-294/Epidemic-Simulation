@@ -15,7 +15,7 @@ extern int Policy;//防疫政策：0完全开放，1疫苗接种+不管控，2�
 extern int Day;//天数
 extern double Time;//时间
 QVector<Resident*> initPeople();
-
+QVector<Resident*> initIncubation(QVector<Resident*>&);
 /*
  * 使用前提：政策选择为完全开放
  * 参数：
@@ -24,7 +24,6 @@ QVector<Resident*> initPeople();
 void fullyOpen()
 {
     QVector<Resident*> allPeople=initPeople();//初始化人群
-    InitInfection(allPeople);//初始化感染者
-
+    QVector<Resident*> incubations=initIncubation(allPeople);//初始化感染者
 
 }

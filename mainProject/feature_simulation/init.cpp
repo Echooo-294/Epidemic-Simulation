@@ -29,15 +29,16 @@ QVector<Resident*> initPeople()
     }
     return allPeople;
 }
-QVector<Resident*> initInfection(QVector<Resident*>& allPeople)
+QVector<Resident*> initIncubation(QVector<Resident*>& allPeople)
 {
-    QVector<Resident*> infections;
+    QVector<Resident*> incubations;//感染潜伏
+    incubations.reserve(InitInfection);
     QVector<Resident*>::iterator iter=allPeople.begin();
     for(int i=0;i<InitInfection;i++)//初始感染潜伏
     {
-        (*iter)->setHealthStatus(1);//感染潜伏
-        infections.append(*iter);
+        (*iter)->setHealthStatus(1);
+        incubations.append(*iter);
         iter++;
     }
-
+    return incubations;
 }
