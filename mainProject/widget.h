@@ -2,7 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
-
+#include "mainwindow.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -15,7 +15,12 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_startBtn_clicked();
+
 private:
     Ui::Widget *ui;
+
+    MainWindow *mainwin = NULL;
 };
 #endif // WIDGET_H

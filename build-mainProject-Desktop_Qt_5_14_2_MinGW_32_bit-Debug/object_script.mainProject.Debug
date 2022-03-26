@@ -8,7 +8,9 @@ debug/virus.o
 debug/space.o
 debug/virusGrowth.o
 debug/main.o
+debug/mainwindow.o
 debug/widget.o
 debug/moc_resident.o
 debug/moc_space.o
+debug/moc_mainwindow.o
 debug/moc_widget.o
