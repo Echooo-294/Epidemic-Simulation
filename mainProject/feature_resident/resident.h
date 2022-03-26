@@ -11,12 +11,12 @@
 
 #include <QObject>
 #include<feature_virus/virus.h>
-
+#include<QVector>
 class Resident : public QObject
 {
     Q_OBJECT
 public:
-    explicit Resident(QObject *parent = nullptr,double im=1);
+    explicit Resident(QObject *parent = nullptr,double im=1.0);
     double getVirusDensity() const;
     int getHealthStatus() const;
     int getActivityStatus() const;

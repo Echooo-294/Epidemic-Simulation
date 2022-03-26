@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     feature_resident/resident.cpp \
     feature_resident/vaccination.cpp \
+    feature_simulation/init.cpp \
     feature_space/door.cpp \
     feature_virus/infectionProbability.cpp \
     feature_simulation/fullyOpen.cpp \

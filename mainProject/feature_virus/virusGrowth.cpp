@@ -20,7 +20,7 @@ void virusGrowth(Resident &people,const Virus &v)
     const double growthRate1=v.getgrowthRate1();//潜伏期自然增长率
     const double growthRate2=v.getgrowthRate2();//出症状后自然增长率
     const double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
-    if(density>0&&density<boundary1)
+    if(density>=0&&density<boundary1)
         people.setVirusDensity(density+growthRate1);//潜伏期自然增长
     else if(density<1&&density>=boundary1)
         people.setVirusDensity(density+growthRate2);//出症状后自然增长

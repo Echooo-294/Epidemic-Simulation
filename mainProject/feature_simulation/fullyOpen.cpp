@@ -14,6 +14,8 @@ extern const double UpdateTime;//更新间隔时间
 extern int Policy;//防疫政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
 extern int Day;//天数
 extern double Time;//时间
+QVector<Resident*> initPeople();
+
 /*
  * 使用前提：政策选择为完全开放
  * 参数：
@@ -21,5 +23,8 @@ extern double Time;//时间
  */
 void fullyOpen()
 {
+    QVector<Resident*> allPeople=initPeople();//初始化人群
+    InitInfection(allPeople);//初始化感染者
+
 
 }

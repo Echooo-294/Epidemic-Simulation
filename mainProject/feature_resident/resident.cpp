@@ -6,7 +6,8 @@
  * @Last Modified time: 2022-03-15
  */
 
-#include "resident.h"
+#include<feature_resident/resident.h>
+#include<feature_virus/virus.h>
 
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
   ,activityStatus(0),vaccine(0),immunity(im)
