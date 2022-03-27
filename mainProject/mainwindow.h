@@ -25,7 +25,7 @@ private:
     QLabel *curbuiLab;
 
 private slots:
-    void get_Mouse_Point(int x,int y);
+    void get_Mouse_Point(QPoint point);
 };
 
 #endif // MAINWINDOW_H

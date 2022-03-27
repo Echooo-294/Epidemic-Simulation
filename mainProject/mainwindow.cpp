@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mapwidg.h"
-#include <QPainter>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -29,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     permanent->setOpenExternalLinks(true);//设置可以打开网站链接
     ui->statusbar->addPermanentWidget(permanent);//显示永久信息
     //将地图上鼠标位置显示在状态栏中
-    connect(ui->mapWidget,SIGNAL(send_Mouse_Point(int,int)),this,SLOT(get_Mouse_Point(int,int)));
+    connect(ui->mapView,SIGNAL(mouseMovePoint(QPoint)),this,SLOT(get_Mouse_Point(QPoint)));
 
     //地图
 
@@ -47,7 +46,9 @@ void MainWindow::on_actionexit_triggered()
     this->close();
 }
 
-void MainWindow::get_Mouse_Point(int x, int y)
+void MainWindow::get_Mouse_Point(QPoint point)
 {
-      curlocLab->setText(QString::asprintf("当前位置：%d,%d",x,y));
+    int x = point.x();
+    int y = point.y();
+    curlocLab->setText(QString::asprintf("当前位置：%d,%d",x,y));
 }
