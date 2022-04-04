@@ -1,4 +1,4 @@
-void randMove(QVector<Resident*> allPeople)
+void randMove()
 {
 
 }

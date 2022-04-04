@@ -27,7 +27,7 @@ public:
     void setHealthStatus(int value);
     void setActivityStatus(int value);
     void setVaccine(int value);
-    void updateHealthStatus(const Virus &v);//用于根据病毒密度更新健康状态，病毒类可以作为参数
+    void updateHealthStatus();//用于根据病毒密度更新健康状态，病毒类可以作为参数
     double getImmunity() const;
     void setImmunity(double value);
     void initPoint();//初始图形化

@@ -3,12 +3,12 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-03-15
+ * @Last Modified time: 2022-04-04
  */
 
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
-
+#include<feature_timeAndStatistic/statistic.h>
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
   ,activityStatus(0),vaccine(0),immunity(im)
 {
@@ -55,10 +55,10 @@ void Resident::setVaccine(int value)
     vaccine = value;
 }
 
-void Resident::updateHealthStatus(const Virus &v)
+void Resident::updateHealthStatus()
 {
-    double boundary1=0.3;//潜伏与出症状的密度界限
-    double boundary2=0.75;//非重症与重症的密度界限
+    double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
+    double boundary2=v.getBoundary2();//非重症与重症的密度界限
     if(virusDensity==0)
         setHealthStatus(0);//健康
     else if(virusDensity>0&&virusDensity<boundary1)
@@ -84,14 +84,4 @@ void Resident::setImmunity(double value)
 void Resident::initPoint()
 {
 
-}
-
-QPoint Resident::getPosition() const
-{
-    return position;
-}
-
-void Resident::setPosition(const QPoint &value)
-{
-    position = value;
 }
