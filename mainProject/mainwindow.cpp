@@ -52,6 +52,7 @@ void MainWindow::mapInit()
     Space *W[4]={w1,w2,w3,w4};
     Space *H[1]={h1};
     Space *Z[1]={z1};
+    //qDebug()<<ui->mapView->width()<<ui->mapView->height();
 
     //初始化视图
     scene=new QGraphicsScene(0,0,ui->mapView->width()-5,ui->mapView->height()-5);
