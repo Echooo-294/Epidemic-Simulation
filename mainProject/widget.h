@@ -16,7 +16,7 @@ public:
     ~Widget();
 
 private slots:
-    void on_startBtn_clicked();
+    void on_startBtn_clicked();//确定按钮点击
 
 private:
     Ui::Widget *ui;

@@ -24,13 +24,14 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    //状态栏上的显示
+    //状态栏
     QLabel *curlocLab;
     QLabel *curbuiLab;
-    //图的视图
+    //地图的视图
     QGraphicsScene *scene=NULL;
 
 private slots:
+    //获得鼠标移动和点击的槽函数
     void get_Mouse_Point(QPoint point);
     void get_Mouse_Point_Press(QPoint point);
 };
