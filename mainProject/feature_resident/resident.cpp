@@ -9,6 +9,7 @@
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
 #include<feature_timeAndStatistic/statistic.h>
+
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
   ,activityStatus(0),vaccine(0),immunity(im)
 {

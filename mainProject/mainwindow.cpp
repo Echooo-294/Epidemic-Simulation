@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include<mapqgraphics.h>
 void fullOpen(MapQGraphics *);
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -36,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->mapInit();
 
     //完全开放模拟
+    ui->mapView->fullyOpen();
 }
 
 void MainWindow::mapInit()

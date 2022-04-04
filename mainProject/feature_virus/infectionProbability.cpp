@@ -10,7 +10,7 @@
 #include<feature_timeAndStatistic/statistic.h>
 /*
  * 参数：两个居民对象（带病毒者和被计算感染概率者）和病毒对象
- * 使用时间和空间：出现感染者后，对感染者周围4米范围内每半小时计算一次
+ * 使用时间和空间：出现感染者后，对感染者周围4米范围内每一小时计算一次
  */
 
 bool infectionP(Resident &people1,Resident &people2)
