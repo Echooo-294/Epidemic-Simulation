@@ -1,6 +1,8 @@
 release/resident.o
 release/vaccination.o
+release/init.o
 release/door.o
+release/statistic.o
 release/infectionProbability.o
 release/fullyOpen.o
 release/timeRelevant.o
@@ -12,6 +14,7 @@ release/main.o
 release/mainwindow.o
 release/mapqgraphics.o
 release/widget.o
+release/qrc_res.o
 release/moc_resident.o
 release/moc_door.o
 release/moc_space.o

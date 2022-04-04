@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
@@ -20,6 +21,7 @@ class Ui_Widget
 {
 public:
     QPushButton *startBtn;
+    QLabel *label;
 
     void setupUi(QWidget *Widget)
     {
@@ -28,7 +30,11 @@ public:
         Widget->resize(800, 600);
         startBtn = new QPushButton(Widget);
         startBtn->setObjectName(QString::fromUtf8("startBtn"));
-        startBtn->setGeometry(QRect(310, 370, 111, 81));
+        startBtn->setGeometry(QRect(280, 310, 221, 171));
+        startBtn->setIconSize(QSize(51, 46));
+        label = new QLabel(Widget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(50, 60, 611, 151));
 
         retranslateUi(Widget);
 
@@ -38,7 +44,8 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
-        startBtn->setText(QCoreApplication::translate("Widget", "\345\274\200\345\247\213", nullptr));
+        startBtn->setText(QString());
+        label->setText(QCoreApplication::translate("Widget", "\347\226\253\346\203\205\346\250\241\346\213\237\347\263\273\347\273\237", nullptr));
     } // retranslateUi
 
 };
