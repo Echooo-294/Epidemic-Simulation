@@ -16,14 +16,33 @@
   <widget class="QPushButton" name="startBtn">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>370</y>
-     <width>111</width>
-     <height>81</height>
+     <x>280</x>
+     <y>310</y>
+     <width>221</width>
+     <height>171</height>
     </rect>
    </property>
    <property name="text">
-    <string>开始</string>
+    <string/>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>51</width>
+     <height>46</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>60</y>
+     <width>611</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>疫情模拟系统</string>
    </property>
   </widget>
  </widget>
