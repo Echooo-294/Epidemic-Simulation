@@ -7,12 +7,13 @@
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
+#include<feature_timeAndStatistic/statistic.h>
 /*
  * 使用前提：病毒密度大于0且小于1，健康状态为非健康和存活
  * 参数：居民对象（或数组）和病毒对象
  * 使用时间和空间：每日更新（或每多少时间），无空间限制
  */
-void virusGrowth(Resident &people,const Virus &v)
+void virusGrowth(Resident &people)
 {
     if(people.getHealthStatus()==0||people.getHealthStatus()==4)//健康状态为非健康和存活
         return;

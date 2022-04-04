@@ -80,3 +80,18 @@ void Resident::setImmunity(double value)
 {
     immunity = value;
 }
+
+void Resident::initPoint()
+{
+
+}
+
+QPoint Resident::getPosition() const
+{
+    return position;
+}
+
+void Resident::setPosition(const QPoint &value)
+{
+    position = value;
+}

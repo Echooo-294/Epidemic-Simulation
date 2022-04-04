@@ -7,13 +7,7 @@
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
-extern int Population;//初始总人数
-extern int InitInfection;//初始感染人数
-extern const double StartTime;//起始时间
-extern const double UpdateTime;//更新间隔时间
-extern int Policy;//防疫政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
-extern int Day;//天数
-extern double Time;//时间
+#include<feature_timeAndStatistic/statistic.h>
 QVector<Resident*> initPeople();
 QVector<Resident*> initIncubation(QVector<Resident*>&);
 /*
@@ -21,9 +15,17 @@ QVector<Resident*> initIncubation(QVector<Resident*>&);
  * 参数：
  * 使用时间和空间：
  */
+//地图窗口需要有QTime成员、QVector
 void fullyOpen()
 {
     QVector<Resident*> allPeople=initPeople();//初始化人群
-    QVector<Resident*> incubations=initIncubation(allPeople);//初始化感染者
+    QVector<Resident*> incubations=initIncubation(allPeople);//初始化感染潜伏者
+    //分组类并行，分三十趟，100个先移动，再感染或者其他，重复
+     QTimer *timer1=new QTimer();//初始化计时器
+     connect(timer1,timerout(),);//每500ms全部人要做的
+     timer1->start(500);
+     QTimer *timer2=new QTimer();
+     connect(timer2,timerout(),);//每24h更新统计结果
+     timer2->start(6000);
 
 }
