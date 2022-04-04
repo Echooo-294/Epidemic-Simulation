@@ -110,6 +110,54 @@ void MainWindow::mapInit()
          scene->addItem(&m_Z[i]);
          scene->addItem(&t_Z[i]);
         }
+    Resident *res[400];
+    for(int i=0;i<400;i++)
+    {
+        if(i<=100)res[i]=new Resident(this,0.3);
+        else if(i<=200)res[i]=new Resident(this,0.5);
+        else if(i<=400)res[i]=new Resident(this,0.7);
+    }
+    QGraphicsEllipseItem *people = new QGraphicsEllipseItem[400];
+    QPen pen5;
+    pen5.setColor(Qt::black);
+    pen5.setWidth(2);
+    for(int i=0;i<400;i++)
+    {
+
+        if(i<=100)
+        {
+            people[i].setPen(pen5);
+            people[i].setRect(QRectF((i%10)*10+5,(i/10)*10+5,2,2));
+            people[i].setStartAngle(16*0);
+            people[i].setSpanAngle(16*360);
+            scene->addItem(&people[i]);
+        }
+        else if(i<=200)
+        {
+            people[i].setPen(pen5);
+            people[i].setRect(QRectF(((i-100)%10)*10+5,((i-100)/10)*10+351,2,2));
+            people[i].setStartAngle(16*0);
+            people[i].setSpanAngle(16*360);
+            scene->addItem(&people[i]);
+        }
+        else if(i<=300)
+        {
+            people[i].setPen(pen5);
+            people[i].setRect(QRectF(((i-200)%10)*10+551,((i-200)/10)*10+5,2,2));
+            people[i].setStartAngle(16*0);
+            people[i].setSpanAngle(16*360);
+            scene->addItem(&people[i]);
+        }
+        else if(i<=400)
+        {
+            people[i].setPen(pen5);
+            people[i].setRect(QRectF(((i-300)%10)*10+551,((i-300)/10)*10+351,2,2));
+            people[i].setStartAngle(16*0);
+            people[i].setSpanAngle(16*360);
+            scene->addItem(&people[i]);
+        }
+
+    }
 }
 
 MainWindow::~MainWindow()
