@@ -5,6 +5,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <feature_space/space.h>
+#include<QVector>
 
 class MapQGraphics : public QGraphicsView
 {
@@ -14,6 +15,12 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 public:
     MapQGraphics(QWidget *parent = nullptr);
+    QVector<Resident*> allPeople;//总人群
+    QVector<Resident*> incubations;//感染潜伏
+    void initPeople();
+    void initIncubation();
+    void fullyOpen();
+    void simulation1();
 
 
 signals:

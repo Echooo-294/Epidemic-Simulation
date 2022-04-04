@@ -1,6 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
-
+#include <QFont>
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
@@ -9,10 +9,21 @@ Widget::Widget(QWidget *parent)
     //设置开始界面
     this->setWindowTitle("疫情模拟系统");
     this->resize(600,400);
-    ui->startBtn->move(this->width()*0.5-ui->startBtn->width()*0.5,this->height()*0.6);
-
+    //开始按钮
+    ui->startBtn->move(this->width()*0.5-ui->startBtn->width()*0.5,this->height()*0.5);
+    ui->startBtn->setIcon(QIcon(":/images/strBtn.png"));
+    ui->startBtn->setIconSize(ui->startBtn->size());
+    this->setStyleSheet("QPushButton{border:0px;}");
     //实例化主界面
     mainwin = new MainWindow;
+
+    //界面大标题
+    QFont font = ui->label->font();
+    font.setPointSize(48);
+    font.setFamily(QStringLiteral("宋体"));
+    ui->label->setFont(font);
+
+
 
 }
 
