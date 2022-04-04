@@ -11,12 +11,14 @@
 
 #include <QObject>
 #include<feature_virus/virus.h>
+#include<QVector>
+
 
 class Resident : public QObject
 {
     Q_OBJECT
 public:
-    explicit Resident(QObject *parent = nullptr,double im=1);
+    explicit Resident(QObject *parent = nullptr,double im=1.0);
     double getVirusDensity() const;
     int getHealthStatus() const;
     int getActivityStatus() const;
@@ -25,9 +27,11 @@ public:
     void setHealthStatus(int value);
     void setActivityStatus(int value);
     void setVaccine(int value);
-    void updateHealthStatus(const Virus &v);//用于根据病毒密度更新健康状态，病毒类可以作为参数
+    void updateHealthStatus();//用于根据病毒密度更新健康状态，病毒类可以作为参数
     double getImmunity() const;
     void setImmunity(double value);
+    void initPoint();//初始图形化
+
 private:
     double virusDensity;//病毒密度
     int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
