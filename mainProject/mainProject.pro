@@ -18,7 +18,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     feature_resident/resident.cpp \
     feature_resident/vaccination.cpp \
+    feature_simulation/init.cpp \
     feature_space/door.cpp \
+    feature_timeAndStatistic/statistic.cpp \
     feature_virus/infectionProbability.cpp \
     feature_simulation/fullyOpen.cpp \
     feature_timeAndStatistic/timeRelevant.cpp \
@@ -34,6 +36,7 @@ SOURCES += \
 HEADERS += \
     feature_resident/resident.h \
     feature_space/door.h \
+    feature_timeAndStatistic/statistic.h \
     feature_virus/virus.h \
     feature_space/space.h \
     mainwindow.h \
@@ -48,3 +51,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc

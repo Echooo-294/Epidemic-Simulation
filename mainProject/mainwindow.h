@@ -27,9 +27,12 @@ private:
     //状态栏上的显示
     QLabel *curlocLab;
     QLabel *curbuiLab;
+    //图的视图
+    QGraphicsScene *scene=NULL;
 
 private slots:
     void get_Mouse_Point(QPoint point);
+    void get_Mouse_Point_Press(QPoint point);
 };
 
 #endif // MAINWINDOW_H
