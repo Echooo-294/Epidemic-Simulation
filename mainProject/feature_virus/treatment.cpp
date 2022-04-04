@@ -16,7 +16,7 @@
  */
 void judgeIntoHos()
 {
-    const double p=getran();
+    const double p=getrand();
 
 }
 /*
