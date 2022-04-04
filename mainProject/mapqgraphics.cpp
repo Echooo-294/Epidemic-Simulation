@@ -9,6 +9,14 @@ void MapQGraphics::mouseMoveEvent(QMouseEvent *event)
     QGraphicsView::mouseMoveEvent(event);
 }
 
+void MapQGraphics::mousePressEvent(QMouseEvent *event)
+{
+    //鼠标点击
+    QPoint point=event->pos();
+    emit mousePressPoint(point);
+    QGraphicsView::mousePressEvent(event);
+}
+
 MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
 
