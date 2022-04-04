@@ -209,7 +209,4 @@ void MainWindow::get_Mouse_Point_Press(QPoint point)
         QString str =item->data(1).toString();
         curbuiLab->setText("当前建筑："+str);
     }
-//    int x = point.x();
-//    int y = point.y();
-//    curbuiLab->setText(QString::asprintf("当前建筑：%d,%d",x,y));
 }
