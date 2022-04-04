@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QGraphicsRectItem>
+#include <QGraphicsTextItem>
+#include <feature_space/space.h>
 namespace Ui {
 class MainWindow;
 }
@@ -13,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void mapInit();
     ~MainWindow();
 
 private slots:
@@ -23,9 +27,12 @@ private:
     //状态栏上的显示
     QLabel *curlocLab;
     QLabel *curbuiLab;
+    //图的视图
+    QGraphicsScene *scene=NULL;
 
 private slots:
-    void get_Mouse_Point(int x,int y);
+    void get_Mouse_Point(QPoint point);
+    void get_Mouse_Point_Press(QPoint point);
 };
 
 #endif // MAINWINDOW_H

@@ -52,7 +52,7 @@
       <string>左侧区域</string>
      </property>
     </widget>
-    <widget class="MapWidg" name="mapWidget" native="true">
+    <widget class="MapQGraphics" name="mapView">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -99,10 +99,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MapWidg</class>
-   <extends>QWidget</extends>
-   <header location="global">mapwidg.h</header>
-   <container>1</container>
+   <class>MapQGraphics</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">mapqgraphics.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

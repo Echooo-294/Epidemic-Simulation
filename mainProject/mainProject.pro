@@ -31,7 +31,7 @@ SOURCES += \
     feature_virus/virusGrowth.cpp \
     main.cpp \
     mainwindow.cpp \
-    mapwidg.cpp \
+    mapqgraphics.cpp \
     widget.cpp
 
 HEADERS += \
@@ -41,12 +41,11 @@ HEADERS += \
     feature_virus/virus.h \
     feature_space/space.h \
     mainwindow.h \
-    mapwidg.h \
+    mapqgraphics.h \
     widget.h\
 
 FORMS += \
     mainwindow.ui \
-    mapwidg.ui \
     widget.ui
 
 # Default rules for deployment.
