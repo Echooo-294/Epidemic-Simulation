@@ -80,8 +80,3 @@ void Resident::setImmunity(double value)
 {
     immunity = value;
 }
-
-void Resident::initPoint()
-{
-
-}
