@@ -7,14 +7,18 @@
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
-double getrand();
+#include<feature_timeAndStatistic/statistic.h>
 /*
- * 用于判断是否进入医院
+ * 用于判断是否进入医院，轻症患者有一半的概率进入医院，全部重症患者进入医院
  * 使用前提：病毒密度大于0且小于1，健康状态为非健康和存活
  * 参数：居民对象（或数组）和病毒对象
  * 使用时间和空间：每日更新（或每多少时间），需要处于医院
  */
-void judgeIntoHos();
+void judgeIntoHos()
+{
+    const double p=getran();
+
+}
 /*
  * 用于治疗
  * 使用前提：病毒密度大于0且小于1，健康状态为非健康和存活，活动状态处于治疗中

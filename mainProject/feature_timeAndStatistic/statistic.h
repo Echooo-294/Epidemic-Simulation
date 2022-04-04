@@ -14,7 +14,7 @@ extern double showTime;//时间
 extern Virus v;
 
 //统计量
-
+double getrand();
 //定时器
 
 
