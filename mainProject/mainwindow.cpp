@@ -117,26 +117,30 @@ void MainWindow::mapInit()
          scene->addItem(&m_Z[i]);
          scene->addItem(&t_Z[i]);
         }
+
+
+    //创建居民对象数组
     Resident *res[400];
-    for(int i=0;i<400;i++)
+    for(int i=0;i<400;i++)//根据比例调整抵抗力 0.4、0.5、0.7 可改
     {
-        if(i<=100)res[i]=new Resident(this,0.3);
+        if(i<=100)res[i]=new Resident(this,0.4);
         else if(i<=200)res[i]=new Resident(this,0.5);
         else if(i<=400)res[i]=new Resident(this,0.7);
     }
+    //创建居民对象的图元
     QGraphicsEllipseItem *people = new QGraphicsEllipseItem[400];
-    QPen pen5;
+    QPen pen5;//设置画笔
     pen5.setColor(Qt::black);
     pen5.setWidth(2);
-    for(int i=0;i<400;i++)
+    for(int i=0;i<400;i++)//将居民放进不同的居民楼里
     {
 
         if(i<=100)
         {
             people[i].setPen(pen5);
-            people[i].setRect(QRectF((i%10)*10+5,(i/10)*10+5,2,2));
-            people[i].setStartAngle(16*0);
-            people[i].setSpanAngle(16*360);
+            people[i].setRect(QRectF((i%10)*10+5,(i/10)*10+5,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
+            people[i].setStartAngle(16*0);//起始角度
+            people[i].setSpanAngle(16*360);//旋转角度
             scene->addItem(&people[i]);
         }
         else if(i<=200)

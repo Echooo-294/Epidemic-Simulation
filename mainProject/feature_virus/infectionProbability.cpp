@@ -3,7 +3,7 @@
  * @Author: Mars
  * @Date: 2022-03-21
  * @Last Modified by: Mars
- * @Last Modified time: 2022-03-21
+ * @Last Modified time: 2022-04-4
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
@@ -13,7 +13,7 @@
  * 使用时间和空间：出现感染者后，对感染者周围4米范围内每半小时计算一次
  */
 
-bool infectionP(Resident &people1,Resident &people2)
+bool infectionP(Resident &people1,Resident &people2)//考虑距离 要加上两个居民对应图元
 {
     //如果感染次数达到上限也返回0，不能感染
     if(people2.getHealthStatus()==0)//如果后者也是感染者，直接等于没被感染
