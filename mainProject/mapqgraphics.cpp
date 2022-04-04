@@ -12,6 +12,8 @@ void MapQGraphics::mouseMoveEvent(QMouseEvent *event)
 MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
 
+
 }
+
 
 

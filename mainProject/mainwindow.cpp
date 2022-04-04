@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,9 +31,85 @@ MainWindow::MainWindow(QWidget *parent) :
     //将地图上鼠标位置显示在状态栏中
     connect(ui->mapView,SIGNAL(mouseMovePoint(QPoint)),this,SLOT(get_Mouse_Point(QPoint)));
 
-    //地图
+    //绘画初始化地图
+    this->mapInit();
 
+}
 
+void MainWindow::mapInit()
+{
+    Space *r1=new Space('R',100,100,"一号居民楼",QPoint(5,5));
+    Space *r2=new Space('R',100,100,"二号居民楼",QPoint(ui->mapView->width()-105,5));
+    Space *r3=new Space('R',100,100,"三号居民楼",QPoint(5,ui->mapView->height()-110));
+    Space *r4=new Space('R',100,100,"四号居民楼",QPoint(ui->mapView->width()-105,ui->mapView->height()-110));
+    Space *w1=new Space('W',100,100,"一号写字楼",QPoint(200,100));
+    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(310,100));
+    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(200,210));
+    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(310,210));
+    Space *h1=new Space('H',100,100,"一号医院",QPoint(5,200));
+    Space *z1=new Space('Z',100,100,"一号隔离区",QPoint(ui->mapView->width()-105,200));
+    Space *R[4]={r1,r2,r3,r4};
+    Space *W[4]={w1,w2,w3,w4};
+    Space *H[1]={h1};
+    Space *Z[1]={z1};
+
+    QGraphicsScene *scene=new QGraphicsScene(0,0,ui->mapView->width()-5,ui->mapView->height()-5);
+    ui->mapView->setScene(scene);
+    QPen pen1,pen2,pen3,pen4;// 定义画笔，设置画笔颜色和宽度
+    pen1.setColor(Qt::blue);
+    pen1.setWidth(5);
+    pen2.setColor(Qt::red);
+    pen2.setWidth(5);
+    pen3.setColor(Qt::green);
+    pen3.setWidth(5);
+    pen4.setColor(Qt::yellow);
+    pen4.setWidth(5);
+
+    QGraphicsRectItem *m_R = new QGraphicsRectItem[4];
+    QGraphicsTextItem *t_R = new QGraphicsTextItem[4];
+    QGraphicsRectItem *m_W = new QGraphicsRectItem[4];
+    QGraphicsTextItem *t_W = new QGraphicsTextItem[4];
+    QGraphicsRectItem *m_H = new QGraphicsRectItem[1];
+    QGraphicsTextItem *t_H = new QGraphicsTextItem[1];
+    QGraphicsRectItem *m_Z = new QGraphicsRectItem[1];
+    QGraphicsTextItem *t_Z = new QGraphicsTextItem[1];
+
+    for(int i=0;i<4;i++)
+    {
+         m_R[i].setPen(pen1);
+         m_R[i].setRect(R[i]->getPosition().x(),R[i]->getPosition().y(), R[i]->getWidth(), R[i]->getLength());
+         t_R[i].setPlainText(R[i]->getName());
+         t_R[i].setPos(R[i]->getPosition());
+         scene->addItem(&m_R[i]);
+         scene->addItem(&t_R[i]);
+    }
+    for(int i=0;i<4;i++)
+    {
+         m_W[i].setPen(pen2);
+         m_W[i].setRect(W[i]->getPosition().x(),W[i]->getPosition().y(), W[i]->getWidth(), W[i]->getLength());
+         t_W[i].setPlainText(W[i]->getName());
+         t_W[i].setPos(W[i]->getPosition());
+         scene->addItem(&m_W[i]);
+         scene->addItem(&t_W[i]);
+    }
+    for(int i=0;i<1;i++)
+    {
+         m_H[i].setPen(pen3);
+         m_H[i].setRect(H[i]->getPosition().x(),H[i]->getPosition().y(), H[i]->getWidth(), H[i]->getLength());
+         t_H[i].setPlainText(H[i]->getName());
+         t_H[i].setPos(H[i]->getPosition());
+         scene->addItem(&m_H[i]);
+         scene->addItem(&t_H[i]);
+    }
+    for(int i=0;i<1;i++)
+    {
+         m_Z[i].setPen(pen4);
+         m_Z[i].setRect(Z[i]->getPosition().x(),Z[i]->getPosition().y(), Z[i]->getWidth(),Z[i]->getLength());
+         t_Z[i].setPlainText(Z[i]->getName());
+         t_Z[i].setPos(Z[i]->getPosition());
+         scene->addItem(&m_Z[i]);
+         scene->addItem(&t_Z[i]);
+        }
 }
 
 MainWindow::~MainWindow()

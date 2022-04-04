@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QGraphicsRectItem>
+#include <QGraphicsTextItem>
+#include <feature_space/space.h>
 namespace Ui {
 class MainWindow;
 }
@@ -13,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void mapInit();
     ~MainWindow();
 
 private slots:

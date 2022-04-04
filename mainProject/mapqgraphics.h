@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QGraphicsView>
+#include <QGraphicsScene>
+#include <feature_space/space.h>
 
 class MapQGraphics : public QGraphicsView
 {
@@ -12,6 +14,7 @@ protected:
     //void mousePressEvent(QMouseEvent *event) override;
 public:
     MapQGraphics(QWidget *parent = nullptr);
+
 
 signals:
     void mouseMovePoint(QPoint point);

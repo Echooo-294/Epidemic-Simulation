@@ -38,6 +38,7 @@ Space::Space(char t,double l,double w,QString n,QPoint p) : QObject(nullptr),cap
         setMoveMode(1);
         setInfectionRro(0);
         qDebug()<<"H";
+        break;
     }
     //隔离区
     case 'Z':{
