@@ -53,24 +53,33 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::mapInit()
 {
     //初始化一系列建筑
-    Space *r1=new Space('R',100,100,"一号居民楼",QPoint(5,5));
-    Space *r2=new Space('R',100,100,"二号居民楼",QPoint(ui->mapView->width()-105,5));
-    Space *r3=new Space('R',100,100,"三号居民楼",QPoint(5,ui->mapView->height()-110));
-    Space *r4=new Space('R',100,100,"四号居民楼",QPoint(ui->mapView->width()-105,ui->mapView->height()-110));
-    Space *w1=new Space('W',100,100,"一号写字楼",QPoint(200,100));
-    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(310,100));
-    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(200,210));
-    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(310,210));
-    Space *h1=new Space('H',100,100,"一号医院",QPoint(5,200));
-    Space *z1=new Space('Z',100,100,"一号隔离区",QPoint(ui->mapView->width()-105,200));
+    Space *r1=new Space('R',150,200,"一号居民楼",QPoint(5,5));
+    Space *r2=new Space('R',150,200,"二号居民楼",QPoint(ui->mapView->width()-455,5));
+    Space *r3=new Space('R',150,200,"三号居民楼",QPoint(5,ui->mapView->height()-160));
+    Space *r4=new Space('R',150,200,"四号居民楼",QPoint(ui->mapView->width()-455,ui->mapView->height()-160));
+    Space *w1=new Space('W',200,200,"一号写字楼",QPoint(270,210));
+//    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(1,1));
+//    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(1,1));
+//    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(1,1));
+    Space *h1=new Space('H',300,235,"一号医院",QPoint(ui->mapView->width()-240,5));
+    Space *z1=new Space('Z',300,235,"一号隔离区",QPoint(ui->mapView->width()-240,ui->mapView->height()-305));
     Space *R[4]={r1,r2,r3,r4};
-    Space *W[4]={w1,w2,w3,w4};
+    Space *W[4]={w1};
     Space *H[1]={h1};
     Space *Z[1]={z1};
 
     //初始化视图
     scene=new QGraphicsScene(0,0,ui->mapView->width()-5,ui->mapView->height()-5);
     ui->mapView->setScene(scene);
+
+    auto line = new QGraphicsLineItem;
+    line->setLine(ui->mapView->width()-250,0,ui->mapView->width()-250,ui->mapView->height());
+    QPen pen6;
+    pen6.setWidth(2);
+    pen6.setColor(Qt::black);
+    line->setPen(pen6);
+    scene->addItem(line);
+
     QPen pen1,pen2,pen3,pen4;
     // 定义画笔，设置画笔颜色和宽度
     pen1.setColor(Qt::blue);
@@ -85,8 +94,8 @@ void MainWindow::mapInit()
     //为各种建筑类建立图元
     QGraphicsRectItem *m_R = new QGraphicsRectItem[4];
     QGraphicsTextItem *t_R = new QGraphicsTextItem[4];
-    QGraphicsRectItem *m_W = new QGraphicsRectItem[4];
-    QGraphicsTextItem *t_W = new QGraphicsTextItem[4];
+    QGraphicsRectItem *m_W = new QGraphicsRectItem[1];
+    QGraphicsTextItem *t_W = new QGraphicsTextItem[1];
     QGraphicsRectItem *m_H = new QGraphicsRectItem[1];
     QGraphicsTextItem *t_H = new QGraphicsTextItem[1];
     QGraphicsRectItem *m_Z = new QGraphicsRectItem[1];
@@ -96,6 +105,7 @@ void MainWindow::mapInit()
     for(int i=0;i<4;i++)
     {
          m_R[i].setPen(pen1);
+         //m_R[i].setFlag(QGraphicsItem::ItemIsMovable);
          //获取建筑参数，绘画矩形建筑
          m_R[i].setRect(R[i]->getPosition().x(),R[i]->getPosition().y(), R[i]->getWidth(), R[i]->getLength());
          m_R[i].setData(1,R[i]->getName());
@@ -104,7 +114,7 @@ void MainWindow::mapInit()
          scene->addItem(&m_R[i]);
          scene->addItem(&t_R[i]);
     }
-    for(int i=0;i<4;i++)
+    for(int i=0;i<1;i++)
     {
          m_W[i].setPen(pen2);
          m_W[i].setRect(W[i]->getPosition().x(),W[i]->getPosition().y(), W[i]->getWidth(), W[i]->getLength());
