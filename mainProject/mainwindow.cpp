@@ -12,19 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("疫情模拟系统");
     this->resize(1200,800);
     //界面布局
-    //ui->groupBox->resize(this->width(),this->height()*0.15);
     ui->groupBox->setGeometry(0,0,this->width(),this->height()*0.15);
-
-    //ui->groupBox_3->resize(this->width(),this->height()*0.85);
     ui->groupBox_3->setGeometry(0,this->height()*0.15,this->width(),this->height()*0.85);
-
-    //ui->groupBox_2->resize(ui->groupBox_3->width()*0.15,ui->groupBox_3->height());
     ui->groupBox_2->setGeometry(0,0,ui->groupBox_3->width()*0.15,ui->groupBox_3->height());
-
-    //ui->mapView->resize(ui->groupBox_3->width()*0.85,ui->groupBox_3->height());
     ui->mapView->setGeometry(this->width()*0.15,0,ui->groupBox_3->width()*0.85,ui->groupBox_3->height()-50);
-
-
     //设置状态栏
     ui->statusbar->setSizeGripEnabled(false);//去掉状态栏右下角的三角
 
