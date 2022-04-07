@@ -1,8 +1,17 @@
+/*
+ * @Description: 初始参数、统计量、随机数和定时器头文件等声明
+ * @Author: Echooo
+ * @Date: 2022-03-03
+ * @Last Modified by: Echooo
+ * @Last Modified time: 2022-04-04
+ */
 #ifndef STATISTIC_H
 #define STATISTIC_H
 
 #include<QTimer>
 #include<feature_virus/virus.h>
+#include<QDebug>
+#include<QVector>
 
 //初始参数
 extern int population;//初始总人数

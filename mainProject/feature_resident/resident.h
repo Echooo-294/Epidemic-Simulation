@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-03-15
+ * @Last Modified time: 2022-04-04
  */
 
 #ifndef RESIDENT_H
@@ -11,9 +11,6 @@
 
 #include <QObject>
 #include<feature_virus/virus.h>
-#include<QVector>
-
-
 class Resident : public QObject
 {
     Q_OBJECT

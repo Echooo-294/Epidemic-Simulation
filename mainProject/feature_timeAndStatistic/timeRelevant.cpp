@@ -14,7 +14,7 @@ double getrand()//用于判断概率所需的随机数，种子在主函数中�
     const double p = rand()%(n+1)/(double)(n+1);
     return p;
 }
-void updateTime()
+void updateTime()//更新显示时间
 {
 
 }

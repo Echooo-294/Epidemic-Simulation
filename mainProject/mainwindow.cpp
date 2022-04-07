@@ -1,6 +1,13 @@
+/*
+ * @Description: 主界面
+ * @Date: 2022-04-04
+ * @Last Modified by: 巾可
+ * @Last Modified time: 2022-04-04
+ */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include<mapqgraphics.h>
 void fullOpen(MapQGraphics *);
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -40,10 +47,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->mapInit();
 
     //完全开放模拟
+    ui->mapView->fullyOpen();
 }
 
 void MainWindow::mapInit()
 {
+    //初始化一系列建筑
     Space *r1=new Space('R',100,100,"一号居民楼",QPoint(5,5));
     Space *r2=new Space('R',100,100,"二号居民楼",QPoint(ui->mapView->width()-105,5));
     Space *r3=new Space('R',100,100,"三号居民楼",QPoint(5,ui->mapView->height()-110));
@@ -62,7 +71,8 @@ void MainWindow::mapInit()
     //初始化视图
     scene=new QGraphicsScene(0,0,ui->mapView->width()-5,ui->mapView->height()-5);
     ui->mapView->setScene(scene);
-    QPen pen1,pen2,pen3,pen4;// 定义画笔，设置画笔颜色和宽度
+    QPen pen1,pen2,pen3,pen4;
+    // 定义画笔，设置画笔颜色和宽度
     pen1.setColor(Qt::blue);
     pen1.setWidth(5);
     pen2.setColor(Qt::red);
@@ -72,6 +82,7 @@ void MainWindow::mapInit()
     pen4.setColor(Qt::yellow);
     pen4.setWidth(5);
 
+    //为各种建筑类建立图元
     QGraphicsRectItem *m_R = new QGraphicsRectItem[4];
     QGraphicsTextItem *t_R = new QGraphicsTextItem[4];
     QGraphicsRectItem *m_W = new QGraphicsRectItem[4];
@@ -81,12 +92,14 @@ void MainWindow::mapInit()
     QGraphicsRectItem *m_Z = new QGraphicsRectItem[1];
     QGraphicsTextItem *t_Z = new QGraphicsTextItem[1];
 
+    //在主界面中绘图
     for(int i=0;i<4;i++)
     {
          m_R[i].setPen(pen1);
+         //获取建筑参数，绘画矩形建筑
          m_R[i].setRect(R[i]->getPosition().x(),R[i]->getPosition().y(), R[i]->getWidth(), R[i]->getLength());
          m_R[i].setData(1,R[i]->getName());
-         t_R[i].setPlainText(R[i]->getName());
+         t_R[i].setPlainText(R[i]->getName());//添加建筑文字内容
          t_R[i].setPos(R[i]->getPosition());
          scene->addItem(&m_R[i]);
          scene->addItem(&t_R[i]);
@@ -120,27 +133,31 @@ void MainWindow::mapInit()
          t_Z[i].setPos(Z[i]->getPosition());
          scene->addItem(&m_Z[i]);
          scene->addItem(&t_Z[i]);
-        }
+    }
+
+
+    //创建居民对象数组
     Resident *res[400];
-    for(int i=0;i<400;i++)
+    for(int i=0;i<400;i++)//根据比例调整抵抗力 0.4、0.5、0.7 可改
     {
-        if(i<=100)res[i]=new Resident(this,0.3);
+        if(i<=100)res[i]=new Resident(this,0.4);
         else if(i<=200)res[i]=new Resident(this,0.5);
         else if(i<=400)res[i]=new Resident(this,0.7);
     }
+    //创建居民对象的图元
     QGraphicsEllipseItem *people = new QGraphicsEllipseItem[400];
-    QPen pen5;
+    QPen pen5;//设置画笔
     pen5.setColor(Qt::black);
     pen5.setWidth(2);
-    for(int i=0;i<400;i++)
+    for(int i=0;i<400;i++)//将居民放进不同的居民楼里
     {
 
         if(i<=100)
         {
             people[i].setPen(pen5);
-            people[i].setRect(QRectF((i%10)*10+5,(i/10)*10+5,2,2));
-            people[i].setStartAngle(16*0);
-            people[i].setSpanAngle(16*360);
+            people[i].setRect(QRectF((i%10)*10+5,(i/10)*10+5,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
+            people[i].setStartAngle(16*0);//起始角度
+            people[i].setSpanAngle(16*360);//旋转角度
             scene->addItem(&people[i]);
         }
         else if(i<=200)

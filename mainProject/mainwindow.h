@@ -1,3 +1,9 @@
+/*
+ * @Description: 主界面
+ * @Date: 2022-04-04
+ * @Last Modified by: 巾可
+ * @Last Modified time: 2022-04-04
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

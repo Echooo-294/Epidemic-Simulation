@@ -60,7 +60,7 @@ public:
     void setMoveMode(int value);
 
     double area()const;//返回面积
-    void addResident(const Resident&);//居民进入函数，居民类可以作为参数
+    //void addResident(const Resident&);//居民进入函数，居民类可以作为参数
 
     char getType() const;
     void setType(char value);

@@ -1,6 +1,12 @@
 #include "mapqgraphics.h"
 #include <QPoint>
 #include <QMouseEvent>
+MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
+{
+    initPeople();//初始化人群
+    initIncubation();//初始化感染潜伏者
+}
+
 void MapQGraphics::mouseMoveEvent(QMouseEvent *event)
 {
     //鼠标移动
@@ -17,11 +23,6 @@ void MapQGraphics::mousePressEvent(QMouseEvent *event)
     QGraphicsView::mousePressEvent(event);
 }
 
-MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
-{
-
-
-}
 
 
 

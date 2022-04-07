@@ -25,7 +25,6 @@ Widget::Widget(QWidget *parent)
     ui->label->setFont(font);
 
 
-
 }
 
 Widget::~Widget()

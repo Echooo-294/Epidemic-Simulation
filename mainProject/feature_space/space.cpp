@@ -151,7 +151,3 @@ double Space::area()const
 {
     return length * width;
 }
-void Space::addResident(const Resident& r)
-{
-
-}
