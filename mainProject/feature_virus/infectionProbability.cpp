@@ -13,7 +13,7 @@
  * 使用时间和空间：出现感染者后，对感染者周围4米范围内每一小时计算一次
  */
 
-bool infectionP(Resident &people1,Resident &people2)//考虑距离 要加上两个居民对应图元
+bool infectionP(Resident &people1,Resident &people2,Virus &v)//考虑距离 要加上两个居民对应图元
 {
     //如果感染次数达到上限也返回0，不能感染
     if(people2.getHealthStatus()==0)//如果后者也是感染者，直接等于没被感染
@@ -28,11 +28,10 @@ bool infectionP(Resident &people1,Resident &people2)//考虑距离 要加上两�
     double mask=v.getmaskEffectiveness(); //是否做了防护措施 看政策 可能还要加参数
     double place=1; //所处空间的感染概率  感觉要在resident里加入判断人在什么地方的函数
     double p=density*status*vaccine*mask*place;
-    //随机数判断 随机数（0-1）小于p return 1；大于p return0&&感染次数-1；
-
-
-
-
+    //随机数判断是否感染
+    double pp=getrand();
+    if(pp<p)return 1;
+    else return 0;
     }
     return 0;
 }

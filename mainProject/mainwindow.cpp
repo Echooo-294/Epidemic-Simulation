@@ -162,40 +162,46 @@ void MainWindow::mapInit()
     for(int i=0;i<400;i++)//将居民放进不同的居民楼里
     {
 
-        if(i<=100)
+        if(i<100)
         {
             people[i].setPen(pen5);
-            people[i].setRect(QRectF((i%10)*10+5,(i/10)*10+5,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
+            people[i].setRect(QRectF(0,0,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
             people[i].setStartAngle(16*0);//起始角度
             people[i].setSpanAngle(16*360);//旋转角度
+            people[i].setPos((i%10)*20+10+r1->getPosition().x(),(i/10)*15+7+r1->getPosition().y());
             scene->addItem(&people[i]);
         }
-        else if(i<=200)
+        else if(i<200)
         {
             people[i].setPen(pen5);
-            people[i].setRect(QRectF(((i-100)%10)*10+5,((i-100)/10)*10+351,2,2));
+            people[i].setRect(QRectF(0,0,2,2));
             people[i].setStartAngle(16*0);
             people[i].setSpanAngle(16*360);
+            people[i].setPos(((i-100)%10)*20+10+r2->getPosition().x(),((i-100)/10)*15+7+r2->getPosition().y());
             scene->addItem(&people[i]);
         }
-        else if(i<=300)
+        else if(i<300)
         {
             people[i].setPen(pen5);
-            people[i].setRect(QRectF(((i-200)%10)*10+551,((i-200)/10)*10+5,2,2));
+            people[i].setRect(QRectF(0,0,2,2));
             people[i].setStartAngle(16*0);
             people[i].setSpanAngle(16*360);
+            people[i].setPos(((i-200)%10)*20+10+r3->getPosition().x(),((i-200)/10)*15+7+r3->getPosition().y());
             scene->addItem(&people[i]);
         }
-        else if(i<=400)
+        else if(i<400)
         {
             people[i].setPen(pen5);
-            people[i].setRect(QRectF(((i-300)%10)*10+551,((i-300)/10)*10+351,2,2));
+            people[i].setRect(QRectF(0,0,2,2));
             people[i].setStartAngle(16*0);
             people[i].setSpanAngle(16*360);
+            people[i].setPos(((i-300)%10)*20+10+r4->getPosition().x(),((i-300)/10)*15+7+r4->getPosition().y());
             scene->addItem(&people[i]);
         }
 
     }
+
+
 }
 
 MainWindow::~MainWindow()
