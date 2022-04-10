@@ -7,6 +7,7 @@
 #include <feature_space/space.h>
 #include<QVector>
 #include<mainwindow.h>
+
 class MapQGraphics : public QGraphicsView
 {
     Q_OBJECT
@@ -24,6 +25,7 @@ public:
     void simulation1();//完全开放模拟每半小时的过程
     QTimer *timer1;//定时器1
     void randMove(int i);//随即移动
+    void path();//路径移动
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
     void mousePressPoint(QPoint point);//发送鼠标按下信号，传坐标
