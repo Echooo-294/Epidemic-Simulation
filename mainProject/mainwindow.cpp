@@ -2,13 +2,12 @@
  * @Description: 主界面
  * @Date: 2022-04-04
  * @Last Modified by: 巾可
- * @Last Modified time: 2022-04-04
+ * @Last Modified time: 2022-04-10
  */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include<mapqgraphics.h>
-void fullOpen(MapQGraphics *);
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -46,8 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //绘画初始化地图
     this->mapInit();
 
-    //完全开放模拟
-    ui->mapView->fullyOpen();
 }
 
 void MainWindow::mapInit()
@@ -58,9 +55,9 @@ void MainWindow::mapInit()
     Space *r3=new Space('R',150,200,"三号居民楼",QPoint(5,ui->mapView->height()-160));
     Space *r4=new Space('R',150,200,"四号居民楼",QPoint(ui->mapView->width()-455,ui->mapView->height()-160));
     Space *w1=new Space('W',200,200,"一号写字楼",QPoint(270,210));
-//    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(1,1));
-//    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(1,1));
-//    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(1,1));
+    //    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(1,1));
+    //    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(1,1));
+    //    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(1,1));
     Space *h1=new Space('H',300,235,"一号医院",QPoint(ui->mapView->width()-240,5));
     Space *z1=new Space('Z',300,235,"一号隔离区",QPoint(ui->mapView->width()-240,ui->mapView->height()-305));
     Space *R[4]={r1,r2,r3,r4};
@@ -104,104 +101,92 @@ void MainWindow::mapInit()
     //在主界面中绘图
     for(int i=0;i<4;i++)
     {
-         m_R[i].setPen(pen1);
-         //m_R[i].setFlag(QGraphicsItem::ItemIsMovable);
-         //获取建筑参数，绘画矩形建筑
-         m_R[i].setRect(R[i]->getPosition().x(),R[i]->getPosition().y(), R[i]->getWidth(), R[i]->getLength());
-         m_R[i].setData(1,R[i]->getName());
-         t_R[i].setPlainText(R[i]->getName());//添加建筑文字内容
-         t_R[i].setPos(R[i]->getPosition());
-         scene->addItem(&m_R[i]);
-         scene->addItem(&t_R[i]);
+        m_R[i].setPen(pen1);
+        //m_R[i].setFlag(QGraphicsItem::ItemIsMovable);
+        //获取建筑参数，绘画矩形建筑
+        m_R[i].setRect(R[i]->getPosition().x(),R[i]->getPosition().y(), R[i]->getWidth(), R[i]->getLength());
+        m_R[i].setData(1,R[i]->getName());
+        t_R[i].setPlainText(R[i]->getName());//添加建筑文字内容
+        t_R[i].setPos(R[i]->getPosition());
+        scene->addItem(&m_R[i]);
+        scene->addItem(&t_R[i]);
     }
     for(int i=0;i<1;i++)
     {
-         m_W[i].setPen(pen2);
-         m_W[i].setRect(W[i]->getPosition().x(),W[i]->getPosition().y(), W[i]->getWidth(), W[i]->getLength());
-         m_W[i].setData(1,W[i]->getName());
-         t_W[i].setPlainText(W[i]->getName());
-         t_W[i].setPos(W[i]->getPosition());
-         scene->addItem(&m_W[i]);
-         scene->addItem(&t_W[i]);
+        m_W[i].setPen(pen2);
+        m_W[i].setRect(W[i]->getPosition().x(),W[i]->getPosition().y(), W[i]->getWidth(), W[i]->getLength());
+        m_W[i].setData(1,W[i]->getName());
+        t_W[i].setPlainText(W[i]->getName());
+        t_W[i].setPos(W[i]->getPosition());
+        scene->addItem(&m_W[i]);
+        scene->addItem(&t_W[i]);
     }
     for(int i=0;i<1;i++)
     {
-         m_H[i].setPen(pen3);
-         m_H[i].setRect(H[i]->getPosition().x(),H[i]->getPosition().y(), H[i]->getWidth(), H[i]->getLength());
-         m_H[i].setData(1,H[i]->getName());
-         t_H[i].setPlainText(H[i]->getName());
-         t_H[i].setPos(H[i]->getPosition());
-         scene->addItem(&m_H[i]);
-         scene->addItem(&t_H[i]);
+        m_H[i].setPen(pen3);
+        m_H[i].setRect(H[i]->getPosition().x(),H[i]->getPosition().y(), H[i]->getWidth(), H[i]->getLength());
+        m_H[i].setData(1,H[i]->getName());
+        t_H[i].setPlainText(H[i]->getName());
+        t_H[i].setPos(H[i]->getPosition());
+        scene->addItem(&m_H[i]);
+        scene->addItem(&t_H[i]);
     }
     for(int i=0;i<1;i++)
     {
-         m_Z[i].setPen(pen4);
-         m_Z[i].setRect(Z[i]->getPosition().x(),Z[i]->getPosition().y(), Z[i]->getWidth(),Z[i]->getLength());
-         m_Z[i].setData(1,Z[i]->getName());
-         t_Z[i].setPlainText(Z[i]->getName());
-         t_Z[i].setPos(Z[i]->getPosition());
-         scene->addItem(&m_Z[i]);
-         scene->addItem(&t_Z[i]);
-    }
-
-
-    //创建居民对象数组
-    Resident *res[400];
-    for(int i=0;i<400;i++)//根据比例调整抵抗力 0.4、0.5、0.7 可改
-    {
-        if(i<=100)res[i]=new Resident(this,0.4);
-        else if(i<=200)res[i]=new Resident(this,0.5);
-        else if(i<=400)res[i]=new Resident(this,0.7);
+        m_Z[i].setPen(pen4);
+        m_Z[i].setRect(Z[i]->getPosition().x(),Z[i]->getPosition().y(), Z[i]->getWidth(),Z[i]->getLength());
+        m_Z[i].setData(1,Z[i]->getName());
+        t_Z[i].setPlainText(Z[i]->getName());
+        t_Z[i].setPos(Z[i]->getPosition());
+        scene->addItem(&m_Z[i]);
+        scene->addItem(&t_Z[i]);
     }
     //创建居民对象的图元
-    QGraphicsEllipseItem *people = new QGraphicsEllipseItem[400];
+    ui->mapView->people = new QGraphicsEllipseItem[400];
     QPen pen5;//设置画笔
     pen5.setColor(Qt::black);
     pen5.setWidth(2);
     for(int i=0;i<400;i++)//将居民放进不同的居民楼里
     {
-
         if(i<100)
         {
-            people[i].setPen(pen5);
-            people[i].setRect(QRectF(0,0,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
-            people[i].setStartAngle(16*0);//起始角度
-            people[i].setSpanAngle(16*360);//旋转角度
-            people[i].setPos((i%10)*20+10+r1->getPosition().x(),(i/10)*15+7+r1->getPosition().y());
-            scene->addItem(&people[i]);
+            ui->mapView->people[i].setPen(pen5);
+            ui->mapView->people[i].setRect(QRectF(0,0,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
+            ui->mapView->people[i].setStartAngle(16*0);//起始角度
+            ui->mapView->people[i].setSpanAngle(16*360);//旋转角度
+            ui->mapView->people[i].setPos((i%10)*20+10+r1->getPosition().x(),(i/10)*15+7+r1->getPosition().y());
+            scene->addItem(&ui->mapView->people[i]);
         }
         else if(i<200)
         {
-            people[i].setPen(pen5);
-            people[i].setRect(QRectF(0,0,2,2));
-            people[i].setStartAngle(16*0);
-            people[i].setSpanAngle(16*360);
-            people[i].setPos(((i-100)%10)*20+10+r2->getPosition().x(),((i-100)/10)*15+7+r2->getPosition().y());
-            scene->addItem(&people[i]);
+            ui->mapView->people[i].setPen(pen5);
+            ui->mapView->people[i].setRect(QRectF(0,0,2,2));
+            ui->mapView->people[i].setStartAngle(16*0);
+            ui->mapView->people[i].setSpanAngle(16*360);
+            ui->mapView->people[i].setPos(((i-100)%10)*20+10+r2->getPosition().x(),((i-100)/10)*15+7+r2->getPosition().y());
+            scene->addItem(&ui->mapView->people[i]);
         }
         else if(i<300)
         {
-            people[i].setPen(pen5);
-            people[i].setRect(QRectF(0,0,2,2));
-            people[i].setStartAngle(16*0);
-            people[i].setSpanAngle(16*360);
-            people[i].setPos(((i-200)%10)*20+10+r3->getPosition().x(),((i-200)/10)*15+7+r3->getPosition().y());
-            scene->addItem(&people[i]);
+            ui->mapView->people[i].setPen(pen5);
+            ui->mapView->people[i].setRect(QRectF(0,0,2,2));
+            ui->mapView->people[i].setStartAngle(16*0);
+            ui->mapView->people[i].setSpanAngle(16*360);
+            ui->mapView->people[i].setPos(((i-200)%10)*20+10+r3->getPosition().x(),((i-200)/10)*15+7+r3->getPosition().y());
+            scene->addItem(&ui->mapView->people[i]);
         }
         else if(i<400)
         {
-            people[i].setPen(pen5);
-            people[i].setRect(QRectF(0,0,2,2));
-            people[i].setStartAngle(16*0);
-            people[i].setSpanAngle(16*360);
-            people[i].setPos(((i-300)%10)*20+10+r4->getPosition().x(),((i-300)/10)*15+7+r4->getPosition().y());
-            scene->addItem(&people[i]);
+            ui->mapView->people[i].setPen(pen5);
+            ui->mapView->people[i].setRect(QRectF(0,0,2,2));
+            ui->mapView->people[i].setStartAngle(16*0);
+            ui->mapView->people[i].setSpanAngle(16*360);
+            ui->mapView->people[i].setPos(((i-300)%10)*20+10+r4->getPosition().x(),((i-300)/10)*15+7+r4->getPosition().y());
+            scene->addItem(&ui->mapView->people[i]);
         }
-
     }
-
-
+    ui->mapView->fullyOpen();
+    qDebug()<<"start";
 }
 
 MainWindow::~MainWindow()
