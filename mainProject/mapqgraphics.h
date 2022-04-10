@@ -21,6 +21,7 @@ public:
     void initIncubation();//初始化潜伏感染者，用在构造函数中
     void fullyOpen();//完全开放模拟
     void simulation1();//完全开放模拟每半小时的过程
+    void path();//路径移动
 
 
 signals:

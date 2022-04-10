@@ -10,6 +10,8 @@
 #define RESIDENT_H
 
 #include <QObject>
+#include <QPoint>
+#include <QTime>
 #include<feature_virus/virus.h>
 class Resident : public QObject
 {
