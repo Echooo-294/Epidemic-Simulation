@@ -193,9 +193,12 @@ void MainWindow::mapInit()
             ui->mapView->people[i].setPos(((i-300)%10)*20+10+r4->getPosition().x(),((i-300)/10)*15+7+r4->getPosition().y());
             scene->addItem(&ui->mapView->people[i]);
         }
+        //ui->mapView->people[i].setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     }
+
+    //ui->mapView->setCacheMode(QGraphicsView::CacheBackground);
+    //模拟疫情开始
     ui->mapView->fullyOpen();
-    qDebug()<<"aftersimulation";
 }
 
 MainWindow::~MainWindow()
