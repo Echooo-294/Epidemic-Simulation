@@ -3,10 +3,11 @@
 
 #include <QObject>
 #include <QPoint>
+#include<QVector>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <feature_space/space.h>
-#include<QVector>
+
 #include<mainwindow.h>
 
 class MapQGraphics : public QGraphicsView
@@ -29,7 +30,7 @@ public:
     void fullyOpen();//完全开放模拟
     void simulation1();//完全开放模拟每半小时的过程
     int judgeWhere(int i);//判断人在第几个建筑中，可以根据模拟活动简化判断，如果都不在则返回-1
-    void randMove(int i);//随即移动
+    void randMove(int i);//随即移动，不在建筑中的随机移动还没写
     void path();//路径移动
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标

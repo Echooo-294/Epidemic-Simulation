@@ -1,3 +1,10 @@
+/*
+ * @Description: 移动
+ * @Author: Echooo
+ * @Date: 2022-04-12
+ * @Last Modified by: Echooo
+ * @Last Modified time: 2022-04-12
+ */
 #include"mapqgraphics.h"
 #include<feature_timeAndStatistic/statistic.h>
 
@@ -42,8 +49,10 @@ double activityWill()
 {
     double activityWill=0;
      if(showTime>0&&showTime<=6.0)
-         activityWill=0.1;
-     else if(showTime>6.0&&showTime<=11.0)
+         activityWill=0.05;
+     else if(showTime>6.0&&showTime<=8.0)
+         activityWill=0.3;
+     else if(showTime>8.0&&showTime<=11.0)
          activityWill=0.6;
      else if(showTime>11.0&&showTime<=13.0)
          activityWill=0.8;
@@ -56,7 +65,7 @@ double activityWill()
      else if(showTime>20.0&&showTime<=22.0)
          activityWill=0.8;
      else if(showTime>22.0&&showTime<=24.0)
-         activityWill=0.2;
+         activityWill=0.1;
      return activityWill;
 }
 int MapQGraphics::judgeWhere(int i)
@@ -99,8 +108,7 @@ void MapQGraphics::randMove(int i)
     int px=people[i].x();
     int py=people[i].y();
     const int where=judgeWhere(i);
-
-    if(where>=0)
+    if(where>=0)//如果在建筑中
     {
         Space *b=buildings.at(where);
         const int bx=b->getPosition().x();

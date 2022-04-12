@@ -1,3 +1,10 @@
+/*
+ * @Description: 初始参数、统计量、统计结果相关函数的定义
+ * @Author: Echooo
+ * @Date: 2022-03-21
+ * @Last Modified by: Echooo
+ * @Last Modified time: 2022-04-12
+ */
 #include "statistic.h"
 #include<feature_resident/resident.h>
 //初始参数定义
@@ -15,7 +22,7 @@ int seriousNumber=0;//重症人数
 int deadNumber=0;//死亡人数
 int immunityNumber=0;//疫苗接种人数
 int day=0;//天数
-double showTime=7.0;//时间
+double showTime=6.0;//时间
 
 void showStatistic()
 {
