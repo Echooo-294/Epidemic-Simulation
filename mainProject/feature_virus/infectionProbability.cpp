@@ -31,7 +31,7 @@ bool infectionP(Resident &people1,Resident &people2)//考虑距离 要加上两�
     double place=1; //所处空间的感染概率  感觉要在resident里加入判断人在什么地方的函数
     double p=density*status*vaccine*mask*place;
     //随机数判断是否感染
-    double pp=getrand();
+    double pp=randDouble();
     if(pp<p)return 1;
     else return 0;
     }

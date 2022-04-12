@@ -21,27 +21,24 @@ void MapQGraphics::fullyOpen()
     qDebug()<<incubations.size();
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
-    timer1->start(500);
-
-//     QTimer *timer2=new QTimer(this);
-//     connect(timer2,timeout(),);//每24h更新统计结果
-//     timer2->start(6000);
-
+    timer1->start(200);
+    timer2=new QTimer(this);
+    connect(timer2,&QTimer::timeout,this,&showStatistic);//每24h更新统计结果
+    timer2->start(2400);
 }
 //每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
-//    qDebug()<<"simulation1";
-
+    qDebug()<<"simulation1";
 //    QVector<Resident*>::iterator iterall=allPeople.begin();//全体
 //    //QVector<Resident*>::iterator iter1=incubations.begin();//感染潜伏
 //    int healthStatus=0;
 //    int activityStatus=0;
 //    double p=0;
+    updateShowTime();//时间更新
     int i=0;
     for(i=0;i<400;i++)
     {
-        qDebug()<<"move"<<i;
         randMove(i);//随机移动
 //        (*iterall)->updateHealthStatus();//更新自身状态
 //        healthStatus=(*iterall)->getHealthStatus();//健康状态
@@ -71,5 +68,7 @@ void MapQGraphics::simulation1()
 //        }
     }
 }
+
+
 
 

@@ -7,24 +7,31 @@
  */
 #ifndef STATISTIC_H
 #define STATISTIC_H
-
 #include<QTimer>
 #include<feature_virus/virus.h>
 #include<QDebug>
 #include<QVector>
-
+#include <cmath>
 //初始参数
-extern int population;//初始总人数
+extern int initPopulation;//初始总人数
 extern int initInfection;//初始感染人数
 extern double updateTime;//更新间隔时间
-extern int policy;//防疫政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
-extern int day;//天数
-extern double showTime;//时间
+extern int policy;//政策
 extern Virus v;
 
 //统计量
-double getrand();
-//定时器
+extern int population;//总人数
+extern int infectionNumber;//总感染人数
+extern int isolationNumber;//隔离人数
+extern int seriousNumber;//重症人数
+extern int deadNumber;//死亡人数
+extern int immunityNumber;//疫苗接种人数
+extern int day;//天数
+extern double showTime;//时间
+int randInt();
+double randDouble();
+void updateShowTime();
+void showStatistic();
 
 
 #endif // STATISTIC_H

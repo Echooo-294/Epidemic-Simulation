@@ -19,8 +19,8 @@ SOURCES += \
     feature_resident/resident.cpp \
     feature_resident/vaccination.cpp \
     feature_simulation/init.cpp \
+    feature_simulation/move.cpp \
     feature_space/door.cpp \
-    feature_timeAndStatistic/path_move.cpp \
     feature_timeAndStatistic/statistic.cpp \
     feature_virus/infectionProbability.cpp \
     feature_simulation/fullyOpen.cpp \
