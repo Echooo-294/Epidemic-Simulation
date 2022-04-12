@@ -64,6 +64,14 @@ void MainWindow::mapInit()
     Space *W[4]={w1};
     Space *H[1]={h1};
     Space *Z[1]={z1};
+    //向mapView传递Space*参数
+    ui->mapView->buildings.append(r1);
+    ui->mapView->buildings.append(r2);
+    ui->mapView->buildings.append(r3);
+    ui->mapView->buildings.append(r4);
+    ui->mapView->buildings.append(w1);
+    ui->mapView->buildings.append(h1);
+    ui->mapView->buildings.append(z1);
 
     //初始化视图
     scene=new QGraphicsScene(0,0,ui->mapView->width()-5,ui->mapView->height()-5);
@@ -141,6 +149,7 @@ void MainWindow::mapInit()
         scene->addItem(&m_Z[i]);
         scene->addItem(&t_Z[i]);
     }
+
     //创建居民对象的图元
     ui->mapView->people = new QGraphicsEllipseItem[400];
     QPen pen5;//设置画笔
@@ -186,7 +195,7 @@ void MainWindow::mapInit()
         }
     }
     ui->mapView->fullyOpen();
-    qDebug()<<"start";
+    qDebug()<<"aftersimulation";
 }
 
 MainWindow::~MainWindow()

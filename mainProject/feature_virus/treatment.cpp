@@ -19,7 +19,7 @@ void treatment(Resident* people)
     const double density=people->getVirusDensity();
     const double recoveryRate=0.075;//治疗速率
     const double successRate=0.9;//治疗有效率
-    const double p=getrand();
+    const double p=randDouble();
     if (p>0&&p<=successRate)
         people->setVirusDensity(density-recoveryRate);
 }

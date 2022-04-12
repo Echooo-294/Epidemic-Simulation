@@ -1,5 +1,4 @@
 #include "mapqgraphics.h"
-#include <feature_timeAndStatistic/path_move.cpp>
 #include <QPoint>
 #include <QMouseEvent>
 MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
