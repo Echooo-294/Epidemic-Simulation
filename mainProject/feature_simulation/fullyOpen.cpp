@@ -31,7 +31,7 @@ void MapQGraphics::fullyOpen()
 //每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
-    qDebug()<<"simulation1";
+//    qDebug()<<"simulation1";
 
 //    QVector<Resident*>::iterator iterall=allPeople.begin();//全体
 //    //QVector<Resident*>::iterator iter1=incubations.begin();//感染潜伏

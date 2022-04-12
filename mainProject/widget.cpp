@@ -14,8 +14,8 @@ Widget::Widget(QWidget *parent)
     ui->startBtn->setIcon(QIcon(":/images/strBtn.png"));
     ui->startBtn->setIconSize(ui->startBtn->size());
     this->setStyleSheet("QPushButton{border:0px;}");
-    //实例化主界面
-    mainwin = new MainWindow;
+
+
 
     //界面大标题
     //设置字体
@@ -37,5 +37,7 @@ void Widget::on_startBtn_clicked()
 {
     //点击开始按钮，界面跳转
     this->hide();
+    //实例化主界面
+    mainwin = new MainWindow;
     mainwin->show();
 }
