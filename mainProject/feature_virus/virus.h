@@ -1,8 +1,7 @@
 #ifndef VIRUS_H
 #define VIRUS_H
-#include<QObject>
 
-class Virus:public QObject
+class Virus
 {
 public:
     Virus(int a,double b,double c,int d,double e,double f,double g,double h,double i,double j);

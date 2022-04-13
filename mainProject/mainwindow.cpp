@@ -1,8 +1,8 @@
 /*
- * @Description: 主界面
+ * @Description: 主界面，最近修改mapInit：添加各大建筑类进入mapView
  * @Date: 2022-04-04
  * @Last Modified by: echooo
- * @Last Modified time: 2022-04-10
+ * @Last Modified time: 2022-04-12
  */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"

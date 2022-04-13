@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-04
+ * @Last Modified time: 2022-04-12
  */
 #ifndef STATISTIC_H
 #define STATISTIC_H
@@ -28,8 +28,8 @@ extern int deadNumber;//死亡人数
 extern int immunityNumber;//疫苗接种人数
 extern int day;//天数
 extern double showTime;//时间
-int randInt();
-double randDouble();
+int randInt();//返回任意int
+double randDouble();//返回0-1double
 void updateShowTime();
 void showStatistic();
 

@@ -3,22 +3,16 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-10
+ * @Last Modified time: 2022-04-12
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include<mapqgraphics.h>
 void virusGrowth(Resident* people);
 void treatment(Resident* people);
-/*
- * 使用前提：政策选择为完全开放
- * 参数：
- * 使用时间和空间：
- */
+
 void MapQGraphics::fullyOpen()
 {
-    qDebug()<<allPeople.size();
-    qDebug()<<incubations.size();
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
     timer1->start(200);
@@ -29,20 +23,19 @@ void MapQGraphics::fullyOpen()
 //每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
-    qDebug()<<"simulation1";
-//    QVector<Resident*>::iterator iterall=allPeople.begin();//全体
-//    //QVector<Resident*>::iterator iter1=incubations.begin();//感染潜伏
-//    int healthStatus=0;
-//    int activityStatus=0;
-//    double p=0;
+    QVector<Resident*>::iterator iterall=allPeople.begin();//全体
+    //QVector<Resident*>::iterator iter1=incubations.begin();//感染潜伏
+    int healthStatus=0;
+    int activityStatus=0;
+    //double p=0;
     updateShowTime();//时间更新
     int i=0;
     for(i=0;i<400;i++)
     {
         randMove(i);//随机移动
-//        (*iterall)->updateHealthStatus();//更新自身状态
-//        healthStatus=(*iterall)->getHealthStatus();//健康状态
-//        activityStatus=(*iterall)->getActivityStatus();
+        (*iterall)->updateHealthStatus();//更新自身状态
+        healthStatus=(*iterall)->getHealthStatus();//健康状态
+        activityStatus=(*iterall)->getActivityStatus();
 //        if(healthStatus!=0&&healthStatus!=4&&activityStatus!=4&&activityStatus!=5)
 //            {}//感染者感染
 //        if(healthStatus!=0&&healthStatus!=4)
