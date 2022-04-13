@@ -200,6 +200,27 @@ void MainWindow::mapInit()
     //模拟疫情开始
     ui->mapView->fullyOpen();
     qDebug()<<"aftersimulation";
+
+
+    QGraphicsEllipseItem *yuan1 = new QGraphicsEllipseItem(10,10,50,50);
+    QGraphicsEllipseItem *yuan2 = new QGraphicsEllipseItem(60,10,50,50);
+    QPen pen7;
+    pen7.setColor(Qt::red);
+    yuan1->setFlag(QGraphicsItem::ItemIsMovable);
+    yuan1->setFlag(QGraphicsItem::ItemIsFocusable);
+    yuan2->setFlag(QGraphicsItem::ItemIsFocusable);
+    yuan2->setFlag(QGraphicsItem::ItemIsMovable);
+    yuan1->setPen(pen7);
+    yuan2->setPen(pen7);
+
+    scene->addItem(yuan1);
+    scene->addItem(yuan2);
+    if(yuan1->collidesWithItem(yuan2))
+    {
+        qDebug()<<"!!!!!";
+    }
+
+
 }
 
 MainWindow::~MainWindow()
