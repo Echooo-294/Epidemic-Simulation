@@ -26,8 +26,10 @@ void MapQGraphics::initIncubation()
     QVector<Resident*>::iterator iter=allPeople.begin();
     for(int i=0;i<initInfection;i++)//初始的感染者全部是感染潜伏
     {
-        (*iter)->setHealthStatus(1);//全体人群从0开始感染
+        //people[i].setHealthStatus(1);//全体人群从0开始感染
         incubations.append(*iter);//并且添加到新感染潜伏数组
         iter++;
     }
 }
+
+

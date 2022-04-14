@@ -81,3 +81,10 @@ void Resident::setImmunity(double value)
 {
     immunity = value;
 }
+
+QPainterPath Resident::shape() const
+{
+    QPainterPath path;
+    path.addEllipse(-20,-20,40,40);
+    return path;
+}

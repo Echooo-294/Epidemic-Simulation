@@ -8,6 +8,7 @@
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include<mapqgraphics.h>
+#include<mainwindow.h>
 void virusGrowth(Resident* people);
 void treatment(Resident* people);
 
@@ -23,9 +24,8 @@ void MapQGraphics::fullyOpen()
 //每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
-    QVector<Resident*>::iterator iterall=allPeople.begin();//全体
+    //QVector<Resident*>::iterator iterall=allPeople.begin();//全体
     //QVector<Resident*>::iterator iter1=incubations.begin();//感染潜伏
-    int healthStatus=0;
     int activityStatus=0;
     //double p=0;
     updateShowTime();//时间更新
@@ -33,11 +33,37 @@ void MapQGraphics::simulation1()
     for(i=0;i<400;i++)
     {
         randMove(i);//随机移动
-        (*iterall)->updateHealthStatus();//更新自身状态
-        healthStatus=(*iterall)->getHealthStatus();//健康状态
-        activityStatus=(*iterall)->getActivityStatus();
-//        if(healthStatus!=0&&healthStatus!=4&&activityStatus!=4&&activityStatus!=5)
-//            {}//感染者感染
+        QList<QGraphicsItem*>::iterator iter=people[i].collidingItems().begin();
+
+//      int j=0;
+        //qDebug()<<people[i].collidingItems()[j]->data(1).toString();
+//        if(people[i].collidingItems()[0]->data(1).toString()=="ganran")
+//            qDebug()<<people[i].collidingItems()[0]->data(1).toString();
+//        for(; iter<people[i].collidingItems().end(); iter++,j++)
+//        {
+//            if(people[i].collidingItems()[j]->data(1).toString()=="ganran")
+//            {
+//                    people[i].setHealthStatus(1);
+//                    people[i].setBrush(QBrush(Qt::red));
+//            }
+
+//        }
+        if(people[i].collidesWithItem(&people[0]))
+        {
+                people[i].setHealthStatus(1);
+                people[i].setBrush(QBrush(Qt::red));
+        }
+
+
+        //people[i].updateHealthStatus();//更新自身状态
+        //int healthStatus=people[i].getHealthStatus();//健康状态
+        activityStatus=people[i].getActivityStatus();
+
+//        if(healthStatus==1)
+//        {
+//            people[i].setBrush(QBrush(Qt::red));
+//        }//感染者感染
+
 //        if(healthStatus!=0&&healthStatus!=4)
 //            virusGrowth(*iterall);//病毒密度更新
 //        else
@@ -59,6 +85,7 @@ void MapQGraphics::simulation1()
 //        {
 //            treatment(*iterall);
 //        }
+
     }
 }
 

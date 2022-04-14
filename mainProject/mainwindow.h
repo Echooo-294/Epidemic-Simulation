@@ -12,6 +12,8 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
 #include <feature_space/space.h>
+#include<feature_timeAndStatistic/statistic.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -35,6 +37,7 @@ private:
     QLabel *curbuiLab;
     //地图的视图
     QGraphicsScene *scene=NULL;
+
 
 private slots:
     //获得鼠标移动和点击的槽函数

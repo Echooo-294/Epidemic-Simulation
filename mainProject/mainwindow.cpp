@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //绘画初始化地图
     this->mapInit();
 
+
 }
 
 void MainWindow::mapInit()
@@ -151,16 +152,17 @@ void MainWindow::mapInit()
     }
 
     //创建居民对象的图元
-    ui->mapView->people = new QGraphicsEllipseItem[400];
-    QPen pen5;//设置画笔
-    pen5.setColor(Qt::black);
-    pen5.setWidth(2);
-    for(int i=0;i<400;i++)//将居民放进不同的居民楼里
+    ui->mapView->people = new Resident[400];
+    ui->mapView->infectpeople = new Resident[400];
+
+    //将居民放进不同的居民楼里
+    for(int i=0;i<400;i++)
     {
+        ui->mapView->people[i].setData(1,"jiankang");
         if(i<100)
         {
-            ui->mapView->people[i].setPen(pen5);
-            ui->mapView->people[i].setRect(QRectF(0,0,2,2));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
+            ui->mapView->people[i].setBrush(QBrush(Qt::green));
+            ui->mapView->people[i].setRect(QRectF(0,0,7,7));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
             ui->mapView->people[i].setStartAngle(16*0);//起始角度
             ui->mapView->people[i].setSpanAngle(16*360);//旋转角度
             ui->mapView->people[i].setPos((i%10)*20+10+r1->getPosition().x(),(i/10)*15+7+r1->getPosition().y());
@@ -168,8 +170,8 @@ void MainWindow::mapInit()
         }
         else if(i<200)
         {
-            ui->mapView->people[i].setPen(pen5);
-            ui->mapView->people[i].setRect(QRectF(0,0,2,2));
+            ui->mapView->people[i].setBrush(QBrush(Qt::green));
+            ui->mapView->people[i].setRect(QRectF(0,0,7,7));
             ui->mapView->people[i].setStartAngle(16*0);
             ui->mapView->people[i].setSpanAngle(16*360);
             ui->mapView->people[i].setPos(((i-100)%10)*20+10+r2->getPosition().x(),((i-100)/10)*15+7+r2->getPosition().y());
@@ -177,8 +179,8 @@ void MainWindow::mapInit()
         }
         else if(i<300)
         {
-            ui->mapView->people[i].setPen(pen5);
-            ui->mapView->people[i].setRect(QRectF(0,0,2,2));
+            ui->mapView->people[i].setBrush(QBrush(Qt::green));
+            ui->mapView->people[i].setRect(QRectF(0,0,7,7));
             ui->mapView->people[i].setStartAngle(16*0);
             ui->mapView->people[i].setSpanAngle(16*360);
             ui->mapView->people[i].setPos(((i-200)%10)*20+10+r3->getPosition().x(),((i-200)/10)*15+7+r3->getPosition().y());
@@ -186,41 +188,27 @@ void MainWindow::mapInit()
         }
         else if(i<400)
         {
-            ui->mapView->people[i].setPen(pen5);
-            ui->mapView->people[i].setRect(QRectF(0,0,2,2));
+            ui->mapView->people[i].setBrush(QBrush(Qt::green));
+            ui->mapView->people[i].setRect(QRectF(0,0,7,7));
             ui->mapView->people[i].setStartAngle(16*0);
             ui->mapView->people[i].setSpanAngle(16*360);
             ui->mapView->people[i].setPos(((i-300)%10)*20+10+r4->getPosition().x(),((i-300)/10)*15+7+r4->getPosition().y());
             scene->addItem(&ui->mapView->people[i]);
         }
-        //ui->mapView->people[i].setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     }
 
-    //ui->mapView->setCacheMode(QGraphicsView::CacheBackground);
+    for(int i=0;i<initInfection;i++)//初始的感染者全部是感染潜伏
+    {
+        ui->mapView->people[i].setHealthStatus(1);//全体人群从0开始感染
+        ui->mapView->people[i].setData(1,"ganran");
+        ui->mapView->people[i].setBrush(Qt::red);
+        ui->mapView->infectpeople[i].setHealthStatus(1);
+    }
+
+
     //模拟疫情开始
     ui->mapView->fullyOpen();
     qDebug()<<"aftersimulation";
-
-
-    QGraphicsEllipseItem *yuan1 = new QGraphicsEllipseItem(10,10,50,50);
-    QGraphicsEllipseItem *yuan2 = new QGraphicsEllipseItem(60,10,50,50);
-    QPen pen7;
-    pen7.setColor(Qt::red);
-    yuan1->setFlag(QGraphicsItem::ItemIsMovable);
-    yuan1->setFlag(QGraphicsItem::ItemIsFocusable);
-    yuan2->setFlag(QGraphicsItem::ItemIsFocusable);
-    yuan2->setFlag(QGraphicsItem::ItemIsMovable);
-    yuan1->setPen(pen7);
-    yuan2->setPen(pen7);
-
-    scene->addItem(yuan1);
-    scene->addItem(yuan2);
-    if(yuan1->collidesWithItem(yuan2))
-    {
-        qDebug()<<"!!!!!";
-    }
-
-
 }
 
 MainWindow::~MainWindow()

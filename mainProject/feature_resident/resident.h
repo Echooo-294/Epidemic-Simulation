@@ -13,7 +13,9 @@
 #include <QPoint>
 #include <QTime>
 #include<feature_virus/virus.h>
-class Resident : public QObject
+#include<QGraphicsEllipseItem>
+
+class Resident : public QObject,public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
@@ -29,8 +31,8 @@ public:
     void updateHealthStatus();//用于根据病毒密度更新健康状态，病毒类可以作为参数
     double getImmunity() const;
     void setImmunity(double value);
-
-private:
+    QPainterPath shape() const override;
+public:
     double virusDensity;//病毒密度
     int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
     int activityStatus;//活动状态（自由活动0、密切接触1、独立隔离2、确诊3、治疗中4、治愈5）

@@ -23,11 +23,13 @@ public:
     QVector<Resident*> allPeople;//总人群数组
     QVector<Resident*> incubations;//感染潜伏数组
 
-    QGraphicsEllipseItem *people;//人群图元，目前是400个
+    Resident *people;//人群图元，目前是400个
+    Resident *infectpeople;
     //定时器
     QTimer *timer1;//定时器1，用来模拟每半小时的
     QTimer *timer2;//定时器2，用来模拟每天的统计结果更新
     QTimer *timer3;//
+
 
     //初始化，实现在init.cpp中
     void initPeople();//初始化全部人群，用在构造函数中
