@@ -33,26 +33,29 @@ void MapQGraphics::simulation1()
     for(i=0;i<400;i++)
     {
         randMove(i);//随机移动
-        QList<QGraphicsItem*>::iterator iter=people[i].collidingItems().begin();
+        QList<QGraphicsItem*>::const_iterator  iter;
+        int j=0;
 
-//      int j=0;
-        //qDebug()<<people[i].collidingItems()[j]->data(1).toString();
+//        qDebug()<<people[i].collidingItems()[j]->data(1).toString();
 //        if(people[i].collidingItems()[0]->data(1).toString()=="ganran")
 //            qDebug()<<people[i].collidingItems()[0]->data(1).toString();
-//        for(; iter<people[i].collidingItems().end(); iter++,j++)
-//        {
-//            if(people[i].collidingItems()[j]->data(1).toString()=="ganran")
-//            {
-//                    people[i].setHealthStatus(1);
-//                    people[i].setBrush(QBrush(Qt::red));
-//            }
-
-//        }
-        if(people[i].collidesWithItem(&people[0]))
+      //collidingItems返回碰撞的图元
+        QList<QGraphicsItem*> list=people[i].collidingItems();
+        for(iter=list.constBegin(); iter!=list.constEnd(); iter++,j++)
         {
-                people[i].setHealthStatus(1);
-                people[i].setBrush(QBrush(Qt::red));
+            if(people[i].collidingItems().isEmpty()) break;
+            if(people[i].collidingItems().at(j)->data(1).toString()=="ganran")
+            {
+                    people[i].setHealthStatus(1);
+                    people[i].setBrush(QBrush(Qt::red));
+            }
+
         }
+//        if(people[i].collidesWithItem(&people[0]))
+//        {
+//                people[i].setHealthStatus(1);
+//                people[i].setBrush(QBrush(Qt::red));
+//        }
 
 
         //people[i].updateHealthStatus();//更新自身状态

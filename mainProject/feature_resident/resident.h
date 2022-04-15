@@ -31,6 +31,7 @@ public:
     void updateHealthStatus();//用于根据病毒密度更新健康状态，病毒类可以作为参数
     double getImmunity() const;
     void setImmunity(double value);
+    //碰撞范围和形状
     QPainterPath shape() const override;
 public:
     double virusDensity;//病毒密度
