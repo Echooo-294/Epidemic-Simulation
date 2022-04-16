@@ -33,13 +33,16 @@ void MapQGraphics::simulation1()
     for(i=0;i<400;i++)
     {
         randMove(i);//随机移动
-        QList<QGraphicsItem*>::const_iterator  iter;
-        int j=0;
 
 //        qDebug()<<people[i].collidingItems()[j]->data(1).toString();
 //        if(people[i].collidingItems()[0]->data(1).toString()=="ganran")
 //            qDebug()<<people[i].collidingItems()[0]->data(1).toString();
+
+//对于第i个人，判断在运行的某一时刻与其发生碰撞的居民中，有无感染人员，如果有，就将此人状态改为感染，且颜色设置为红色
       //collidingItems返回碰撞的图元
+        QList<QGraphicsItem*>::const_iterator  iter;
+        int j=0;
+
         QList<QGraphicsItem*> list=people[i].collidingItems();
         for(iter=list.constBegin(); iter!=list.constEnd(); iter++,j++)
         {
@@ -51,6 +54,7 @@ void MapQGraphics::simulation1()
             }
 
         }
+
 //        if(people[i].collidesWithItem(&people[0]))
 //        {
 //                people[i].setHealthStatus(1);
