@@ -9,7 +9,7 @@
 #include<feature_timeAndStatistic/statistic.h>
 #include<mapqgraphics.h>
 #include<mainwindow.h>
-
+//只有进入医院一个特殊步骤
 void MapQGraphics::fullyOpen()
 {
     timer1=new QTimer(this);//初始化计时器
@@ -46,9 +46,8 @@ void MapQGraphics::simulation1()
             //如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
             if(activityStatus!=4)
             {
-                //infecting(i);
+                infecting(i);
             }
-
         }
         else
         {

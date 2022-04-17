@@ -35,7 +35,7 @@ void showStatistic()
 {
     qDebug()<<"模拟天数："<<day;
 //    qDebug()<<"正常人数："<<healthNumber;
-//    qDebug()<<"感染人数："<<infectionNumber;
+    qDebug()<<"感染人数："<<infectionNumber;
 //    qDebug()<<"隔离人数："<<isolationNumber;
 //    qDebug()<<"重症人数："<<seriousNumber;
 //    qDebug()<<"死亡人数："<<deadNumber;

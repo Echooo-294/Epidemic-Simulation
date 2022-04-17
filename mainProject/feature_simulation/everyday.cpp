@@ -8,9 +8,9 @@
 #include<feature_timeAndStatistic/statistic.h>
 #include<feature_resident/resident.h>
 #include"mapqgraphics.h"
-
 void MapQGraphics::everyday()
 {
+    qDebug()<<"dayout";
     for(int i=0;i<livingNumber;i++)
     {
         people[i].virusGrowth();//病毒自然增长

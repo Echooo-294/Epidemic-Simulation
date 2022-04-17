@@ -3,13 +3,14 @@
  * @Author: Mars
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-16
+ * @Last Modified time: 2022-04-17
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include"mapqgraphics.h"
 /*
+ * 使用前提：注意政策
  * 参数：两个居民对象（带病毒者和被计算感染概率者）和病毒对象
  * 使用时间和空间：出现感染者后，对感染者周围4米范围内每一小时计算一次
  */
@@ -32,6 +33,7 @@ void MapQGraphics::infecting(int i)
         {
                 people[i].setHealthStatus(1);
                 people[i].setBrush(QBrush(Qt::red));
+                infectionNumber++;
         }
     }
     //        if(people[i].collidesWithItem(&people[0]))
