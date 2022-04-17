@@ -17,7 +17,8 @@ public:
     double getBoundary2() const;
 private:
     int infectivity;//传染人数上限
-    double openInfection,closeInfection;//感染概率
+    double openInfection;//开放空间感染概率
+    double closeInfection;//密闭空间感染概率
     int infectionDistance;//可感染范围
     double growthRate1;//潜伏期病毒增长率
     double growthRate2;//出症状病毒增长率

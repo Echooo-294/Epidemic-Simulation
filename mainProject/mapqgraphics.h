@@ -37,6 +37,8 @@ public:
     //在路径上的移动，还未实现
     void path();//路径移动
 
+    //每天的病毒自然增长和治疗
+    void everyday();
     //感染，实现在feature_virus/infecting.cpp
     void infecting(int i);
 signals:

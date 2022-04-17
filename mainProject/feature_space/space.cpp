@@ -23,35 +23,30 @@ Space::Space(char t,double l,double w,QString n,QPoint p) : QObject(nullptr),cap
     case 'R':{
         setMoveMode(1);
         setInfectionRro(1.0);
-        qDebug()<<"R";
         break;
     }
     //写字楼
     case 'W':{
         setMoveMode(1);
         setInfectionRro(0.8);
-        qDebug()<<"W";
         break;
     }
     //医院
     case 'H':{
         setMoveMode(1);
         setInfectionRro(0);
-        qDebug()<<"H";
         break;
     }
     //隔离区
     case 'Z':{
         setMoveMode(0);
         setInfectionRro(0);
-        qDebug()<<"Z";
         break;
     }
     //开放区域（包括道路）
     case 'O':{
         setMoveMode(2);
         setInfectionRro(0.5);
-        qDebug()<<"O";
         break;
     }
     }

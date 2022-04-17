@@ -16,7 +16,7 @@ void MapQGraphics::fullyOpen()
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
     timer1->start(200);
     timer2=new QTimer(this);
-    connect(timer2,&QTimer::timeout,this,&showStatistic);//每24h更新统计结果
+    connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer2->start(2400);
 }
 //每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
@@ -29,25 +29,31 @@ void MapQGraphics::simulation1()
     int i=0;
     int flag=0;
     //选择感染方式：如果感染者多，让健康者被感染；如果健康者多，让感染者去感染别人
-    if(livingNumber<infectionNumber)
+    //先在循环外判断，不考虑操作过程中的人数变化
+    //可以预估可能被感染的人数（考虑人数变化），再抉择方案
+    if(healthNumber<infectionNumber-isolationNumber)
         flag=1;
-    for(i=0;i<400;i++)
+    for(i=0;i<livingNumber;i++)
     {
-        randMove(i);//随机移动
         people[i].updateHealthStatus();//更新自身状态
+        randMove(i);//随机移动
         healthStatus=people[i].getHealthStatus();//健康状态
         activityStatus=people[i].getActivityStatus();//活动状态
-        //if(flag==0)//健康人多
-
-        if(healthStatus==0&&healthStatus==4)//如果健康或死亡则下一个人，其他模拟还要考虑活动状态
-            continue;
-        //健康者多，判断如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
-        if(activityStatus!=4)
+        if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）
         {
-            //infecting(i);
-        }
-        people[i].virusGrowth();
+            if(healthStatus==0&&healthStatus==4)//如果健康或死亡则下一个人，其他模拟还要考虑活动状态
+                continue;
+            //如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
+            if(activityStatus!=4)
+            {
+                //infecting(i);
+            }
 
+        }
+        else
+        {
+
+        }
 //        if(activityStatus!=4)//是否进入医院
 //        {
 //            if(healthStatus==3)
@@ -61,11 +67,6 @@ void MapQGraphics::simulation1()
 //                 {}//进入医院
 //            }
 //        }
-//        if(activityStatus==4)//治疗
-//        {
-//            treatment(*iterall);
-//        }
-
     }
 }
 
