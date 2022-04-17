@@ -2,8 +2,8 @@
  * @Description: 居民类的声明
  * @Author: Echooo
  * @Date: 2022-03-03
- * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-04
+ * @Last Modified by: 巾可
+ * @Last Modified time: 2022-04-14
  */
 
 #ifndef RESIDENT_H
@@ -31,9 +31,11 @@ public:
     void updateHealthStatus();//用于根据病毒密度更新健康状态，病毒类可以作为参数
     double getImmunity() const;
     void setImmunity(double value);
-    //碰撞范围和形状
-    QPainterPath shape() const override;
-public:
+    void virusGrowth();//病毒自然增长，定义在feature_virus
+    void treatment();//治疗，定义在feature_virus
+    QPainterPath shape() const override;//碰撞范围和形状
+    Resident& operator=(Resident &a);//重载=运算符
+private:
     double virusDensity;//病毒密度
     int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
     int activityStatus;//活动状态（自由活动0、密切接触1、独立隔离2、确诊3、治疗中4、治愈5）

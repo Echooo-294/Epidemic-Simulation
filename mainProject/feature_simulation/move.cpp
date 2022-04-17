@@ -82,13 +82,13 @@ int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，
     //用于判断是否在建筑内
     bool flag=0;
     int j=0;
-    for(;j<buildings.size();j++)
+    for(;j<buildingNumber;j++)
     {
         //传建筑位置参数
-        bx=buildings.at(j)->getPosition().x();
-        by=buildings.at(j)->getPosition().y();
-        bw=buildings.at(j)->getWidth();
-        bl=buildings.at(j)->getLength();
+        bx=buildings[j]->getPosition().x();
+        by=buildings[j]->getPosition().y();
+        bw=buildings[j]->getWidth();
+        bl=buildings[j]->getLength();
         //判断是不是在第j个建筑中
         if(px>=bx&&px<=bx+bw&&py>=by&&py<=by+bl)
         {
@@ -105,26 +105,27 @@ void MapQGraphics::randMove(int i)
 {
     const double w=activityWill();//获得当前时间的活动意愿
     double p=randDouble();//随机数，返回的是0-1的值
-    if(p>=w)
+    if(p>=w)//不移动
         return;
     else
-        p=p/w;
+        p=p/w;//移动，并且修正概率为0-1之间的值
+
     const int distance=10;//移动距离
     int px=people[i].x();
     int py=people[i].y();
     const int where=judgeWhere(i);
     if(where>=0)//如果在建筑中
     {
-        Space *b=buildings.at(where);//获取所在的建筑
+        Space *b=buildings[where];//获取所在的建筑
         const int bx=b->getPosition().x();
         const int by=b->getPosition().y();
         const int bw=b->getWidth();
         const int bl=b->getLength();
 
-        //禁止出界
+        //判断移动方向，且移动后是否出界，出了就反向走
         if(p<0.25)//右
             {
-                if(px+distance<=bx+bw)//判断移动后是否出界，出了就反向走
+                if(px+distance<=bx+bw)
                     people[i].moveBy(distance,0);//一次移动10
                 else
                     people[i].moveBy(-distance,0);
@@ -152,5 +153,4 @@ void MapQGraphics::randMove(int i)
             }
     }
     //不在各建筑中，在公共空间随即移动？还是按路径移动
-
 }

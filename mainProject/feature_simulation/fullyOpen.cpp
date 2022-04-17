@@ -9,8 +9,6 @@
 #include<feature_timeAndStatistic/statistic.h>
 #include<mapqgraphics.h>
 #include<mainwindow.h>
-void virusGrowth(Resident* people);
-void treatment(Resident* people);
 
 void MapQGraphics::fullyOpen()
 {
@@ -24,57 +22,32 @@ void MapQGraphics::fullyOpen()
 //每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
-    //QVector<Resident*>::iterator iterall=allPeople.begin();//全体
-    //QVector<Resident*>::iterator iter1=incubations.begin();//感染潜伏
     int activityStatus=0;
+    int healthStatus=0;
     //double p=0;
     updateShowTime();//时间更新
     int i=0;
+    int flag=0;
+    //选择感染方式：如果感染者多，让健康者被感染；如果健康者多，让感染者去感染别人
+    if(livingNumber<infectionNumber)
+        flag=1;
     for(i=0;i<400;i++)
     {
         randMove(i);//随机移动
+        people[i].updateHealthStatus();//更新自身状态
+        healthStatus=people[i].getHealthStatus();//健康状态
+        activityStatus=people[i].getActivityStatus();//活动状态
+        //if(flag==0)//健康人多
 
-//        qDebug()<<people[i].collidingItems()[j]->data(1).toString();
-//        if(people[i].collidingItems()[0]->data(1).toString()=="ganran")
-//            qDebug()<<people[i].collidingItems()[0]->data(1).toString();
-
-//对于第i个人，判断在运行的某一时刻与其发生碰撞的居民中，有无感染人员，如果有，就将此人状态改为感染，且颜色设置为红色
-      //collidingItems返回碰撞的图元
-        QList<QGraphicsItem*>::const_iterator  iter;
-        int j=0;
-
-        QList<QGraphicsItem*> list=people[i].collidingItems();
-        for(iter=list.constBegin(); iter!=list.constEnd(); iter++,j++)
+        if(healthStatus==0&&healthStatus==4)//如果健康或死亡则下一个人，其他模拟还要考虑活动状态
+            continue;
+        //健康者多，判断如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
+        if(activityStatus!=4)
         {
-            if(people[i].collidingItems().isEmpty()) break;
-            if(people[i].collidingItems().at(j)->data(1).toString()=="ganran")
-            {
-                    people[i].setHealthStatus(1);
-                    people[i].setBrush(QBrush(Qt::red));
-            }
-
+            //infecting(i);
         }
+        people[i].virusGrowth();
 
-//        if(people[i].collidesWithItem(&people[0]))
-//        {
-//                people[i].setHealthStatus(1);
-//                people[i].setBrush(QBrush(Qt::red));
-//        }
-
-
-        //people[i].updateHealthStatus();//更新自身状态
-        //int healthStatus=people[i].getHealthStatus();//健康状态
-        activityStatus=people[i].getActivityStatus();
-
-//        if(healthStatus==1)
-//        {
-//            people[i].setBrush(QBrush(Qt::red));
-//        }//感染者感染
-
-//        if(healthStatus!=0&&healthStatus!=4)
-//            virusGrowth(*iterall);//病毒密度更新
-//        else
-//            continue;//如果健康或死亡则下一个人
 //        if(activityStatus!=4)//是否进入医院
 //        {
 //            if(healthStatus==3)

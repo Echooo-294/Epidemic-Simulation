@@ -2,21 +2,48 @@
  * @Description: 感染概率
  * @Author: Mars
  * @Date: 2022-03-21
- * @Last Modified by: Mars
- * @Last Modified time: 2022-04-4
+ * @Last Modified by: Echooo
+ * @Last Modified time: 2022-04-16
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
 #include<feature_timeAndStatistic/statistic.h>
+#include"mapqgraphics.h"
 /*
  * 参数：两个居民对象（带病毒者和被计算感染概率者）和病毒对象
  * 使用时间和空间：出现感染者后，对感染者周围4米范围内每一小时计算一次
  */
+void MapQGraphics::infecting(int i)
+{
+    //对于第i个人，判断在运行的某一时刻与其发生碰撞的居民中，有无感染人员
+    //如果有，就将此人状态改为感染，且颜色设置为红色
+    //collidingItems返回碰撞的图元
+    //qDebug()<<people[i].collidingItems()[j]->data(1).toString();
+    //if(people[i].collidingItems()[0]->data(1).toString()=="ganran")
+    //    qDebug()<<people[i].collidingItems()[0]->data(1).toString();
+    QList<QGraphicsItem*>::const_iterator  iter;
+    int j=0;
+    QList<QGraphicsItem*> list=people[i].collidingItems();
+    for(iter=list.constBegin(); iter!=list.constEnd(); iter++,j++)
+    {
 
+        if(people[i].collidingItems().isEmpty()) break;
+        if(people[i].collidingItems().at(j)->data(1).toString()=="ganran")
+        {
+                people[i].setHealthStatus(1);
+                people[i].setBrush(QBrush(Qt::red));
+        }
+    }
+    //        if(people[i].collidesWithItem(&people[0]))
+    //        {
+    //                people[i].setHealthStatus(1);
+    //                people[i].setBrush(QBrush(Qt::red));
+    //        }
+}
 bool infectionP(Resident &people1,Resident &people2)//考虑距离 要加上两个居民对应图元
 {
     //如果已治愈则无法感染
-
+    //治愈者不再被感染
     //如果感染次数达到上限也返回0，不能感染
     if(people2.getHealthStatus()==0)//如果后者也是感染者，直接等于没被感染
     {

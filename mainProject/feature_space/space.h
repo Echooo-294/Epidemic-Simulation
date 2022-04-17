@@ -18,20 +18,6 @@ class Space : public QObject
     Q_OBJECT
 public:
     explicit Space(char t,double l,double w,QString n,QPoint p);
-
-private:
-    char type;//建筑种类--R：居民楼；W：写字楼；H：医院；Z：隔离区；O：开发空间
-    int capacity;//容量
-    double length,width;//长宽
-    QString name;//建筑名称
-    QPoint position;//坐标
-    bool accessible;//是否可进入--人满或特殊政策下不可进入
-    int restRoom;//剩余容量
-    double infectionRro;//传播概率--居民楼：传播概率=1；写字楼：传播概率=0.8
-    //医院：即传播概率=0;隔离区：即传播概率=0;开放空间:传播概率=0.5
-    int moveMode;//人的移动方式--0：不移动（比如医院和隔离区）；1：上下左右各1/4的概率随机运动；2：路上定向运动
-
-public:
     int getCapacity() const;
     void setCapacity(int value);//设置和获取容纳量
 
@@ -64,6 +50,17 @@ public:
 
     char getType() const;
     void setType(char value);
+private:
+    char type;//建筑种类--R：居民楼；W：写字楼；H：医院；Z：隔离区；O：开发空间
+    int capacity;//容量
+    double length,width;//长宽
+    QString name;//建筑名称
+    QPoint position;//坐标
+    bool accessible;//是否可进入--人满或特殊政策下不可进入
+    int restRoom;//剩余容量
+    double infectionRro;//传播概率--居民楼：传播概率=1；写字楼：传播概率=0.8
+    //医院：即传播概率=0;隔离区：即传播概率=0;开放空间:传播概率=0.5
+    int moveMode;//人的移动方式--0：不移动（比如医院和隔离区）；1：上下左右各1/4的概率随机运动；2：路上定向运动
 
 signals:
 

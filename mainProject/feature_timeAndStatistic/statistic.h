@@ -18,9 +18,9 @@ extern int initInfection;//初始感染人数
 extern double updateTime;//更新间隔时间
 extern int policy;//政策
 extern Virus v;
-
+extern int buildingNumber;
 //统计量
-extern int population;//总人数
+extern int livingNumber;//总人数
 extern int infectionNumber;//总感染人数
 extern int isolationNumber;//隔离人数
 extern int seriousNumber;//重症人数

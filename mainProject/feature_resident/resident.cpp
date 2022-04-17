@@ -88,3 +88,13 @@ QPainterPath Resident::shape() const//返回被碰撞的形状
     path.addEllipse(-20,-20,40,40);//设置碰撞范围
     return path;
 }
+
+Resident& Resident::operator=(Resident &a)
+{
+    virusDensity=a.getVirusDensity();
+    healthStatus=a.getHealthStatus();
+    activityStatus=a.getActivityStatus();
+    vaccine=a.getVaccine();
+    immunity=a.getImmunity();
+    return *this;
+}

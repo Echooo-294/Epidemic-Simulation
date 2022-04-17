@@ -17,19 +17,15 @@
 namespace Ui {
 class MainWindow;
 }
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     void mapInit();
     ~MainWindow();
-
 private slots:
     void on_actionexit_triggered();
-
 private:
     Ui::MainWindow *ui;
     //状态栏
@@ -37,8 +33,6 @@ private:
     QLabel *curbuiLab;
     //地图的视图
     QGraphicsScene *scene=NULL;
-
-
 private slots:
     //获得鼠标移动和点击的槽函数
     void get_Mouse_Point(QPoint point);

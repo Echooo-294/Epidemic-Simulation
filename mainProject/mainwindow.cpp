@@ -51,28 +51,28 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::mapInit()
 {
     //初始化一系列建筑
+    //继续添加建筑需要去修改statistic.cpp中的buildingNumber
     Space *r1=new Space('R',150,200,"一号居民楼",QPoint(5,5));
+    ui->mapView->buildings[0]=r1;
     Space *r2=new Space('R',150,200,"二号居民楼",QPoint(ui->mapView->width()-455,5));
+    ui->mapView->buildings[1]=r2;
     Space *r3=new Space('R',150,200,"三号居民楼",QPoint(5,ui->mapView->height()-160));
+    ui->mapView->buildings[2]=r3;
     Space *r4=new Space('R',150,200,"四号居民楼",QPoint(ui->mapView->width()-455,ui->mapView->height()-160));
+    ui->mapView->buildings[3]=r4;
     Space *w1=new Space('W',200,200,"一号写字楼",QPoint(270,210));
+    ui->mapView->buildings[4]=w1;
     //    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(1,1));
     //    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(1,1));
     //    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(1,1));
     Space *h1=new Space('H',300,235,"一号医院",QPoint(ui->mapView->width()-240,5));
+    ui->mapView->buildings[5]=h1;
     Space *z1=new Space('Z',300,235,"一号隔离区",QPoint(ui->mapView->width()-240,ui->mapView->height()-305));
+    ui->mapView->buildings[6]=z1;
     Space *R[4]={r1,r2,r3,r4};
     Space *W[4]={w1};
     Space *H[1]={h1};
     Space *Z[1]={z1};
-    //向mapView传递Space*参数
-    ui->mapView->buildings.append(r1);
-    ui->mapView->buildings.append(r2);
-    ui->mapView->buildings.append(r3);
-    ui->mapView->buildings.append(r4);
-    ui->mapView->buildings.append(w1);
-    ui->mapView->buildings.append(h1);
-    ui->mapView->buildings.append(z1);
 
     //初始化视图
     scene=new QGraphicsScene(0,0,ui->mapView->width()-5,ui->mapView->height()-5);
@@ -151,10 +151,6 @@ void MainWindow::mapInit()
         scene->addItem(&t_Z[i]);
     }
 
-    //创建居民对象的图元
-    ui->mapView->people = new Resident[400];
-    ui->mapView->infectpeople = new Resident[400];
-
     //将居民放进不同的居民楼里
     for(int i=0;i<400;i++)
     {
@@ -202,13 +198,12 @@ void MainWindow::mapInit()
         ui->mapView->people[i].setHealthStatus(1);//全体人群从0开始感染
         ui->mapView->people[i].setData(1,"ganran");
         ui->mapView->people[i].setBrush(Qt::red);
-        ui->mapView->infectpeople[i].setHealthStatus(1);
+        ui->mapView->incubation[i].setHealthStatus(1);
     }
 
 
     //模拟疫情开始
     ui->mapView->fullyOpen();
-    qDebug()<<"aftersimulation";
 }
 
 MainWindow::~MainWindow()
