@@ -21,5 +21,4 @@ void Resident::virusGrowth()
         virusDensity+=growthRate1;//潜伏期自然增长
     else if(virusDensity<1&&virusDensity>=boundary1)
         virusDensity+=growthRate2;//出症状后自然增长
-    qDebug()<<virusDensity;
 }

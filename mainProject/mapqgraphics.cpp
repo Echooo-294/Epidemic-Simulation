@@ -16,6 +16,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     for(int i=0;i<initInfection;i++)//初始的感染者全部是感染潜伏
     {
         people[i].setHealthStatus(1);//全体人群从0开始感染
+        people[i].setVirusDensity(0.03);//赋予初始病毒密度
         incubation[i]=people[i];//并且添加到感染潜伏数组
     }
     //buildingNumber是定义在statistic.cpp中的建筑数量

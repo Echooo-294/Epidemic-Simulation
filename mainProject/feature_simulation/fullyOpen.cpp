@@ -14,12 +14,12 @@ void MapQGraphics::fullyOpen()
 {
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
-    timer1->start(200);
+    timer1->start(200);//代表2小时
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
-    timer2->start(2400);
+    timer2->start(2400);//代表24小时
 }
-//每500ms全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
+//每2小时全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
     int activityStatus=0;
@@ -35,38 +35,49 @@ void MapQGraphics::simulation1()
         flag=1;
     for(i=0;i<initPopulation;i++)//遍历整个人群，因为死亡其实也没有删除
     {
-        people[i].updateHealthStatus();//更新自身状态
         randMove(i);//随机移动
+        people[i].updateHealthStatus();//更新自身状态
         healthStatus=people[i].getHealthStatus();//健康状态
         activityStatus=people[i].getActivityStatus();//活动状态
         if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）
         {
-            if(healthStatus==0&&healthStatus==4)//如果健康或死亡则下一个人，其他模拟还要考虑活动状态
-                continue;
+//            if(healthStatus==0&&healthStatus==4)//如果健康或死亡则下一个人，其他模拟还要考虑活动状态
+//                continue;
             //如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
-            if(activityStatus!=4)
+            if(activityStatus!=4&&healthStatus!=0&&healthStatus!=4)
             {
-                //infecting(i);
+                infecting1(i);
             }
         }
-        else
-        {
-
-        }
-//        if(activityStatus!=4)//是否进入医院
+//        else
 //        {
-//            if(healthStatus==3)
-//            {
-//                //进入医院
-//            }
-//            else
-//            {
-//                 p=getrand();
-//                 if(p>0&&p<=0.5)
-//                 {}//进入医院
-//            }
+
 //        }
     }
+//    for(int i=0;i<initPopulation;i++)
+//    {
+//        healthStatus=people[i].getHealthStatus();
+//        if(healthStatus==1||healthStatus==4)
+//            continue;
+//        if(people[i].data(1).toString()=="ganran")
+//        {
+//            people[i].setHealthStatus(1);
+//            people[i].setBrush(QBrush(Qt::red));
+//        }
+//    }
+    //        if(activityStatus!=4)//是否进入医院
+    //        {
+    //            if(healthStatus==3)
+    //            {
+    //                //进入医院
+    //            }
+    //            else
+    //            {
+    //                 p=getrand();
+    //                 if(p>0&&p<=0.5)
+    //                 {}//进入医院
+    //            }
+    //        }
 }
 
 

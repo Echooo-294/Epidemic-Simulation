@@ -14,6 +14,7 @@
 #include <QTime>
 #include<feature_virus/virus.h>
 #include<QGraphicsEllipseItem>
+#include<QBrush>
 
 class Resident : public QObject,public QGraphicsEllipseItem
 {

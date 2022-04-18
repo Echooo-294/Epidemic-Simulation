@@ -60,16 +60,23 @@ void Resident::updateHealthStatus()
 {
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
     double boundary2=v.getBoundary2();//非重症与重症的密度界限
+    if(healthStatus==0&&data(1).toString()=="ganran")//如果是健康人被感染
+    {
+        healthStatus=1;
+        virusDensity=0.03;
+        setBrush(QBrush(Qt::red));
+    }
     if(virusDensity==0)
-        setHealthStatus(0);//健康
+        healthStatus=0;//健康
     else if(virusDensity>0&&virusDensity<boundary1)
-        setHealthStatus(1);//感染潜伏
+        healthStatus=1;//感染潜伏
     else if(virusDensity>=boundary1&&virusDensity<boundary2)
-        setHealthStatus(2);//感染出症状
+        healthStatus=2;//感染出症状
     else if(virusDensity>=boundary2&&virusDensity<1)
-        setHealthStatus(3);//重症
+        healthStatus=3;//重症
     else if(virusDensity==1)
-        setHealthStatus(4);//死亡
+        healthStatus=4;//死亡
+
 }
 
 double Resident::getImmunity() const

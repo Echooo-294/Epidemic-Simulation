@@ -23,9 +23,10 @@ public:
     Resident *people;//人群图元，目前是400个
     Resident *incubation;//感染潜伏人群
     //定时器
-    QTimer *timer1;//定时器1，用来模拟每半小时的
-    QTimer *timer2;//定时器2，用来模拟每天的统计结果更新
-    QTimer *timer3;//
+    QTimer *timer1;//模拟每2小时的更新
+    QTimer *timer2;//模拟每天的统计结果更新
+//    QTimer *timer3;//定时上班
+//    QTimer *timer4;//定时下班
 
     //开放模拟，实现在fullyOpen中
     void fullyOpen();//完全开放模拟
@@ -40,7 +41,8 @@ public:
     //每天的病毒自然增长和治疗
     void everyday();
     //感染，实现在feature_virus/infecting.cpp
-    void infecting(int i);
+    bool infectionP(int i);//计算感染概率
+    void infecting1(int i);//由感染者去感染他人，调用前需要确定是感染者
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
     void mousePressPoint(QPoint point);//发送鼠标按下信号，传坐标

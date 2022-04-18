@@ -22,8 +22,8 @@ int buildingNumber=7;//建筑数量
 
 //统计量
 int livingNumber=initPopulation;//存活人数
-int healthNumber=0;//正常人数
-int infectionNumber=0;//总感染人数
+int healthNumber=initPopulation;//正常人数
+int infectionNumber=initInfection;//总感染人数
 int isolationNumber=0;//隔离人数，也算在感染，治疗也算隔离
 int seriousNumber=0;//重症人数，也算在感染
 int deadNumber=0;//死亡人数，加上总人数应该=initPopulation
