@@ -4,7 +4,7 @@
 class Virus
 {
 public:
-    Virus(int a,double b,double c,int d,double e,double f,double g,double h,double i,double j);
+    Virus(double b,double c,int d,double e,double f,double g,double h,double i,double j);
     int getinfectivity() const;
     double getopenInfection() const;
     double getcloseInfection() const;
@@ -16,7 +16,6 @@ public:
     double getBoundary1() const;
     double getBoundary2() const;
 private:
-    int infectivity;//传染人数上限
     double openInfection;//开放空间感染概率
     double closeInfection;//密闭空间感染概率
     int infectionDistance;//可感染范围

@@ -18,4 +18,6 @@ void Resident::treatment()
     const double successRate=0.9;//治疗有效率
     if (randDouble()<=successRate)
         virusDensity-=recoveryRate;
+    if(virusDensity<0)
+        virusDensity=0;
 }

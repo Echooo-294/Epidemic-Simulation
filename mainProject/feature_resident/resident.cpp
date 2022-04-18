@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-04
+ * @Last Modified time: 2022-04-18
  */
 
 #include<feature_resident/resident.h>
@@ -11,7 +11,7 @@
 #include<feature_timeAndStatistic/statistic.h>
 
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
-  ,activityStatus(0),vaccine(0),immunity(im)
+  ,activityStatus(0),vaccine(0),immunity(im),infectivity(3)
 {
     //创建时可以选择三种对象：adult,student,senior，仅免疫力不同，其他全部默认
 }
@@ -97,4 +97,10 @@ Resident& Resident::operator=(Resident &a)
     vaccine=a.getVaccine();
     immunity=a.getImmunity();
     return *this;
+}
+
+void Resident::goDeadth()
+{
+    healthStatus=4;//健康状态设为死亡
+
 }

@@ -1,16 +1,11 @@
 #include "virus.h"
 
-Virus::Virus(int a,double b,double c,int d,double e,double f,double g,double h,double i,double j):\
-    infectivity(a),openInfection(b),closeInfection(c),infectionDistance(d),\
+Virus::Virus(double b,double c,int d,double e,double f,double g,double h,double i,double j):\
+    openInfection(b),closeInfection(c),infectionDistance(d),\
     growthRate1(e),growthRate2(f),cureEffectiveness(g),maskEffectiveness(h),\
     boundary1(i),boundary2(j)
 {
 
-}
-
-int Virus::getinfectivity() const
-{
-    return infectivity;
 }
 
 double Virus::getopenInfection() const

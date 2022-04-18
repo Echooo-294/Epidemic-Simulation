@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-12
+ * @Last Modified time: 2022-04-18
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -33,7 +33,7 @@ void MapQGraphics::simulation1()
     //可以预估可能被感染的人数（考虑人数变化），再抉择方案
     if(healthNumber<infectionNumber-isolationNumber)
         flag=1;
-    for(i=0;i<livingNumber;i++)
+    for(i=0;i<initPopulation;i++)//遍历整个人群，因为死亡其实也没有删除
     {
         people[i].updateHealthStatus();//更新自身状态
         randMove(i);//随机移动
@@ -46,7 +46,7 @@ void MapQGraphics::simulation1()
             //如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
             if(activityStatus!=4)
             {
-                infecting(i);
+                //infecting(i);
             }
         }
         else
