@@ -25,7 +25,7 @@ public:
     //定时器
     QTimer *timer1;//模拟每2小时的更新
     QTimer *timer2;//模拟每天的统计结果更新
-//    QTimer *timer3;//定时上班
+    QTimer *timer3;//定时上班
 //    QTimer *timer4;//定时下班
 
     //开放模拟，实现在fullyOpen中

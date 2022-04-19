@@ -38,10 +38,7 @@ void MapQGraphics::mousePressEvent(QMouseEvent *event)
     emit mousePressPoint(point);
     QGraphicsView::mousePressEvent(event);
 }
-void MapQGraphics::path()
-{
 
-}
 
 
 
