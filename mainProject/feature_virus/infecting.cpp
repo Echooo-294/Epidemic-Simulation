@@ -36,46 +36,23 @@ bool MapQGraphics::infectionP(int i)
         return 0;
     return 0;
 }
-void MapQGraphics::infecting1(int i)//感染者去感染他人
+void MapQGraphics::infecting1(int i)//感染者去感染他人，先将被感染者设置data，延后状态和颜色更新
 {
-    QList<QGraphicsItem*>::const_iterator  iter;
     int j=0;
-    QList<QGraphicsItem*> list=people[i].collidingItems();
-    for(iter=list.constBegin(); iter!=list.constEnd(); iter++,j++)
+    int size=size();
+    QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
+    for(;j<size;j++)
     {
-        if(people[i].collidingItems().isEmpty()) break;
+        if(list.isEmpty())
+            break;//如果没有碰撞到其他人，则退出循环
         else
         {
-            if(infectionP(i))
-                list[j]->setData(1,"ganran");
+            if(list[j]->data(1).toString()!="infected")//如果未被感染
+            {
+                if(infectionP(i))//判断是否被感染
+                    list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染
+            }
         }
     }
-
-
-    //对于第i个人，判断在运行的某一时刻与其发生碰撞的居民中，有无感染人员
-    //如果有，就将此人状态改为感染，且颜色设置为红色
-    //collidingItems返回碰撞的图元
-    //qDebug()<<people[i].collidingItems()[j]->data(1).toString();
-    //if(people[i].collidingItems()[0]->data(1).toString()=="ganran")
-    //    qDebug()<<people[i].collidingItems()[0]->data(1).toString();
-//    QList<QGraphicsItem*>::const_iterator  iter;
-//    int j=0;
-//    QList<QGraphicsItem*> list=people[i].collidingItems();
-//    for(iter=list.constBegin(); iter!=list.constEnd(); iter++,j++)
-//    {
-
-//        if(people[i].collidingItems().isEmpty()) break;
-//        if(people[i].collidingItems().at(j)->data(1).toString()=="ganran")
-//        {
-//            people[i].setHealthStatus(1);
-//            people[i].setBrush(QBrush(Qt::red));
-//            infectionNumber++;
-//        }
-//    }
-    //        if(people[i].collidesWithItem(&people[0]))
-    //        {
-    //                people[i].setHealthStatus(1);
-    //                people[i].setBrush(QBrush(Qt::red));
-    //        }
 }
 
