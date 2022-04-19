@@ -6,6 +6,7 @@
 #include<QVector>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsItemAnimation>
 #include <feature_space/space.h>
 
 #include<mainwindow.h>
