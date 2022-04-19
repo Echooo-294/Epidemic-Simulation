@@ -23,7 +23,7 @@ void MapQGraphics::fullyOpen()
 }
 void MapQGraphics::path()
 {//上班
-    if(showTime>=6&&showTime<=10)
+    if(showTime<=12)
     {
         for (int i=0;i<initPopulation;i++) {
             //获得人当前坐标
@@ -33,7 +33,7 @@ void MapQGraphics::path()
             int dx=end.x()-sta.x();
             int dy=end.y()-sta.y();
 
-            QTimeLine *tline=new QTimeLine(200);
+            QTimeLine *tline=new QTimeLine(500);
 //            tline->setCurveShape(QTimeLine::LinearCurve);
 //            tline->setLoopCount(1);
             tline->setFrameRange(0,100);
@@ -63,7 +63,7 @@ void MapQGraphics::path()
             int dx=end.x()-sta.x();
             int dy=end.y()-sta.y();
 
-            QTimeLine *tline=new QTimeLine(200);
+            QTimeLine *tline=new QTimeLine(500);
 //            tline->setCurveShape(QTimeLine::LinearCurve);
 //            tline->setLoopCount(1);
             tline->setFrameRange(0,100);
@@ -89,7 +89,7 @@ void MapQGraphics::simulation1()
     //double p=0;
     //不同时间段活动
     //分为上下班时间在路径移动，和其他时间自由移动
-    if((showTime>=6&&showTime<=10)||(showTime>=16&&showTime<=20))
+    if(showTime==6||showTime==20)
     {
         path();
     }
