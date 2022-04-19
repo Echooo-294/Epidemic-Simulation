@@ -31,8 +31,8 @@ extern int day;//天数
 extern double showTime;//时间
 int randInt();//返回任意int
 double randDouble();//返回0-1double
-void updateShowTime();
-void showStatistic();
+void updateShowTime();//更新展示的时间
+void showStatistic();//展示统计结果
 
 
 #endif // STATISTIC_H
