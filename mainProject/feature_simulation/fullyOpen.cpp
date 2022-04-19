@@ -88,7 +88,7 @@ void MapQGraphics::simulation1()
     int healthStatus=0;
     //double p=0;
     //不同时间段活动
-//分为上下班时间在路径移动，和其他时间自由移动
+    //分为上下班时间在路径移动，和其他时间自由移动
     if((showTime>=6&&showTime<=10)||(showTime>=16&&showTime<=20))
     {
         path();
@@ -102,7 +102,7 @@ void MapQGraphics::simulation1()
         int flag=0;
         if(healthNumber<infectionNumber-isolationNumber)
             flag=1;
-        for(i=0;i<initPopulation;i++)//遍历整个人群，因为死亡其实也没有删除
+        for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             randMove(i);//随机移动
             people[i].updateHealthStatus();//更新自身状态
