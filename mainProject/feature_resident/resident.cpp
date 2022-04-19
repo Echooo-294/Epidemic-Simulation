@@ -60,11 +60,12 @@ void Resident::updateHealthStatus()
 {
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
     double boundary2=v.getBoundary2();//非重症与重症的密度界限
-    if(healthStatus==0&&data(1).toString()=="ganran")//如果是健康人被感染
+    if(healthStatus==0&&data(1).toString()=="infected")//如果是健康人被感染
     {
         healthStatus=1;
         virusDensity=0.03;
         setBrush(QBrush(Qt::red));
+        //感染人数增加，正常人数减少
     }
     if(virusDensity==0)
         healthStatus=0;//健康
@@ -109,5 +110,5 @@ Resident& Resident::operator=(Resident &a)
 void Resident::goDeadth()
 {
     healthStatus=4;//健康状态设为死亡
-
+    //设置透明or空白，修改相关统计结果
 }

@@ -11,7 +11,8 @@
 void MapQGraphics::everyday()
 {
     int healthStatus=0;
-    for(int i=0;i<initPopulation;i++)
+    int i=0;
+    for(;i<initPopulation;i++)
     {
         healthStatus=people[i].getHealthStatus();
         if(healthStatus!=0&&healthStatus!=4)//如果非健康非死亡

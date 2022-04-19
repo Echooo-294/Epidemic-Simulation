@@ -5,10 +5,12 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
     //initPopulation是定义在statistic.cpp中的初始总人数
     people = new Resident[initPopulation];
-    for(int i=0;i<initPopulation;i++)//初始化居民
+    int i=0;
+    for(;i<initPopulation;i++)//初始化居民
     {
         Resident adult;
         people[i]=adult;
+        people[i].setBrush(QBrush(Qt::green));
     }
 
     //initInfection是定义在statistic.cpp中的初始感染人数
@@ -17,6 +19,8 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     {
         people[i].setHealthStatus(1);//全体人群从0开始感染
         people[i].setVirusDensity(0.03);//赋予初始病毒密度
+        people[i].setData(1,"infected");//设置被感染的标志
+        people[i].setBrush(QBrush(Qt::red));//变红
         incubation[i]=people[i];//并且添加到感染潜伏数组
     }
 
@@ -39,10 +43,7 @@ void MapQGraphics::mousePressEvent(QMouseEvent *event)
     emit mousePressPoint(point);
     QGraphicsView::mousePressEvent(event);
 }
-void MapQGraphics::path()
-{
 
-}
 
 
 

@@ -8,10 +8,6 @@
 #include "statistic.h"
 #include<feature_resident/resident.h>
 
-//病毒自然增长以及治疗 需要根据更新时间修改!!!!!!!
-//或者初始赋值都是每天的变化，通过数学公式计算
-//或者让这两者直接一天一用，而不是每多少时间使用
-
 //初始参数定义
 int initPopulation=400;//初始总人数
 int initInfection=1;//初始感染人数
@@ -23,13 +19,13 @@ int buildingNumber=7;//建筑数量
 //统计量
 int livingNumber=initPopulation;//存活人数
 int healthNumber=initPopulation;//正常人数
-int infectionNumber=initInfection;//总感染人数
-int isolationNumber=0;//隔离人数，也算在感染，治疗也算隔离
-int seriousNumber=0;//重症人数，也算在感染
+int infectionNumber=initInfection;//总感染人数，包括隔离和重症，被感染后自我状态更新时+1
+int isolationNumber=0;//隔离人数，治疗也算隔离，每有一人被隔离或进入医院，则+1
+int seriousNumber=0;//重症人数，状态更新时，如果变为重症则+1
 int deadNumber=0;//死亡人数，加上总人数应该=initPopulation
 int immunityNumber=0;//疫苗接种人数
 int day=0;//天数
-double showTime=6.0;//时间
+double showTime=0;//时间，起始为0点
 
 void showStatistic()
 {

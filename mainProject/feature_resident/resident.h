@@ -29,9 +29,10 @@ public:
     void setHealthStatus(int value);
     void setActivityStatus(int value);
     void setVaccine(int value);
-    void updateHealthStatus();//用于根据病毒密度更新健康状态，病毒类可以作为参数
     double getImmunity() const;
     void setImmunity(double value);
+
+    void updateHealthStatus();//用于根据病毒密度更新健康状态
     void virusGrowth();//病毒自然增长，定义在feature_virus
     void treatment();//治疗，定义在feature_virus
     QPainterPath shape() const override;//碰撞范围和形状

@@ -150,15 +150,13 @@ void MainWindow::mapInit()
         scene->addItem(&m_Z[i]);
         scene->addItem(&t_Z[i]);
     }
-
-    //将居民放进不同的居民楼里
-    for(int i=0;i<400;i++)
+    //把居民放进居民楼
+    const int r=4;//人图元的直径
+    for(int i=0;i<initPopulation;i++)
     {
-        ui->mapView->people[i].setData(1,"jiankang");
         if(i<100)
         {
-            ui->mapView->people[i].setBrush(QBrush(Qt::green));
-            ui->mapView->people[i].setRect(QRectF(0,0,7,7));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
+            ui->mapView->people[i].setRect(QRectF(0,0,r,r));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
             ui->mapView->people[i].setStartAngle(16*0);//起始角度
             ui->mapView->people[i].setSpanAngle(16*360);//旋转角度
             ui->mapView->people[i].setPos((i%10)*20+10+r1->getPosition().x(),(i/10)*15+7+r1->getPosition().y());
@@ -166,8 +164,7 @@ void MainWindow::mapInit()
         }
         else if(i<200)
         {
-            ui->mapView->people[i].setBrush(QBrush(Qt::green));
-            ui->mapView->people[i].setRect(QRectF(0,0,7,7));
+            ui->mapView->people[i].setRect(QRectF(0,0,r,r));
             ui->mapView->people[i].setStartAngle(16*0);
             ui->mapView->people[i].setSpanAngle(16*360);
             ui->mapView->people[i].setPos(((i-100)%10)*20+10+r2->getPosition().x(),((i-100)/10)*15+7+r2->getPosition().y());
@@ -175,8 +172,7 @@ void MainWindow::mapInit()
         }
         else if(i<300)
         {
-            ui->mapView->people[i].setBrush(QBrush(Qt::green));
-            ui->mapView->people[i].setRect(QRectF(0,0,7,7));
+            ui->mapView->people[i].setRect(QRectF(0,0,r,r));
             ui->mapView->people[i].setStartAngle(16*0);
             ui->mapView->people[i].setSpanAngle(16*360);
             ui->mapView->people[i].setPos(((i-200)%10)*20+10+r3->getPosition().x(),((i-200)/10)*15+7+r3->getPosition().y());
@@ -184,23 +180,13 @@ void MainWindow::mapInit()
         }
         else if(i<400)
         {
-            ui->mapView->people[i].setBrush(QBrush(Qt::green));
-            ui->mapView->people[i].setRect(QRectF(0,0,7,7));
+            ui->mapView->people[i].setRect(QRectF(0,0,r,r));
             ui->mapView->people[i].setStartAngle(16*0);
             ui->mapView->people[i].setSpanAngle(16*360);
             ui->mapView->people[i].setPos(((i-300)%10)*20+10+r4->getPosition().x(),((i-300)/10)*15+7+r4->getPosition().y());
             scene->addItem(&ui->mapView->people[i]);
         }
     }
-
-    for(int i=0;i<initInfection;i++)//初始的感染者全部是感染潜伏
-    {
-        ui->mapView->people[i].setHealthStatus(1);//全体人群从0开始感染
-        ui->mapView->people[i].setData(1,"ganran");
-        ui->mapView->people[i].setBrush(Qt::red);
-        ui->mapView->incubation[i].setHealthStatus(1);
-    }
-
 
     //模拟疫情开始
     ui->mapView->fullyOpen();
