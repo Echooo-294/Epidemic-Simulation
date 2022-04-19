@@ -25,7 +25,7 @@ int seriousNumber=0;//重症人数，状态更新时，如果变为重症则+1
 int deadNumber=0;//死亡人数，加上总人数应该=initPopulation
 int immunityNumber=0;//疫苗接种人数
 int day=0;//天数
-double showTime=6.0;//时间，起始为6点
+double showTime=0;//时间，起始为0点
 
 void showStatistic()
 {

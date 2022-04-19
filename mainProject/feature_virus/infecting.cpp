@@ -1,20 +1,16 @@
 /*
- * @Description: 感染概率
+ * @Description: 感染
  * @Author: Mars
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-18
+ * @Last Modified time: 2022-04-19
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include"mapqgraphics.h"
-/*
- * 使用前提：注意政策
- * 参数：两个居民对象（带病毒者和被计算感染概率者）和病毒对象
- * 使用时间和空间：出现感染者后，对感染者周围4米范围内每一小时计算一次
- */
-bool MapQGraphics::infectionP(int i)
+
+bool MapQGraphics::judgeInfected(int i)
 {
     //如果已治愈则无法感染
     //如果感染次数达到上限也返回0，不能感染
@@ -38,21 +34,17 @@ bool MapQGraphics::infectionP(int i)
 }
 void MapQGraphics::infecting1(int i)//感染者去感染他人，先将被感染者设置data，延后状态和颜色更新
 {
-    int j=0;
-    int size=size();
     QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
+    int size=list.size();
+    int j=0;
     for(;j<size;j++)
     {
         if(list.isEmpty())
             break;//如果没有碰撞到其他人，则退出循环
         else
-        {
             if(list[j]->data(1).toString()!="infected")//如果未被感染
-            {
-                if(infectionP(i))//判断是否被感染
+                if(judgeInfected(i))//随机判断是否被感染了
                     list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染
-            }
-        }
     }
 }
 

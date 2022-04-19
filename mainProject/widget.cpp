@@ -15,16 +15,12 @@ Widget::Widget(QWidget *parent)
     ui->startBtn->setIconSize(ui->startBtn->size());
     this->setStyleSheet("QPushButton{border:0px;}");
 
-
-
     //界面大标题
     //设置字体
     QFont font = ui->label->font();
     font.setPointSize(48);
     font.setFamily(QStringLiteral("宋体"));
     ui->label->setFont(font);
-
-
 }
 
 Widget::~Widget()
