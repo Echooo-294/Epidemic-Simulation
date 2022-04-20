@@ -10,6 +10,8 @@
 #include<feature_timeAndStatistic/statistic.h>
 #include <QGraphicsItemAnimation>
 
+#include<QTimeLine>
+
 double activityWill()//一天中不同时间段活动意愿不同
 {
     double activityWill=0;
@@ -119,8 +121,64 @@ void MapQGraphics::randMove(int i)
     }
     //不在各建筑中，在公共空间随即移动？还是按路径移动
 }
+
 //封装动画移动函数
-void moveSilky(int i,QPoint des)
-{
-    QPoint sta=people[i].pos().toPoint();
+
+void MapQGraphics::path()
+{//上班
+    if(showTime<=12)
+    {
+        for (int i=0;i<initPopulation;i++) {
+            //获得人当前坐标
+            QPoint sta=people[i].pos().toPoint();
+            //获得建筑内的随机某点坐标
+            QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
+            int dx=end.x()-sta.x();
+            int dy=end.y()-sta.y();
+//实现动画效果
+            //设置时间轴，动画时长为500ms
+            QTimeLine *tline=new QTimeLine(500);
+            tline->setFrameRange(0,100);
+            //设置动画对象
+            QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;//初始化
+            //设置运行轨迹，共200步
+            for(int j=0;j<200;j++)
+                anima->setPosAt(j / 200.0
+                                ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
+            anima->setItem(&people[i]);//设置对象
+            anima->setTimeLine(tline);//设置时间轴
+            //动画开始
+            tline->start();
+        }
+    }
+//下班
+    else
+    {
+        for (int i=0;i<initPopulation;i++) {
+            //获得人当前坐标
+            QPoint sta=people[i].pos().toPoint();
+            //获得建筑内的某点坐标
+            QPoint end;
+            //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
+            if(i<100) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
+            else if(i<200)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
+            else if(i<300) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
+            else  end=QPoint(buildings[3]->getPosition().x()+rand()% (int)buildings[3]->getWidth(),buildings[3]->getPosition().y()+rand()%(int) buildings[3]->getLength());
+            int dx=end.x()-sta.x();
+            int dy=end.y()-sta.y();
+
+            QTimeLine *tline=new QTimeLine(500);
+            tline->setFrameRange(0,100);
+
+            QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;
+            for(int j=0;j<200;j++)
+                anima->setPosAt(j / 200.0
+                                ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
+            anima->setItem(&people[i]);
+            anima->setTimeLine(tline);
+
+            tline->start();
+        }
+    }
+
 }
