@@ -15,10 +15,10 @@ void MapQGraphics::fullyOpen()
 {
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
-    timer1->start(200);//代表2小时
+    timer1->start(1000);//代表2小时
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
-    timer2->start(2400);//代表24小时
+    timer2->start(12000);//代表24小时
 
 }
 void MapQGraphics::path()
@@ -33,7 +33,7 @@ void MapQGraphics::path()
             int dx=end.x()-sta.x();
             int dy=end.y()-sta.y();
 
-            QTimeLine *tline=new QTimeLine(200);
+            QTimeLine *tline=new QTimeLine(5000);
 //            tline->setCurveShape(QTimeLine::LinearCurve);
 //            tline->setLoopCount(1);
             tline->setFrameRange(0,100);
@@ -63,7 +63,7 @@ void MapQGraphics::path()
             int dx=end.x()-sta.x();
             int dy=end.y()-sta.y();
 
-            QTimeLine *tline=new QTimeLine(200);
+            QTimeLine *tline=new QTimeLine(5000);
 //            tline->setCurveShape(QTimeLine::LinearCurve);
 //            tline->setLoopCount(1);
             tline->setFrameRange(0,100);
@@ -89,7 +89,7 @@ void MapQGraphics::simulation1()
     //double p=0;
     //不同时间段活动
     //分为上下班时间在路径移动，和其他时间自由移动
-    if((showTime>=6&&showTime<=10)||(showTime>=16&&showTime<=20))
+    if(showTime==6||showTime==20)
     {
         path();
     }

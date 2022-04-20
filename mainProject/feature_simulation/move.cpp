@@ -6,7 +6,9 @@
  * @Last Modified time: 2022-04-19
  */
 #include"mapqgraphics.h"
+#include<mainwindow.h>
 #include<feature_timeAndStatistic/statistic.h>
+#include <QGraphicsItemAnimation>
 
 double activityWill()//一天中不同时间段活动意愿不同
 {
@@ -116,4 +118,9 @@ void MapQGraphics::randMove(int i)
             }
     }
     //不在各建筑中，在公共空间随即移动？还是按路径移动
+}
+//封装动画移动函数
+void moveSilky(int i,QPoint des)
+{
+    QPoint sta=people[i].pos().toPoint();
 }
