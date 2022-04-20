@@ -15,10 +15,10 @@ void MapQGraphics::fullyOpen()
 {
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
-    timer1->start(1000);//代表2小时
+    timer1->start(2000);//代表2小时
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
-    timer2->start(12000);//代表24小时
+    timer2->start(24000);//代表24小时
 
 }
 

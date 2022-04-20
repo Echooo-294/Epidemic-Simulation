@@ -39,7 +39,7 @@ public:
     //在路径上的移动，还未实现
     void path();//路径移动
     //封装动画移动函数,在move.cpp中实现
-    void moveSilky(int i,QPoint des);
+    void moveSilky(int i,QPoint des,int t);
     //每天的病毒自然增长和治疗
     void everyday();
     //感染，实现在feature_virus/infecting.cpp
