@@ -8,8 +8,8 @@
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include<mapqgraphics.h>
-#include<QTimeLine>
 #include<mainwindow.h>
+
 //只有进入医院一个特殊步骤
 void MapQGraphics::fullyOpen()
 {
@@ -20,64 +20,6 @@ void MapQGraphics::fullyOpen()
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer2->start(2400);//代表24小时
 
-}
-void MapQGraphics::path()
-{//上班
-    if(showTime<=12)
-    {
-        for (int i=0;i<initPopulation;i++) {
-            //获得人当前坐标
-            QPoint sta=people[i].pos().toPoint();
-            //获得建筑内的某点坐标
-            QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
-            int dx=end.x()-sta.x();
-            int dy=end.y()-sta.y();
-
-            QTimeLine *tline=new QTimeLine(500);
-//            tline->setCurveShape(QTimeLine::LinearCurve);
-//            tline->setLoopCount(1);
-            tline->setFrameRange(0,100);
-
-            QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;
-            for(int j=0;j<200;j++)
-                anima->setPosAt(j / 200.0
-                                ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
-            anima->setItem(&people[i]);
-            anima->setTimeLine(tline);
-
-            tline->start();
-        }
-    }
-//下班
-    else
-    {
-        for (int i=0;i<initPopulation;i++) {
-            //获得人当前坐标
-            QPoint sta=people[i].pos().toPoint();
-            //获得建筑内的某点坐标
-            QPoint end;
-            if(i<100) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
-            else if(i<200)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
-            else if(i<300) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
-            else  end=QPoint(buildings[3]->getPosition().x()+rand()% (int)buildings[3]->getWidth(),buildings[3]->getPosition().y()+rand()%(int) buildings[3]->getLength());
-            int dx=end.x()-sta.x();
-            int dy=end.y()-sta.y();
-
-            QTimeLine *tline=new QTimeLine(500);
-//            tline->setCurveShape(QTimeLine::LinearCurve);
-//            tline->setLoopCount(1);
-            tline->setFrameRange(0,100);
-
-            QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;
-            for(int j=0;j<200;j++)
-                anima->setPosAt(j / 200.0
-                                ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
-            anima->setItem(&people[i]);
-            anima->setTimeLine(tline);
-
-            tline->start();
-        }
-    }
 }
 
 //每2小时全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
