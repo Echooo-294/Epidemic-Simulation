@@ -23,6 +23,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         people[i].setBrush(QBrush(Qt::red));//变红
         incubation[i]=people[i];//并且添加到感染潜伏数组
     }
+
     //buildingNumber是定义在statistic.cpp中的建筑数量
     buildings = new Space*[buildingNumber];
 }

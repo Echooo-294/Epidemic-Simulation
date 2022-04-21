@@ -21,6 +21,20 @@ Widget::Widget(QWidget *parent)
     font.setPointSize(48);
     font.setFamily(QStringLiteral("宋体"));
     ui->label->setFont(font);
+    ui->label->move(this->width()*0.5-ui->label->width()*0.5+100,this->height()*0.2);
+
+    //左上角校徽
+    QPixmap pix(":/images/sclbadge.png");
+    QSize siz(80,80);
+    pix=pix.scaled(siz,Qt::KeepAspectRatio);
+    QLabel *scl=new QLabel(this);
+    scl->setPixmap(pix);
+    scl->move(15,10);
+
+    //右下角版本
+    QLabel *version=new QLabel(this);
+    version->setText("v0.1");
+    version->move(this->width()-version->width()+50,this->height()-20);
 }
 
 Widget::~Widget()
