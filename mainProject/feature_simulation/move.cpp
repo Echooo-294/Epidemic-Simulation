@@ -161,10 +161,10 @@ void MapQGraphics::path()
     if(showTime<=12)
     {
         int i=0;
-        for (;i<initPopulation;i++) {
-            //获得建筑内的随机某点坐标
+        for (;i<initPopulation;i++) { 
             if(people[i].getHealthStatus()!=4)
             {
+                //获得建筑内的随机某点坐标
                 QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
                 moveSilky(i, end,time);
             }

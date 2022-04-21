@@ -27,6 +27,8 @@ void MapQGraphics::simulation1()
     if(deadNumber>=initPopulation)
     {
         qDebug()<<"全部死亡";
+        timer1->stop();
+        timer2->stop();
         return;
     }
     updateShowTime();//时间更新
@@ -46,10 +48,13 @@ void MapQGraphics::simulation1()
 //            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
-            randMove(i);//随机移动
+            //死亡是否还需要继续？
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
+
+            if(people[i].getHealthStatus()!=4)//没死就移动，医院和隔离是否可以移动？
+                randMove(i);//随机移动
             if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）
             {
                 //如果是感染者且不在治疗和隔离中，则去感染别人
