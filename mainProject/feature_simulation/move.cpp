@@ -115,5 +115,4 @@ void MapQGraphics::randMove(int i)
                     people[i].moveBy(0,distance);
             }
     }
-    //不在各建筑中，在公共空间随即移动？还是按路径移动
 }
