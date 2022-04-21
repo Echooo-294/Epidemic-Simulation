@@ -46,8 +46,11 @@ void MapQGraphics::simulation1()
 //            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
-            randMove(i);//随机移动
             people[i].updateHealthStatus();//更新自身状态
+            if(people[i].getHealthStatus()!=4)
+            {
+                randMove(i);//随机移动
+            }
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
             if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）

@@ -95,7 +95,7 @@ void Resident::updateHealthStatus()
         if(healthStatus==4)//死亡
         {
             deadNumber++;//死亡+1
-            //goDeadth();//执行死亡函数
+            goDeadth();//执行死亡函数
         }
     }
 }
@@ -130,6 +130,9 @@ Resident& Resident::operator=(Resident &a)
 void Resident::goDeadth()
 {
     healthStatus=4;//健康状态设为死亡
+    qreal x=-5000;
+    setPos(x,x);
+    setBrush(QBrush(Qt::black));
     //设置透明or空白，修改相关统计结果
 }
 
