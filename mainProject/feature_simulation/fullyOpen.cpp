@@ -50,6 +50,10 @@ void MapQGraphics::simulation1()
         {
             //死亡是否还需要继续？
             people[i].updateHealthStatus();//更新自身状态
+            if(people[i].getHealthStatus()!=4)
+            {
+                randMove(i);//随机移动
+            }
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
 
