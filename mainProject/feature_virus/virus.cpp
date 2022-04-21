@@ -1,21 +1,24 @@
 #include "virus.h"
 
-Virus::Virus(double b,double c,int d,double e,double f,double g,double h,double i,double j):\
-    openInfection(b),closeInfection(c),infectionDistance(d),\
-    growthRate1(e),growthRate2(f),cureEffectiveness(g),maskEffectiveness(h),\
-    boundary1(i),boundary2(j)
+Virus::Virus(double infectionP1,double infectionP2,double openInfectionP,double closeInfectionP,\
+             double growthRate1,double growthRate2,\
+             double policyEffect,double boundary1,double boundary2):\
+    infectionP1(infectionP1),infectionP2(infectionP2),\
+    openInfectionP(openInfectionP),closeInfectionP(closeInfectionP),\
+    growthRate1(growthRate1),growthRate2(growthRate2),\
+    policyEffect(policyEffect),boundary1(boundary1),boundary2(boundary2)
 {
 
 }
 
-double Virus::getopenInfection() const
+double Virus::getopenInfectionP() const
 {
-    return openInfection;
+    return openInfectionP;
 }
 
-double Virus::getcloseInfection() const
+double Virus::getcloseInfectionP() const
 {
-    return closeInfection;
+    return closeInfectionP;
 }
 
 int Virus::getinfectionDistance() const
@@ -38,9 +41,9 @@ double Virus::getcureEffectiveness() const
     return cureEffectiveness;
 }
 
-double Virus::getmaskEffectiveness() const
+double Virus::getmaskEffect() const
 {
-    return maskEffectiveness;
+    return policyEffect;
 }
 
 double Virus::getBoundary1() const
@@ -51,4 +54,34 @@ double Virus::getBoundary1() const
 double Virus::getBoundary2() const
 {
     return boundary2;
+}
+
+double Virus::getPolicyEffect() const
+{
+    return policyEffect;
+}
+
+void Virus::setPolicyEffect(double value)
+{
+    policyEffect = value;
+}
+
+double Virus::getInfectionP1() const
+{
+    return infectionP1;
+}
+
+double Virus::getInfectionP2() const
+{
+    return infectionP2;
+}
+
+double Virus::getPoliceEffect() const
+{
+    return policyEffect;
+}
+
+void Virus::setPoliceEffect(double value)
+{
+    policyEffect = value;
 }

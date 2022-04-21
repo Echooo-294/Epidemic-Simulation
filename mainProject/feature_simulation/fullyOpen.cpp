@@ -15,10 +15,10 @@ void MapQGraphics::fullyOpen()
 {
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
-    timer1->start(2000);//代表2小时
+    timer1->start(interval);//代表2小时
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
-    timer2->start(24000);//代表24小时
+    timer2->start(interval*12);//代表24小时
 
 }
 
@@ -26,12 +26,8 @@ void MapQGraphics::fullyOpen()
 void MapQGraphics::simulation1()
 {
     updateShowTime();//时间更新
-    int activityStatus=0;
-    int healthStatus=0;
-    //double p=0;
-    //不同时间段活动
-    //分为上下班时间在路径移动，和其他时间自由移动
-    if(showTime==8||showTime==20)
+    //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
+    if(showTime==8.0||showTime==20.0)//上下班不需要QTimer，只需要根据showtime判断
     {
         path();
     }
@@ -41,9 +37,11 @@ void MapQGraphics::simulation1()
         //先在循环外判断，不考虑操作过程中的人数变化
         //可以预估可能被感染的人数（考虑人数变化），再抉择方案
         int i=0;
+        int activityStatus=0;
+        int healthStatus=0;
         int flag=0;
         if(healthNumber<infectionNumber-isolationNumber)
-            //flag=1;
+            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             randMove(i);//随机移动
@@ -60,6 +58,10 @@ void MapQGraphics::simulation1()
                     infecting1(i);
                 }
             }
+//            else
+//            {
+
+//            }
         }
     }
 

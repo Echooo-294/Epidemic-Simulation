@@ -12,6 +12,7 @@
 #include<QDebug>
 #include<QVector>
 #include <cmath>
+
 //初始参数
 extern int initPopulation;//初始总人数
 extern int initInfection;//初始感染人数

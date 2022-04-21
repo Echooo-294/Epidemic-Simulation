@@ -26,6 +26,8 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 
     //buildingNumber是定义在statistic.cpp中的建筑数量
     buildings = new Space*[buildingNumber];
+
+    interval=400;//400ms
 }
 
 void MapQGraphics::mouseMoveEvent(QMouseEvent *event)

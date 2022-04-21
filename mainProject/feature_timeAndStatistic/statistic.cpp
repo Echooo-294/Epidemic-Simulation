@@ -13,12 +13,16 @@ int initPopulation=400;//初始总人数
 int initInfection=1;//初始感染人数
 double updateTime=2;//更新间隔时间
 int policy=0;//政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
-Virus v(0.6,0.9,4,0.03,0.05,0.9,0.8,0.3,0.75);
+Virus v(0.6,0.8,0.5,0.7,0.03,0.05,1,0.3,0.75);
+/* infectionP1, infectionP2, openInfectionP, closeInfectionP,\
+    growthRate1,double growthRate2,\
+    double policyEffect,double boundary1,double boundary2
+*/
 int buildingNumber=7;//建筑数量
 
-//统计量
+//统计量初始值
 int livingNumber=initPopulation;//存活人数
-int healthNumber=initPopulation;//正常人数
+int healthNumber=initPopulation-initInfection;//正常人数
 int infectionNumber=initInfection;//总感染人数，包括隔离和重症，被感染后自我状态更新时+1
 int isolationNumber=0;//隔离人数，治疗也算隔离，每有一人被隔离或进入医院，则+1
 int seriousNumber=0;//重症人数，状态更新时，如果变为重症则+1

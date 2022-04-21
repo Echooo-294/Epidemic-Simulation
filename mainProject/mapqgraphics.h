@@ -24,9 +24,9 @@ public:
     Resident *people;//人群图元，目前是400个
     Resident *incubation;//感染潜伏人群
     //定时器
-    QTimer *timer1;//模拟每2小时的更新
+    QTimer *timer1;//模拟每隔一定时间的更新
     QTimer *timer2;//模拟每天的统计结果更新
-
+    int interval;//每次更新的时间间隔，默认2小时-400ms
     //开放模拟，实现在fullyOpen中
     void fullyOpen();//完全开放模拟
     void simulation1();//完全开放模拟每半小时的过程

@@ -90,7 +90,7 @@ void MapQGraphics::randMove(int i)
         const int bl=b->getLength();
 
         //判断移动方向，且移动后是否出界，出了就反向走
-        int time=200;//设置移动动画时间
+        int time=interval/4;//设置移动动画时间
         if(p<0.25)//右
             {
                 if(px+distance<=bx+bw)
@@ -107,7 +107,7 @@ void MapQGraphics::randMove(int i)
                     moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
                 else
                     //people[i].moveBy(0,-distance);
-                     moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
+                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
             }
             else if(p<0.75&&p>=0.5)//左
             {
@@ -140,7 +140,7 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
 
     //---------------------实现动画效果-------------------------//
 
-    //设置时间轴，动画时长为500ms
+    //设置时间轴，动画时长为t ms
     QTimeLine *tline=new QTimeLine(t);
     tline->setFrameRange(0,100);
     //设置动画对象
@@ -157,12 +157,13 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
 
 void MapQGraphics::path()
 {//上班
+    int time=interval*3/4;
     if(showTime<=12)
     {
         for (int i=0;i<initPopulation;i++) {           
             //获得建筑内的随机某点坐标
             QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
-            moveSilky(i, end,2000);
+            moveSilky(i, end,time);
         }
     }
 //下班
@@ -176,7 +177,7 @@ void MapQGraphics::path()
             else if(i<200)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
             else if(i<300) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
             else  end=QPoint(buildings[3]->getPosition().x()+rand()% (int)buildings[3]->getWidth(),buildings[3]->getPosition().y()+rand()%(int) buildings[3]->getLength());
-            moveSilky(i,end,2000);
+            moveSilky(i,end,time);
         }
     }
 
