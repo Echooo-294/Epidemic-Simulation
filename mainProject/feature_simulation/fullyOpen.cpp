@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-18
+ * @Last Modified time: 2022-04-21
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -19,7 +19,6 @@ void MapQGraphics::fullyOpen()
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer2->start(interval*12);//代表24小时
-
 }
 
 //每2小时全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
@@ -28,9 +27,7 @@ void MapQGraphics::simulation1()
     updateShowTime();//时间更新
     //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
     if(showTime==8.0||showTime==20.0)//上下班不需要QTimer，只需要根据showtime判断
-    {
         path();
-    }
     else
     {
         //选择感染方式：如果感染者多，让健康者被感染；如果健康者多，让感染者去感染别人
@@ -40,8 +37,8 @@ void MapQGraphics::simulation1()
         int activityStatus=0;
         int healthStatus=0;
         int flag=0;
-        if(healthNumber<infectionNumber-isolationNumber)
-            flag=1;
+//        if(healthNumber<infectionNumber-isolationNumber)
+//            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             randMove(i);//随机移动
@@ -50,17 +47,16 @@ void MapQGraphics::simulation1()
             activityStatus=people[i].getActivityStatus();//活动状态
             if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）
             {
-    //            if(healthStatus==0&&healthStatus==4)//如果健康或死亡则下一个人，其他模拟还要考虑活动状态
-    //                continue;
-                //如果是感染者且不在治疗中（完全开放没有其他措施），则去感染别人
-                if(activityStatus!=4&&healthStatus!=0&&healthStatus!=4)
+                //如果是感染者且不在治疗和隔离中，则去感染别人
+                if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0&&healthStatus!=4)
                 {
-                    infecting1(i);
+                    if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人
+                        infecting1(i);
                 }
             }
 //            else
 //            {
-
+                             //如果已治愈可以跳过感染阶段
 //            }
         }
     }

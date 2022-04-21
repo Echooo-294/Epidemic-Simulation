@@ -21,10 +21,10 @@ extern int policy;//政策
 extern Virus v;
 extern int buildingNumber;
 //统计量
-extern int livingNumber;
 extern int healthNumber;//正常人数
 extern int infectionNumber;//总感染人数
 extern int isolationNumber;//隔离人数
+extern int nosymNumber;//无症状感染者人数
 extern int seriousNumber;//重症人数
 extern int deadNumber;//死亡人数
 extern int immunityNumber;//疫苗接种人数

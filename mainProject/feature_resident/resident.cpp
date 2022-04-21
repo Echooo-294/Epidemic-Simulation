@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-18
+ * @Last Modified time: 2022-04-21
  */
 
 #include<feature_resident/resident.h>
@@ -11,7 +11,7 @@
 #include<feature_timeAndStatistic/statistic.h>
 
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
-  ,activityStatus(0),vaccine(0),immunity(im),infectivity(3)
+  ,activityStatus(0),vaccine(0),immunity(im),infNumber(0)
 {
     //创建时可以选择三种对象：adult,student,senior，仅免疫力不同，其他全部默认
 }
@@ -36,16 +36,6 @@ int Resident::getVaccine() const
     return vaccine;
 }
 
-void Resident::setVirusDensity(double value)
-{
-    virusDensity = value;
-}
-
-void Resident::setHealthStatus(int value)
-{
-    healthStatus = value;
-}
-
 void Resident::setActivityStatus(int value)
 {
     activityStatus = value;
@@ -58,15 +48,12 @@ void Resident::setVaccine(int value)
 
 void Resident::updateHealthStatus()
 {
+    const int oldHealthStatus=healthStatus;//记录旧的健康状态
+//    const int oldActivityStatus=activityStatus;//记录旧的活动状态
+
+    //确认状态和密度绑定，并根据密度更新健康状态
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
     double boundary2=v.getBoundary2();//非重症与重症的密度界限
-    if(healthStatus==0&&data(1).toString()=="infected")//如果是健康人被感染
-    {
-        healthStatus=1;
-        virusDensity=0.03;
-        setBrush(QBrush(Qt::red));
-        //感染人数增加，正常人数减少
-    }
     if(virusDensity==0)
         healthStatus=0;//健康
     else if(virusDensity>0&&virusDensity<boundary1)
@@ -75,9 +62,42 @@ void Resident::updateHealthStatus()
         healthStatus=2;//感染出症状
     else if(virusDensity>=boundary2&&virusDensity<1)
         healthStatus=3;//重症
-    else if(virusDensity==1)
+    else if(virusDensity>=1)
         healthStatus=4;//死亡
 
+    //根据位置更新活动状态？
+
+    //旧状态为健康
+    if(oldHealthStatus==0)
+    {
+        if(data(1).toString()=="infected")//由健康变感染潜伏
+        {
+            healthStatus=1;
+            virusDensity=0.03;//初始密度
+            setBrush(QBrush(Qt::red));
+            infectionNumber++;//总感染+1
+            nosymNumber++;//无症状+1
+            healthNumber--;//正常-1
+        }
+    }//旧状态为感染潜伏
+    else if(oldHealthStatus==1)
+    {
+        if(healthStatus==2)//变为出症状
+            nosymNumber--;//无症状-1
+    }//旧状态为出症状
+    else if(oldHealthStatus==2)
+    {
+        if(healthStatus==3)//变为重症
+            seriousNumber++;//重症+1
+    }//旧状态为重症
+    else if(oldHealthStatus==3)
+    {
+        if(healthStatus==4)//死亡
+        {
+            deadNumber++;//死亡+1
+            goDeadth();//执行死亡函数
+        }
+    }
 }
 
 double Resident::getImmunity() const
@@ -93,7 +113,7 @@ void Resident::setImmunity(double value)
 QPainterPath Resident::shape() const//返回被碰撞的形状
 {
     QPainterPath path;
-    path.addEllipse(-20,-20,40,40);//设置碰撞范围
+    path.addEllipse(0,0,20,20);//设置碰撞范围
     return path;
 }
 
@@ -111,4 +131,24 @@ void Resident::goDeadth()
 {
     healthStatus=4;//健康状态设为死亡
     //设置透明or空白，修改相关统计结果
+}
+
+void Resident::setVirusDensity(double value)
+{
+    virusDensity = value;
+}
+
+void Resident::setHealthStatus(int value)
+{
+    healthStatus = value;
+}
+
+void Resident::infNumInc()
+{
+    infNumber++;
+}
+
+int Resident::getInfNumber() const
+{
+    return infNumber;
 }

@@ -16,23 +16,23 @@ double activityWill()//一天中不同时间段活动意愿不同
 {
     double activityWill=0;
      if(showTime>0&&showTime<=6.0)//凌晨
-         activityWill=0.05;
-     else if(showTime>6.0&&showTime<=8.0)//早餐
-         activityWill=0.3;
-     else if(showTime>8.0&&showTime<=11.0)//上午
-         activityWill=0.6;
-     else if(showTime>11.0&&showTime<=13.0)//正午
-         activityWill=0.8;
-     else if(showTime>13.0&&showTime<=14.0)//午休
-         activityWill=0.2;
-     else if(showTime>14.0&&showTime<=18.0)//下午
-         activityWill=0.6;
-     else if(showTime>18.0&&showTime<=20.0)//傍晚
+         activityWill=0.1;
+     else if(showTime>6.0&&showTime<=8.0)//早晨
          activityWill=0.5;
+     else if(showTime>8.0&&showTime<=11.0)//上午
+         activityWill=0.7;
+     else if(showTime>11.0&&showTime<=13.0)//正午
+         activityWill=0.9;
+     else if(showTime>13.0&&showTime<=14.0)//午休
+         activityWill=0.4;
+     else if(showTime>14.0&&showTime<=18.0)//下午
+         activityWill=0.8;
+     else if(showTime>18.0&&showTime<=20.0)//傍晚
+         activityWill=0.6;
      else if(showTime>20.0&&showTime<=22.0)//晚上
          activityWill=0.8;
      else if(showTime>22.0&&showTime<=24.0)//深夜
-         activityWill=0.1;
+         activityWill=0.2;
      return activityWill;
 }
 int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，如果是，就返回该建筑标号
@@ -77,7 +77,7 @@ void MapQGraphics::randMove(int i)
     else
         p=p/w;//移动，并且修正概率为0-1之间的值
 
-    const int distance=20;//移动距离
+    const int distance=15;//移动距离
     int px=people[i].x();
     int py=people[i].y();
     const int where=judgeWhere(i);
@@ -90,7 +90,7 @@ void MapQGraphics::randMove(int i)
         const int bl=b->getLength();
 
         //判断移动方向，且移动后是否出界，出了就反向走
-        int time=interval/4;//设置移动动画时间
+        int time=interval*0.25;//设置移动动画时间
         if(p<0.25)//右
             {
                 if(px+distance<=bx+bw)
@@ -157,10 +157,11 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
 
 void MapQGraphics::path()
 {//上班
-    int time=interval*3/4;
+    int time=interval*0.75;
     if(showTime<=12)
     {
-        for (int i=0;i<initPopulation;i++) {           
+        int i=0;
+        for (;i<initPopulation;i++) {
             //获得建筑内的随机某点坐标
             QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
             moveSilky(i, end,time);
@@ -173,9 +174,9 @@ void MapQGraphics::path()
             //获得建筑内的某点坐标
             QPoint end;
             //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
-            if(i<100) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
-            else if(i<200)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
-            else if(i<300) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
+            if(i<initPopulation*0.25) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
+            else if(i<initPopulation*0.5)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
+            else if(i<initPopulation*0.75) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
             else  end=QPoint(buildings[3]->getPosition().x()+rand()% (int)buildings[3]->getWidth(),buildings[3]->getPosition().y()+rand()%(int) buildings[3]->getLength());
             moveSilky(i,end,time);
         }

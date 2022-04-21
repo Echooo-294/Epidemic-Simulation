@@ -17,7 +17,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     feature_resident/resident.cpp \
-    feature_resident/vaccination.cpp \
     feature_simulation/everyday.cpp \
     feature_simulation/move.cpp \
     feature_space/door.cpp \

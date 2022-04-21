@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-12
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-17
+ * @Last Modified time: 2022-04-21
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
@@ -14,11 +14,19 @@
  */
 void Resident::virusGrowth()
 {
-    const double growthRate1=v.getgrowthRate1();//潜伏期自然增长率
-    const double growthRate2=v.getgrowthRate2();//出症状后自然增长率
+    //在外层使用前判断非健康非死亡
     const double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
-    if(virusDensity>=0&&virusDensity<boundary1)
-        virusDensity+=growthRate1;//潜伏期自然增长
-    else if(virusDensity<1&&virusDensity>=boundary1)
-        virusDensity+=growthRate2;//出症状后自然增长
+    double k=0.4;
+    if(healthStatus==2)
+        k=0.6;
+    else if(healthStatus==3)
+        k=0.8;
+    const double P=(3/(4*immunity))*k;//病毒的增长概率和免疫力相关，也和病毒密度相关
+    if(randDouble()<P)
+    {
+        if(virusDensity>=0&&virusDensity<boundary1)
+            virusDensity+=v.getgrowthRate1();//潜伏期自然增长
+        else if(virusDensity<1&&virusDensity>=boundary1)
+            virusDensity+=v.getgrowthRate2();//出症状后自然增长
+    }
 }
