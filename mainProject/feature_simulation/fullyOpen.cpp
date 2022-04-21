@@ -24,6 +24,11 @@ void MapQGraphics::fullyOpen()
 //每2小时全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
+    if(deadNumber>=initPopulation)
+    {
+        qDebug()<<"全部死亡";
+        return;
+    }
     updateShowTime();//时间更新
     //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
     if(showTime==8.0||showTime==20.0)//上下班不需要QTimer，只需要根据showtime判断

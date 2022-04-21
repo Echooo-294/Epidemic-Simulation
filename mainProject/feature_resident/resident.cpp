@@ -95,7 +95,7 @@ void Resident::updateHealthStatus()
         if(healthStatus==4)//死亡
         {
             deadNumber++;//死亡+1
-            goDeadth();//执行死亡函数
+            //goDeadth();//执行死亡函数
         }
     }
 }
