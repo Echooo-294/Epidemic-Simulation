@@ -82,7 +82,7 @@ void MainWindow::get_Mouse_Point_Press(QPoint point)
     //鼠标单击事件
     QPointF pointScene=ui->mapView->mapToScene(point);
     QGraphicsItem *item=NULL;
-    item=scene->itemAt(pointScene,ui->mapView->transform());
+    item=ui->mapView->scene->itemAt(pointScene,ui->mapView->transform());
     if(item!=NULL)
     {
         QString str =item->data(1).toString();
