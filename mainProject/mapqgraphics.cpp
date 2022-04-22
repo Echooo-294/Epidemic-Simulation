@@ -175,7 +175,6 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     for(int i=0;i<initPopulation;i++)
         scene->addItem(&this->people[i]);
 
-
     interval=400;//400ms
 }
 

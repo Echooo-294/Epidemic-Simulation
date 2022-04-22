@@ -44,7 +44,8 @@ void MapQGraphics::simulation1()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        int flag=0;
+        bool flag=0;//用于判断选用哪种感染方式
+        double p=0;//用于判断是否进入医院的随机数
 //        if(healthNumber<infectionNumber-isolationNumber)
 //            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
@@ -55,7 +56,7 @@ void MapQGraphics::simulation1()
             if(healthStatus==4)//如果死亡，则跳到下一个人
                 continue;
             randMove(i);//随机移动
-            if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）
+            if(flag==0)//健康人多，让感染者去感染他人
             {
                 //如果是感染者且不在治疗和隔离中，则去感染别人
                 if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
@@ -64,10 +65,22 @@ void MapQGraphics::simulation1()
                         infecting1(i);
                 }
             }
-//            else
-//            {
-                             //如果已治愈可以跳过感染阶段
-//            }
+            else//感染者多，让健康人去被感染
+            {
+            }
+            //完全开放唯一的措施是自行进入医院
+            //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
+            if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
+            {
+                if(healthStatus==3)//重症直接进入医院
+                    people[i].goHospital();
+                else if(healthStatus==2)//出症状的有概率进医院
+                {
+                    p=randDouble();
+                    if(p<=0.4)
+                        people[i].goHospital();
+                }
+            }
         }
     }
 //    if(day%7==0)//每七天重置一遍计时器
@@ -78,30 +91,7 @@ void MapQGraphics::simulation1()
 //        timer2->start(interval*12);
 //    }
 
-//    for(int i=0;i<initPopulation;i++)
-//    {
-//        healthStatus=people[i].getHealthStatus();
-//        if(healthStatus==1||healthStatus==4)
-//            continue;
-//        if(people[i].data(1).toString()=="ganran")
-//        {
-//            people[i].setHealthStatus(1);
-//            people[i].setBrush(QBrush(Qt::red));
-//        }
-//    }
-    //        if(activityStatus!=4)//是否进入医院
-    //        {
-    //            if(healthStatus==3)
-    //            {
-    //                //进入医院
-    //            }
-    //            else
-    //            {
-    //                 p=getrand();
-    //                 if(p>0&&p<=0.5)
-    //                 {}//进入医院
-    //            }
-    //        }
+
 }
 
 

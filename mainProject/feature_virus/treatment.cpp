@@ -14,10 +14,14 @@
  */
 void Resident::treatment()
 {
-    const double recoveryRate=0.075;//治疗速率
-    const double successRate=0.9;//治疗有效率
-    if (randDouble()<=successRate)
-        virusDensity-=recoveryRate;
-    if(virusDensity<0)
+    const double recoveryRate=0.08;//治疗速率
+    const double successRate=0.9*immunity;//治疗有效率
+    if (randDouble()<successRate)
+        virusDensity-=recoveryRate*immunity;
+    if(virusDensity<=0)
+    {
         virusDensity=0;
+        immunity+=3;//免疫力+3
+        goHome();//出院回家
+    }
 }

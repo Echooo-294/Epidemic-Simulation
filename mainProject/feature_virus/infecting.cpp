@@ -49,7 +49,7 @@ void MapQGraphics::infecting1(int i)
     for(;j<size;j++)
     {
         if(people[i].getInfNumber()>=v.getR0())//如果感染者感染人数超限，则退出
-            break;
+            return;
         if(list[j]->data(1).toString()!="infected")//如果未被感染
             if(judgeInfected(i,j))//随机判断是否被感染了，i是感染者，j是健康人
                 list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染

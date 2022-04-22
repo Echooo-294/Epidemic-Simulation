@@ -31,7 +31,7 @@ int Resident::getActivityStatus() const
     return activityStatus;
 }
 
-int Resident::getVaccine() const
+bool Resident::getVaccine() const
 {
     return vaccine;
 }
@@ -41,7 +41,7 @@ void Resident::setActivityStatus(int value)
     activityStatus = value;
 }
 
-void Resident::setVaccine(int value)
+void Resident::setVaccine(bool value)
 {
     vaccine = value;
 }
@@ -49,7 +49,6 @@ void Resident::setVaccine(int value)
 void Resident::updateHealthStatus()
 {
     const int oldHealthStatus=healthStatus;//记录旧的健康状态
-//    const int oldActivityStatus=activityStatus;//记录旧的活动状态，活动状态在相关函数处更新
 
     //确认状态和密度绑定，并根据密度更新健康状态
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
@@ -129,9 +128,22 @@ void Resident::goDeadth()
 {
     healthStatus=4;//健康状态设为死亡
     qreal x=-5000;
-    setPos(x,x);
-    setBrush(QBrush(Qt::black));
-    //设置透明or空白，修改相关统计结果
+    setPos(x,x);//移去墓地
+    //setBrush(QBrush(Qt::black));//设置颜色
+}
+
+void Resident::goHospital()
+{
+    //判断是否满床位，满床位则return
+    //设置了活动状态为治疗中4
+    //设置位置
+    //变颜色？
+}
+
+void Resident::goHome()
+{
+    //随便回一栋居民楼即可，但是不要集中
+    //设置活动状态为自由0
 }
 
 void Resident::setVirusDensity(double value)
