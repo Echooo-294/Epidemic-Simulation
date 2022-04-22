@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     void mapInit();
+    void showStatistic1();
     ~MainWindow();
 private slots:
     void on_actionexit_triggered();

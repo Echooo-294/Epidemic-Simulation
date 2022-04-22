@@ -192,6 +192,11 @@ void MainWindow::mapInit()
     ui->mapView->fullyOpen();
 }
 
+void MainWindow::showStatistic1()
+{
+
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;

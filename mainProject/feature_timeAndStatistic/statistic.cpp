@@ -33,7 +33,7 @@ int day=0;//天数
 double showTime=0;//时间，起始为0点
 
 void showStatistic()
-{
+{   
     qDebug()<<"模拟天数："<<day;
     qDebug()<<"存活人数："<<initPopulation-deadNumber;
     qDebug()<<"正常人数："<<healthNumber;
