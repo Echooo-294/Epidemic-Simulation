@@ -3,11 +3,13 @@
 
 #include <QObject>
 #include <QPoint>
-#include<QVector>
+#include <QtDebug>
+#include <QVector>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItemAnimation>
 #include <feature_space/space.h>
+#include <feature_resident/resident.h>
 
 #include<mainwindow.h>
 
@@ -27,6 +29,11 @@ public:
     QTimer *timer1;//模拟每隔一定时间的更新
     QTimer *timer2;//模拟每天的统计结果更新
     int interval;//每次更新的时间间隔，默认2小时-400ms
+    //建筑图元和名称定义
+    QGraphicsRectItem *m_R,*m_W,*m_H,*m_Z;
+    QGraphicsTextItem *t_R,*t_W,*t_H,*t_Z;
+    //场景
+    QGraphicsScene *scene;
     //开放模拟，实现在fullyOpen中
     void fullyOpen();//完全开放模拟
     void simulation1();//完全开放模拟每半小时的过程
