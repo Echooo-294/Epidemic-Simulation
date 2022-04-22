@@ -42,8 +42,6 @@ public:
     Resident& operator=(Resident &a);//重载=运算符
     void goDeadth();//死亡函数，设置状态和透明/空白
 
-
-
 private:
     double virusDensity;//病毒密度
     int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度

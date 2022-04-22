@@ -24,6 +24,14 @@ void MapQGraphics::fullyOpen()
 //每2小时全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
 void MapQGraphics::simulation1()
 {
+    if(deadNumber>=initPopulation)
+    {
+        timer1->stop();
+        timer2->stop();
+        everyday();//最后展示一遍
+        qDebug()<<"全部死亡";
+        return;
+    }
     updateShowTime();//时间更新
     //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
     if(showTime==8.0||showTime==20.0)//上下班不需要QTimer，只需要根据showtime判断
@@ -41,14 +49,16 @@ void MapQGraphics::simulation1()
 //            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
-            randMove(i);//随机移动
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
+            if(healthStatus==4)//如果死亡，则跳到下一个人
+                continue;
+            randMove(i);//随机移动
             if(flag==0)//健康人多，让感染者去感染他人（不用考虑健康人）
             {
                 //如果是感染者且不在治疗和隔离中，则去感染别人
-                if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0&&healthStatus!=4)
+                if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
                 {
                     if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人
                         infecting1(i);
@@ -60,6 +70,13 @@ void MapQGraphics::simulation1()
 //            }
         }
     }
+//    if(day%7==0)//每七天重置一遍计时器
+//    {
+//        timer1->stop();
+//        timer2->stop();
+//        timer1->start(interval);
+//        timer2->start(interval*12);
+//    }
 
 //    for(int i=0;i<initPopulation;i++)
 //    {

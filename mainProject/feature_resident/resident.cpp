@@ -49,7 +49,7 @@ void Resident::setVaccine(int value)
 void Resident::updateHealthStatus()
 {
     const int oldHealthStatus=healthStatus;//记录旧的健康状态
-//    const int oldActivityStatus=activityStatus;//记录旧的活动状态
+//    const int oldActivityStatus=activityStatus;//记录旧的活动状态，活动状态在相关函数处更新
 
     //确认状态和密度绑定，并根据密度更新健康状态
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
@@ -64,8 +64,6 @@ void Resident::updateHealthStatus()
         healthStatus=3;//重症
     else if(virusDensity>=1)
         healthStatus=4;//死亡
-
-    //根据位置更新活动状态？
 
     //旧状态为健康
     if(oldHealthStatus==0)
@@ -130,6 +128,9 @@ Resident& Resident::operator=(Resident &a)
 void Resident::goDeadth()
 {
     healthStatus=4;//健康状态设为死亡
+    qreal x=-5000;
+    setPos(x,x);
+    setBrush(QBrush(Qt::black));
     //设置透明or空白，修改相关统计结果
 }
 
