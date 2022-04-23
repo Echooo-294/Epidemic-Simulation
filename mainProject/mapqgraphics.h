@@ -24,7 +24,7 @@ public:
     //建筑、人群、感染潜伏数组，都在构造函数中初始化
     Space** buildings;//存放所有建筑
     Resident *people;//人群图元，目前是400个
-    Resident *incubation;//感染潜伏人群
+//    Resident *incubation;//感染潜伏人群
     //定时器
     QTimer *timer1;//模拟每隔一定时间的更新
     QTimer *timer2;//模拟每天的统计结果更新
@@ -50,6 +50,7 @@ public:
     //感染，实现在feature_virus/infecting.cpp
     bool judgeInfected(int i,int j);//计算感染概率
     void infecting1(int i);//由感染者去感染他人，调用前需要确定是感染者
+    void infecting2(int i);//由健康人去被感染
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
     void mousePressPoint(QPoint point);//发送鼠标按下信号，传坐标

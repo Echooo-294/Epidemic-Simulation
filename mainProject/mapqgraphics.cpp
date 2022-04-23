@@ -23,7 +23,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         people[i].setVirusDensity(0.03);//赋予初始病毒密度
         people[i].setData(1,"infected");//设置被感染的标志
         people[i].setBrush(QBrush(Qt::red));//变红
-        incubation[i]=people[i];//并且添加到感染潜伏数组
+//        incubation[i]=people[i];//并且添加到感染潜伏数组
     }
 
     //buildingNumber是定义在statistic.cpp中的建筑数量

@@ -46,8 +46,10 @@ public:
 
 private:
     double virusDensity;//病毒密度
+
     int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
     int activityStatus;//活动状态（自由活动0、密切接触1、独立隔离2、确诊3、治疗中4）
+    //data1:0-4表示健康状态，data2:0-4表示活动状态
     bool vaccine;//1表示接种了疫苗，0表示没有接种疫苗，感染概率因子为0.4，重症因子为0.2
     double immunity;
     //免疫力0-1，adult：1，student：0.8，senior：0.6，和感染概率、治疗速度、治疗有效率相关

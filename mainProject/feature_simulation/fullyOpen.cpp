@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-21
+ * @Last Modified time: 2022-04-22
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -53,6 +53,7 @@ void MapQGraphics::simulation1()
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
+
             if(healthStatus==4)//如果死亡，则跳到下一个人
                 continue;
             randMove(i);//随机移动
