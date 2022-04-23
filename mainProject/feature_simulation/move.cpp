@@ -162,7 +162,7 @@ void MapQGraphics::path()
     {
         int i=0;
         for (;i<initPopulation;i++) { 
-            if(people[i].getHealthStatus()!=4)
+            if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
             {
                 //获得建筑内的随机某点坐标
                 QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
@@ -174,7 +174,7 @@ void MapQGraphics::path()
     else if(showTime>=18)
     {
         for (int i=0;i<initPopulation;i++) {
-            if(people[i].getHealthStatus()!=4)
+            if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
             {
                 //获得建筑内的某点坐标
                 QPoint end;

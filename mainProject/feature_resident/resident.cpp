@@ -9,6 +9,7 @@
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
 #include<feature_timeAndStatistic/statistic.h>
+#include<feature_space/space.h>
 
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
   ,activityStatus(0),vaccine(0),immunity(im),infNumber(0)
@@ -92,6 +93,8 @@ void Resident::updateHealthStatus()
         if(healthStatus==4)//死亡
         {
             deadNumber++;//死亡+1
+            infectionNumber--;//感染者-1
+            seriousNumber--;//重症-1
             goDeadth();//执行死亡函数
         }
     }
@@ -132,18 +135,30 @@ void Resident::goDeadth()
     //setBrush(QBrush(Qt::black));//设置颜色
 }
 
-void Resident::goHospital()
+void Resident::goHospital(int &restroom)
 {
     //判断是否满床位，满床位则return
-    //设置了活动状态为治疗中4
-    //设置位置
-    //变颜色？
+    activityStatus=4;//设置了活动状态为治疗中4
+    setPos(1095+randDouble()*180,5+randDouble()*300);//设置位置
+    setBrush(QBrush(Qt::yellow));//变颜色？
+    restroom=restroom-1;
 }
 
 void Resident::goHome()
 {
-    //随便回一栋居民楼即可，但是不要集中
-    //设置活动状态为自由0
+    double r=randDouble();
+    if(r<0.25)
+        setPos(100,76);
+    else if(r<0.5)
+        setPos(100,671);
+    else if(r<0.75)
+        setPos(973,76);
+    else
+        setPos(973,671);//随便回一栋居民楼即可，但是不要集中
+    activityStatus=0;//设置活动状态为自由0
+    healthStatus=0;//健康状态为健康
+    setBrush(QBrush(Qt::green));
+    setData(1,"cure");//防止遍历被染成红色
 }
 
 void Resident::setVirusDensity(double value)

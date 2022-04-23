@@ -8,11 +8,12 @@
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
 #include<feature_timeAndStatistic/statistic.h>
+#include<mapqgraphics.h>
 /*
  * 使用前提：病毒密度大于0且小于1，健康状态为非健康和存活，活动状态处于治疗中
  * 使用时间和空间：每日更新（或每多少时间），需要处于医院
  */
-void Resident::treatment()
+void Resident::treatment(int &restroom)
 {
     const double recoveryRate=0.08;//治疗速率
     const double successRate=0.9*immunity;//治疗有效率
@@ -23,5 +24,8 @@ void Resident::treatment()
         virusDensity=0;
         immunity+=3;//免疫力+3
         goHome();//出院回家
+        restroom=restroom+1;
+        infectionNumber--;//感染-1
+        healthNumber++;//健康+1
     }
 }

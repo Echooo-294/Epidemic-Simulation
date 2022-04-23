@@ -23,7 +23,8 @@ void MapQGraphics::everyday()
         }
         if(people[i].getActivityStatus()==4)//如果在治疗中
         {
-            people[i].treatment();//治疗
+            int restroom=buildings[5]->getRestRoom();
+            people[i].treatment(restroom);//治疗
         }
         //不需要更新状态，每隔一定时间的模拟都会更新状态
     }
