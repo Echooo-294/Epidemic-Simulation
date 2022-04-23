@@ -8,6 +8,8 @@
 #include<feature_timeAndStatistic/statistic.h>
 #include<feature_resident/resident.h>
 #include"mapqgraphics.h"
+#include"mainwindow.h"
+#include "ui_mainwindow.h"
 void MapQGraphics::everyday()
 {
     int healthStatus=0;
@@ -26,4 +28,15 @@ void MapQGraphics::everyday()
         //不需要更新状态，每隔一定时间的模拟都会更新状态
     }
     showStatistic();//展示数据
+}
+void MainWindow::everyday()
+{
+    ui->lineEdit->setText(QString::number(day));
+    ui->lineEdit_2->setText(QString::number(initPopulation-deadNumber));
+    ui->lineEdit_3->setText(QString::number(healthNumber));
+    ui->lineEdit_4->setText(QString::number(infectionNumber));
+    ui->lineEdit_5->setText(QString::number(isolationNumber));
+    ui->lineEdit_6->setText(QString::number(nosymNumber));
+    ui->lineEdit_7->setText(QString::number(seriousNumber));
+    ui->lineEdit_8->setText(QString::number(deadNumber));
 }

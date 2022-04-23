@@ -12,7 +12,9 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
 #include <feature_space/space.h>
-#include<feature_timeAndStatistic/statistic.h>
+#include <feature_timeAndStatistic/statistic.h>
+#include "chart.h"
+#include <QtCharts/QChartView>
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +25,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     void mapInit();
-    void showStatistic1();
+    void everyday();
     ~MainWindow();
 private slots:
     void on_actionexit_triggered();
@@ -34,6 +36,7 @@ private:
     QLabel *curbuiLab;
     //地图的视图
     QGraphicsScene *scene=NULL;
+    QTimer *timer1;//模拟每隔一定时间的更新
 private slots:
     //获得鼠标移动和点击的槽函数
     void get_Mouse_Point(QPoint point);

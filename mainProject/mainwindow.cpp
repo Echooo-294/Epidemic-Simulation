@@ -45,6 +45,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->mapView,SIGNAL(mousePressPoint(QPoint)),this,SLOT(get_Mouse_Point_Press(QPoint)));
     //绘画初始化地图
     this->mapInit();
+
+    //在主窗口左部上每2h更新统计结果,包括显示人数和视图
+    timer1=new QTimer(this);//初始化计时器
+    connect(timer1,&QTimer::timeout,this,&MainWindow::everyday);
+    timer1->start(ui->mapView->interval);//代表2小时
+
+    //在主窗口上方添加图表，展示每日各个人群状态
+    Chart *chart = new Chart;
+    chart->setTitle("累计健康/累计感染");//设置图表名称
+    chart->legend()->hide();
+    chart->setAnimationOptions(QChart::AllAnimations);
+    ui->graphicsView->setChart(chart);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+
+
 }
 
 void MainWindow::mapInit()
@@ -53,10 +68,6 @@ void MainWindow::mapInit()
     ui->mapView->fullyOpen();
 }
 
-void MainWindow::showStatistic1()
-{
-
-}
 
 MainWindow::~MainWindow()
 {
