@@ -12,6 +12,7 @@
 #include <feature_resident/resident.h>
 
 #include<mainwindow.h>
+#include<widget.h>
 
 class MapQGraphics : public QGraphicsView
 {
@@ -53,6 +54,8 @@ public:
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
     void mousePressPoint(QPoint point);//发送鼠标按下信号，传坐标
+private slots:
+    void getinitdata(int,int,QString);
 };
 
 #endif // MAPQGRAPHICS_H

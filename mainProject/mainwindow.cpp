@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
     permanent->setText(tr("<a href=\"https://gitee.com/echooo294/epidemic-simulation\">代码仓库</a>"));
     permanent->setOpenExternalLinks(true);//设置可以打开网站链接
     ui->statusbar->addPermanentWidget(permanent);//显示永久信息
+    //传递初始化数据
+    connect(this,SIGNAL(bridgeEmit(int,int,QString)),ui->mapView,SIGNAL(getinitdata(int,int,QString)));
     //将地图上鼠标位置显示在状态栏中
     connect(ui->mapView,SIGNAL(mouseMovePoint(QPoint)),this,SLOT(get_Mouse_Point(QPoint)));
     connect(ui->mapView,SIGNAL(mousePressPoint(QPoint)),this,SLOT(get_Mouse_Point_Press(QPoint)));
@@ -125,4 +127,9 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
     ui->mapView->timer1->setInterval(ui->mapView->interval/arg1.toFloat());
     ui->mapView->timer2->setInterval((ui->mapView->interval/arg1.toFloat())*12);
     chart->m_timer.setInterval((ui->mapView->interval/arg1.toFloat())*12);
+}
+
+void MainWindow::bridgeRec(int p, int i, QString s)
+{
+    emit bridgeEmit(p,i,s);
 }
