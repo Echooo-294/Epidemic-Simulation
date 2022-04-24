@@ -56,3 +56,5 @@ void MapQGraphics::infecting1(int i)
     }
 }
 
+
+

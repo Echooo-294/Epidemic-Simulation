@@ -5,6 +5,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
     //初始化图形大小
     this->resize(1280,750);
+
     //initPopulation是定义在statistic.cpp中的初始总人数
     people = new Resident[initPopulation];
     int i=0;
@@ -142,28 +143,28 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     const int r=4;//人图元的直径
     for(int i=0;i<initPopulation;i++)
     {
-        if(i<100)
+        if(i<initPopulation/4)
         {
             this->people[i].setRect(QRectF(0,0,r,r));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
             this->people[i].setStartAngle(16*0);//起始角度
             this->people[i].setSpanAngle(16*360);//旋转角度
             this->people[i].setPos((i%10)*20+10+r1->getPosition().x(),(i/10)*15+7+r1->getPosition().y());
         }
-        else if(i<200)
+        else if(i<initPopulation/2)
         {
             this->people[i].setRect(QRectF(0,0,r,r));
             this->people[i].setStartAngle(16*0);
             this->people[i].setSpanAngle(16*360);
             this->people[i].setPos(((i-100)%10)*20+10+r2->getPosition().x(),((i-100)/10)*15+7+r2->getPosition().y());
         }
-        else if(i<300)
+        else if(i<initPopulation/4*3)
         {
             this->people[i].setRect(QRectF(0,0,r,r));
             this->people[i].setStartAngle(16*0);
             this->people[i].setSpanAngle(16*360);
             this->people[i].setPos(((i-200)%10)*20+10+r3->getPosition().x(),((i-200)/10)*15+7+r3->getPosition().y());
         }
-        else if(i<400)
+        else
         {
             this->people[i].setRect(QRectF(0,0,r,r));
             this->people[i].setStartAngle(16*0);
@@ -194,6 +195,12 @@ void MapQGraphics::mousePressEvent(QMouseEvent *event)
     QGraphicsView::mousePressEvent(event);
 }
 
+void MapQGraphics::getinitdata(int pop, int inf, QString policy)
+{
+    Q_UNUSED(policy);
+    initPopulation=pop;
+    initInfection=inf;
+}
 
 
 
