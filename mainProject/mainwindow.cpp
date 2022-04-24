@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     permanent->setOpenExternalLinks(true);//设置可以打开网站链接
     ui->statusbar->addPermanentWidget(permanent);//显示永久信息
     //传递初始化数据
-    connect(this,SIGNAL(bridgeEmit(int,int,QString)),ui->mapView,SIGNAL(getinitdata(int,int,QString)));
+    connect(this,SIGNAL(bridgeEmit(int,int,QString)),ui->mapView,SLOT(getinitdata(int,int,QString)));
     //将地图上鼠标位置显示在状态栏中
     connect(ui->mapView,SIGNAL(mouseMovePoint(QPoint)),this,SLOT(get_Mouse_Point(QPoint)));
     connect(ui->mapView,SIGNAL(mousePressPoint(QPoint)),this,SLOT(get_Mouse_Point_Press(QPoint)));
