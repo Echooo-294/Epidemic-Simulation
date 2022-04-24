@@ -53,9 +53,28 @@ void MapQGraphics::simulation1()
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
-
-            if(healthStatus==4)//如果死亡，则跳到下一个人
+            if(healthStatus==4||activityStatus==4)//如果死亡，则跳到下一个人
                 continue;
+            //完全开放唯一的措施是自行进入医院
+            //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
+            if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
+            {
+                int restroom=buildings[5]->getRestRoom();
+                if(healthStatus==3&&restroom>0)//重症直接进入医院
+                {
+                    people[i].goHospital(restroom);
+                    buildings[5]->setRestRoom(restroom);
+                }
+                else if(healthStatus==2&&restroom>0)//出症状的有概率进医院
+                {
+                    p=randDouble();
+                    if(p<=0.4)
+                    {
+                        people[i].goHospital(restroom);
+                        buildings[5]->setRestRoom(restroom);
+                    }
+                }
+            }
             randMove(i);//随机移动
             if(flag==0)//健康人多，让感染者去感染他人
             {
@@ -68,20 +87,9 @@ void MapQGraphics::simulation1()
             }
             else//感染者多，让健康人去被感染
             {
+
             }
-            //完全开放唯一的措施是自行进入医院
-            //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
-            if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
-            {
-                if(healthStatus==3)//重症直接进入医院
-                    people[i].goHospital();
-                else if(healthStatus==2)//出症状的有概率进医院
-                {
-                    p=randDouble();
-                    if(p<=0.4)
-                        people[i].goHospital();
-                }
-            }
+
         }
     }
 //    if(day%7==0)//每七天重置一遍计时器

@@ -15,6 +15,7 @@
 #include<feature_virus/virus.h>
 #include<QGraphicsEllipseItem>
 #include<QBrush>
+#include<feature_space/space.h>
 
 class Resident : public QObject,public QGraphicsEllipseItem
 {
@@ -37,11 +38,11 @@ public:
 
     void updateHealthStatus();//用于更新状态
     void virusGrowth();//病毒自然增长，定义在feature_virus
-    void treatment();//治疗，定义在feature_virus
+    void treatment(int &restroom);//治疗，定义在feature_virus
     QPainterPath shape() const override;//碰撞范围和形状
     Resident& operator=(Resident &a);//重载=运算符
     void goDeadth();//死亡函数，设置去墓地
-    void goHospital();//去医院
+    void goHospital(int &restroom);//去医院
     void goHome();//从隔离区、医院回家
 
 private:
