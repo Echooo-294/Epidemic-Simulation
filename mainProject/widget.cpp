@@ -35,6 +35,7 @@ Widget::Widget(QWidget *parent)
     QLabel *version=new QLabel(this);
     version->setText("v0.1");
     version->move(this->width()-version->width()+50,this->height()-20);
+
 }
 
 Widget::~Widget()
@@ -50,4 +51,5 @@ void Widget::on_startBtn_clicked()
     //实例化主界面
     mainwin = new MainWindow;
     mainwin->show();
+    //connect(mainwin,&MainWindow::on_actionexit_triggered,this,&Widget::show);
 }

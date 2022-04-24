@@ -30,7 +30,7 @@ public:
     void mapInit();
     void everyday();
     ~MainWindow();
-private slots:
+public slots:
     void on_actionexit_triggered();
 private:
     Ui::MainWindow *ui;
@@ -41,7 +41,7 @@ private:
     QGraphicsScene *scene=NULL;
     QTimer *timer1;//模拟每隔一定时间的更新
 
-private slots:
+public slots:
     //获得鼠标移动和点击的槽函数
     void get_Mouse_Point(QPoint point);
     void get_Mouse_Point_Press(QPoint point);

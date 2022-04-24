@@ -12,7 +12,7 @@
 #include <QtCharts/QValueAxis>
 #include <QtCore/QRandomGenerator>
 #include <QtCore/QDebug>
-#include<feature_timeAndStatistic/statistic.h>
+#include <feature_timeAndStatistic/statistic.h>
 
 Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     QChart(QChart::ChartTypeCartesian, parent, wFlags),
