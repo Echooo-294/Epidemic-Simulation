@@ -126,3 +126,8 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
     ui->mapView->timer2->setInterval((ui->mapView->interval/arg1.toFloat())*12);
     chart->m_timer.setInterval((ui->mapView->interval/arg1.toFloat())*12);
 }
+
+void MainWindow::on_actexit_triggered()
+{
+    emit emitExit();
+}
