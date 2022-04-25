@@ -80,12 +80,15 @@ void Widget::on_startBtn_clicked()
         QMessageBox::warning(this,QString("警告！"),QString("感染人数超过总人数"));
         return;
     }
-    //数据无误，发射信号
-    emit initdata(initpopline->text().toInt(),initinfline->text().toInt(),initpolBox->currentText());
+    //传总人数数据和感染人数数据
+    initPopulation=initpopline->text().toInt();
+    initInfection=initinfline->text().toInt();
+    healthNumber=initPopulation-initInfection;
+    infectionNumber=initInfection;
+    nosymNumber=initInfection;
     //点击开始按钮，界面跳转
     this->hide();
     //实例化主界面
     mainwin = new MainWindow;
     mainwin->show();
-    connect(this,SIGNAL(initdata(int,int,QString)),mainwin,SLOT(bridgeRec(int,int,QString)));
 }
