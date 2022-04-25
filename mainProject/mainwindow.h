@@ -48,6 +48,9 @@ public slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_lineEdit_9_textChanged(const QString &arg1);
+    void on_actexit_triggered();
+signals:
+    void emitExit();//发射退出信号，退回开始页面
 };
 
 #endif // MAINWINDOW_H

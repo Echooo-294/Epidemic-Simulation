@@ -21,7 +21,7 @@ Widget::Widget(QWidget *parent)
     font.setPointSize(40);
     font.setFamily(QStringLiteral("宋体"));
     ui->label->setFont(font);
-    ui->label->move(this->width()*0.5-ui->label->width()*0.5+100,this->height()*0.05);
+    ui->label->move(this->width()*0.5-ui->label->width()*0.5+150,this->height()*0.05);
 
     //设置初始化
     QFont font2;
@@ -93,8 +93,13 @@ void Widget::on_startBtn_clicked()
     mainwin = new MainWindow;
     mainwin->show();
 
-    //connect(mainwin,&MainWindow::on_actionexit_triggered,this,&Widget::show);
 
     connect(this,SIGNAL(initdata(int,int,QString)),mainwin,SLOT(bridgeRec(int,int,QString)));
 
+
+    connect(mainwin,&MainWindow::emitExit,this,[=](){
+        mainwin->hide();
+        this->show();
+        delete mainwin;
+    });
 }

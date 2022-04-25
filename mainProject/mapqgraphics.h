@@ -5,6 +5,7 @@
 #include <QPoint>
 #include <QtDebug>
 #include <QVector>
+#include <math.h>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsItemAnimation>
