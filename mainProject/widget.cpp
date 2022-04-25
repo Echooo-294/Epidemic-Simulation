@@ -84,12 +84,12 @@ void Widget::on_startBtn_clicked()
     //数据无误，发射信号
     emit initdata(initpopline->text().toInt(),initinfline->text().toInt(),initpolBox->currentText());
     //点击开始按钮，界面跳转
-    this->hide();
+    this->close();
     //实例化主界面
     mainwin = new MainWindow;
     mainwin->show();
 
-    //connect(mainwin,&MainWindow::on_actionexit_triggered,this,&Widget::show);
+    connect(mainwin,&MainWindow::on_actionexit_triggered,this,&Widget::show);
 
     connect(this,SIGNAL(initdata(int,int,QString)),mainwin,SLOT(bridgeRec(int,int,QString)));
 }
