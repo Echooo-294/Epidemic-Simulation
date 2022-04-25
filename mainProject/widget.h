@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QMessageBox>
 #include "mainwindow.h"
+#include <feature_timeAndStatistic/statistic.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -31,9 +32,6 @@ public:
 
 private slots:
     void on_startBtn_clicked();//确定按钮点击
-signals:
-    void initdata(int,int,QString);
-
 private:
     Ui::Widget *ui;
 

@@ -195,12 +195,6 @@ void MapQGraphics::mousePressEvent(QMouseEvent *event)
     QGraphicsView::mousePressEvent(event);
 }
 
-void MapQGraphics::getinitdata(int pop, int inf, QString policy)
-{
-    Q_UNUSED(policy);
-    initPopulation=pop;
-    initInfection=inf;
-}
 
 
 

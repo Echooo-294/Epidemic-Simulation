@@ -48,13 +48,6 @@ public slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_lineEdit_9_textChanged(const QString &arg1);
-    //将来自widget的数据再次发出去
-    void bridgeRec(int,int,QString);
-
-signals:
-    //接受widget发来的用于图的初始化的数据，起到中间节点的作用
-    void bridgeEmit(int,int,QString);
-
 };
 
 #endif // MAINWINDOW_H
