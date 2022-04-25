@@ -34,8 +34,14 @@ void MapQGraphics::simulation1()
     }
     updateShowTime();//时间更新
     //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
-    if(showTime==8.0||showTime==20.0)//上下班不需要QTimer，只需要根据showtime判断
-        path();
+    if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
+        path(1);
+    else if(showTime==10.0)
+        path(2);
+    else if(showTime==14.0)
+        path(3);
+    else if(showTime==20.0)
+        path(4);
     else
     {
         //选择感染方式：如果感染者多，让健康者被感染；如果健康者多，让感染者去感染别人

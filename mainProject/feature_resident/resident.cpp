@@ -113,7 +113,7 @@ void Resident::setImmunity(double value)
 QPainterPath Resident::shape() const//返回被碰撞的形状
 {
     QPainterPath path;
-    path.addEllipse(0,0,20,20);//设置碰撞范围
+    path.addEllipse(0,0,10,10);//设置碰撞范围
     return path;
 }
 

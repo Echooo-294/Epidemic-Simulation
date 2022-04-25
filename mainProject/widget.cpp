@@ -33,6 +33,7 @@ Widget::Widget(QWidget *parent)
     initpoplab->setText("初始总人数");
     initpoplab->move(this->width()*0.25,this->height()*0.4);
     initpopline->setGeometry(this->width()*0.25+150,this->height()*0.4,100,initpoplab->height());
+    initpopline->setText("400");
     //感染人数
     initinflab=new QLabel(this);
     initinfline=new QLineEdit(this);
@@ -40,6 +41,7 @@ Widget::Widget(QWidget *parent)
     initinflab->setText("初始感染人数");
     initinflab->move(this->width()*0.25,this->height()*0.4+50);
     initinfline->setGeometry(this->width()*0.25+150,this->height()*0.4+50,100,initinflab->height());
+    initinfline->setText("1");
     //政策
     initpollab=new QLabel(this);
     initpolBox=new QComboBox(this);

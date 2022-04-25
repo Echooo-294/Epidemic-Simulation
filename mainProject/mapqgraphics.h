@@ -32,8 +32,8 @@ public:
     QTimer *timer2;//模拟每天的统计结果更新
     int interval;//每次更新的时间间隔，默认2小时-400ms
     //建筑图元和名称定义
-    QGraphicsRectItem *m_R,*m_W,*m_H,*m_Z;
-    QGraphicsTextItem *t_R,*t_W,*t_H,*t_Z;
+    QGraphicsRectItem *m_R,*m_W,*m_H,*m_Z,*m_C;
+    QGraphicsTextItem *t_R,*t_W,*t_H,*t_Z,*t_C;
     //场景
     QGraphicsScene *scene;
     //开放模拟，实现在fullyOpen中
@@ -44,7 +44,7 @@ public:
     //随机移动，不在建筑中的随机移动还没写
     void randMove(int i);
     //在路径上的移动，还未实现
-    void path();//路径移动
+    void path(int c);//路径移动
     //封装动画移动函数,在move.cpp中实现
     void moveSilky(int i,QPoint des,int t);
     //每天的病毒自然增长和治疗

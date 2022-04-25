@@ -155,37 +155,86 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
     tline->start();
 }
 
-void MapQGraphics::path()
-{//上班
+void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3：继续上班；4：下班
+{
     int time=interval*0.75;
-    if(showTime<=12)
+    switch (c)
     {
-        int i=0;
-        for (;i<initPopulation;i++) { 
-            if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+        case 1://上班
+        {
+            for (int i=0;i<initPopulation;i++)
             {
-                //获得建筑内的随机某点坐标
-                QPoint end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
-                moveSilky(i, end,time);
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                {
+                    int p=rand()%4;//获取进入写字楼的随机数
+                    //获得建筑内的随机某点坐标
+                    QPoint end;
+                    if(p==0)
+                       end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
+                    else if(p==1)
+                       end=QPoint(buildings[7]->getPosition().x()+rand()% (int)buildings[7]->getWidth(),buildings[7]->getPosition().y()+rand()%(int) buildings[7]->getLength());
+                    else if(p==2)
+                       end=QPoint(buildings[8]->getPosition().x()+rand()% (int)buildings[8]->getWidth(),buildings[8]->getPosition().y()+rand()%(int) buildings[8]->getLength());
+                    else
+                       end=QPoint(buildings[9]->getPosition().x()+rand()% (int)buildings[9]->getWidth(),buildings[9]->getPosition().y()+rand()%(int) buildings[9]->getLength());
+                    moveSilky(i, end,time);
+                }
             }
+            break;
         }
-    }
-//下班
-    else if(showTime>=18)
-    {
-        for (int i=0;i<initPopulation;i++) {
-            if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+        case 2://去食堂
+        {
+            for (int i=0;i<initPopulation;i++)
             {
-                //获得建筑内的某点坐标
-                QPoint end;
-                //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
-                if(i<initPopulation*0.25) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
-                else if(i<initPopulation*0.5)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
-                else if(i<initPopulation*0.75) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
-                else  end=QPoint(buildings[3]->getPosition().x()+rand()% (int)buildings[3]->getWidth(),buildings[3]->getPosition().y()+rand()%(int) buildings[3]->getLength());
-                moveSilky(i,end,time);
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                {
+                    int p=rand()%2;//获取进入食堂的随机数
+                    //获得建筑内的随机某点坐标
+                    QPoint end;
+                    if(p==0)
+                        end=QPoint(buildings[10]->getPosition().x()+rand()% (int)buildings[10]->getWidth(),buildings[10]->getPosition().y()+rand()%(int) buildings[10]->getLength());
+                    else
+                        end=QPoint(buildings[11]->getPosition().x()+rand()% (int)buildings[11]->getWidth(),buildings[11]->getPosition().y()+rand()%(int) buildings[11]->getLength());
+                    moveSilky(i, end,time);
+                }
             }
+            break;
         }
-    }
-
+        case 3://继续上班
+        {
+            for (int i=0;i<initPopulation;i++)
+            {
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                {
+                    //获得建筑内的某点坐标
+                    QPoint end;
+                    //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
+                    if(i<initPopulation*0.25) end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
+                    else if(i<initPopulation*0.5)  end=QPoint(buildings[7]->getPosition().x()+rand()% (int)buildings[7]->getWidth(),buildings[7]->getPosition().y()+rand()%(int) buildings[7]->getLength());
+                    else if(i<initPopulation*0.75) end=QPoint(buildings[8]->getPosition().x()+rand()% (int)buildings[8]->getWidth(),buildings[8]->getPosition().y()+rand()%(int) buildings[8]->getLength());
+                    else  end=QPoint(buildings[9]->getPosition().x()+rand()% (int)buildings[9]->getWidth(),buildings[9]->getPosition().y()+rand()%(int) buildings[9]->getLength());
+                    moveSilky(i,end,time);
+                }
+            }
+            break;
+        }
+        case 4://下班
+        {
+            for (int i=0;i<initPopulation;i++)
+            {
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                {
+                    //获得建筑内的某点坐标
+                    QPoint end;
+                    //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
+                    if(i<initPopulation*0.25) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
+                    else if(i<initPopulation*0.5)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());
+                    else if(i<initPopulation*0.75) end=QPoint(buildings[2]->getPosition().x()+rand()% (int)buildings[2]->getWidth(),buildings[2]->getPosition().y()+rand()%(int) buildings[2]->getLength());
+                    else  end=QPoint(buildings[3]->getPosition().x()+rand()% (int)buildings[3]->getWidth(),buildings[3]->getPosition().y()+rand()%(int) buildings[3]->getLength());
+                    moveSilky(i,end,time);
+                }
+            }
+            break;
+        }
+}
 }

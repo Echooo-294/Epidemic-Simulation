@@ -19,7 +19,7 @@ Virus v;
       double growthRate1=0.03,double growthRate2=0.05,\
       double policyEffect=1,double boundary1=0.3,double boundary2=0.75,double R0=3
 */
-int buildingNumber=7;//建筑数量
+int buildingNumber=12;//建筑数量
 
 //统计量初始值，通常在update
 int healthNumber;//正常人数

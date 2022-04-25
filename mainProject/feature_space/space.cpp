@@ -49,6 +49,12 @@ Space::Space(char t,double l,double w,QString n,QPoint p) : QObject(nullptr),cap
         setInfectionRro(0.5);
         break;
     }
+    //食堂
+    case 'C':{
+        setMoveMode(1);
+        setInfectionRro(0.8);
+        break;
+    }
     }
 }
 

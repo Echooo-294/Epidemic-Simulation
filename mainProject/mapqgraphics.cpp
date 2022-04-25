@@ -52,21 +52,30 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     this->buildings[2]=r3;
     Space *r4=new Space('R',150,200,"四号居民楼",QPoint(this->width()-400,this->height()-160));
     this->buildings[3]=r4;
-    Space *w1=new Space('W',200,200,"一号写字楼",QPoint(this->width()*0.5-100,this->height()*0.5-100));
+    Space *w1=new Space('W',100,150,"一号写字楼",QPoint(this->width()*0.25,this->height()*0.25));
     this->buildings[4]=w1;
-    //    Space *w2=new Space('W',100,100,"二号写字楼",QPoint(1,1));
-    //    Space *w3=new Space('W',100,100,"三号写字楼",QPoint(1,1));
-    //    Space *w4=new Space('W',100,100,"四号写字楼",QPoint(1,1));
+    Space *w2=new Space('W',100,150,"二号写字楼",QPoint(this->width()*0.5,this->height()*0.25));
+    this->buildings[7]=w2;
+    Space *w3=new Space('W',100,150,"三号写字楼",QPoint(this->width()*0.25,this->height()*0.5));
+    this->buildings[8]=w3;
+    Space *w4=new Space('W',100,150,"四号写字楼",QPoint(this->width()*0.5,this->height()*0.5));
+    this->buildings[9]=w4;
     Space *h1=new Space('H',300,180,"一号医院",QPoint(this->width()-185,5));
     this->buildings[5]=h1;
     Space *z1=new Space('Z',300,180,"一号隔离区",QPoint(this->width()-185,this->height()-305));
     this->buildings[6]=z1;
+    Space *c1=new Space('Z',150,150,"一号食堂",QPoint(this->width()*0.05,this->height()*0.4));
+    this->buildings[10]=c1;
+    Space *c2=new Space('Z',150,150,"二号食堂",QPoint(this->width()*0.7,this->height()*0.4));
+    this->buildings[11]=c2;
+
     Space *R[4]={r1,r2,r3,r4};
-    Space *W[4]={w1};
+    Space *W[4]={w1,w2,w3,w4};
     Space *H[1]={h1};
     Space *Z[1]={z1};
+    Space *C[2]={c1,c2};
 
-    QPen pen1,pen2,pen3,pen4;
+    QPen pen1,pen2,pen3,pen4,darkorange;
     // 定义画笔，设置画笔颜色和宽度
     //居民楼用
     pen1.setColor(Qt::blue);
@@ -80,20 +89,25 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     //隔离区用
     pen4.setColor(Qt::yellow);
     pen4.setWidth(5);
-
+    //食堂
+    darkorange.setColor(QColor(255,140,0));
+    darkorange.setWidth(5);
     //建筑图元初始化
     //居民楼
     m_R = new QGraphicsRectItem[4];
     t_R = new QGraphicsTextItem[4];
     //写字楼
-    m_W = new QGraphicsRectItem[1];
-    t_W = new QGraphicsTextItem[1];
+    m_W = new QGraphicsRectItem[4];
+    t_W = new QGraphicsTextItem[4];
     //医院
     m_H = new QGraphicsRectItem[1];
     t_H = new QGraphicsTextItem[1];
     //隔离区
     m_Z = new QGraphicsRectItem[1];
     t_Z = new QGraphicsTextItem[1];
+    //食堂
+    m_C = new QGraphicsRectItem[2];
+    t_C = new QGraphicsTextItem[2];
 
     //在主界面中绘图
     for(int i=0;i<4;i++)
@@ -108,15 +122,15 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         scene->addItem(&this->m_R[i]);
         scene->addItem(&this->t_R[i]);
     }
-    for(int i=0;i<1;i++)
+    for(int i=0;i<4;i++)
     {
         m_W[i].setPen(pen2);
         m_W[i].setRect(W[i]->getPosition().x(),W[i]->getPosition().y(), W[i]->getWidth(), W[i]->getLength());
         m_W[i].setData(1,W[i]->getName());
         t_W[i].setPlainText(W[i]->getName());
         t_W[i].setPos(W[i]->getPosition());
-        scene->addItem(&this->m_W[0]);
-        scene->addItem(&this->t_W[0]);
+        scene->addItem(&this->m_W[i]);
+        scene->addItem(&this->t_W[i]);
     }
     for(int i=0;i<1;i++)
     {
@@ -137,6 +151,16 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         t_Z[i].setPos(Z[i]->getPosition());
         scene->addItem(&this->m_Z[0]);
         scene->addItem(&this->t_Z[0]);
+    }
+    for(int i=0;i<2;i++)
+    {
+        m_C[i].setPen(darkorange);
+        m_C[i].setRect(C[i]->getPosition().x(),C[i]->getPosition().y(), C[i]->getWidth(),C[i]->getLength());
+        m_C[i].setData(1,C[i]->getName());
+        t_C[i].setPlainText(C[i]->getName());
+        t_C[i].setPos(C[i]->getPosition());
+        scene->addItem(&this->m_C[i]);
+        scene->addItem(&this->t_C[i]);
     }
 
     //把居民放进居民楼
