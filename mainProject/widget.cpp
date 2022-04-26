@@ -48,8 +48,11 @@ Widget::Widget(QWidget *parent)
     initpollab->setFont(font2);
     initpollab->setText("初始政策");
     initpolBox->addItem("完全开放");
+    initpolBox->addItem("仅接种疫苗");
+    initpolBox->addItem("接种疫苗+戴口罩");
+    initpolBox->addItem("接种疫苗+戴口罩+严格管控");
     initpollab->move(this->width()*0.25,this->height()*0.4+100);
-    initpolBox->setGeometry(this->width()*0.25+150,this->height()*0.4+100,initpolBox->width(),initinflab->height());
+    initpolBox->setGeometry(this->width()*0.25+150,this->height()*0.4+100,initpolBox->width()+100,initinflab->height());
 
     //左上角校徽
     QPixmap pix(":/images/sclbadge.png");
@@ -89,6 +92,7 @@ void Widget::on_startBtn_clicked()
     healthNumber=initPopulation-initInfection;
     infectionNumber=initInfection;
     nosymNumber=initInfection;
+    policy=initpolBox->currentIndex();
     //点击开始按钮，界面跳转
     this->close();
     //实例化主界面

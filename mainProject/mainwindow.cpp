@@ -68,7 +68,15 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::mapInit()
 {
     //模拟疫情开始
-    ui->mapView->fullyOpen();
+    switch(policy)
+    {
+    case 0:ui->mapView->fullyOpen();
+    case 1:ui->mapView->policy2();
+    case 2:ui->mapView->policy3();
+    case 3:ui->mapView->policy4();
+    }
+
+
 }
 
 
