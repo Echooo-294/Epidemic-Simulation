@@ -1,10 +1,13 @@
 #include "mapqgraphics.h"
 #include <QPoint>
 #include <QMouseEvent>
+#include <QGraphicsDropShadowEffect>
+
 MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
     //初始化图形大小
     this->resize(1280,750);
+    this->setBackgroundBrush(Qt::gray);
 
     //initPopulation是定义在statistic.cpp中的初始总人数
     people = new Resident[initPopulation];
@@ -34,13 +37,13 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     scene=new QGraphicsScene(0,0,this->width()-5,this->height()-5);
     this->setScene(scene);
 
-    auto line = new QGraphicsLineItem;
-    line->setLine(this->width()-195,0,this->width()-195,this->height());
-    QPen pen6;
-    pen6.setWidth(2);
-    pen6.setColor(Qt::black);
-    line->setPen(pen6);
-    scene->addItem(line);
+//    auto line = new QGraphicsLineItem;
+//    line->setLine(this->width()-195,0,this->width()-195,this->height());
+//    QPen pen6;
+//    pen6.setWidth(2);
+//    pen6.setColor(Qt::black);
+//    line->setPen(pen6);
+//    scene->addItem(line);
 
     //初始化一系列建筑
     //继续添加建筑需要去修改statistic.cpp中的buildingNumber
@@ -64,9 +67,9 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     this->buildings[5]=h1;
     Space *z1=new Space('Z',300,180,"一号隔离区",QPoint(this->width()-185,this->height()-305));
     this->buildings[6]=z1;
-    Space *c1=new Space('Z',150,150,"一号食堂",QPoint(this->width()*0.05,this->height()*0.4));
+    Space *c1=new Space('Z',150,150,"春晖园",QPoint(this->width()*0.05,this->height()*0.4));
     this->buildings[10]=c1;
-    Space *c2=new Space('Z',150,150,"二号食堂",QPoint(this->width()*0.7,this->height()*0.4));
+    Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7,this->height()*0.4));
     this->buildings[11]=c2;
 
     Space *R[4]={r1,r2,r3,r4};
@@ -78,16 +81,16 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     QPen pen1,pen2,pen3,pen4,darkorange;
     // 定义画笔，设置画笔颜色和宽度
     //居民楼用
-    pen1.setColor(Qt::blue);
+    pen1.setColor(Qt::white);
     pen1.setWidth(5);
     //写字楼用
-    pen2.setColor(Qt::red);
+    pen2.setColor(Qt::white);
     pen2.setWidth(5);
     //医院用
-    pen3.setColor(Qt::green);
+    pen3.setColor(Qt::white);
     pen3.setWidth(5);
     //隔离区用
-    pen4.setColor(Qt::yellow);
+    pen4.setColor(Qt::white);
     pen4.setWidth(5);
     //食堂
     darkorange.setColor(QColor(255,140,0));
@@ -109,66 +112,124 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     m_C = new QGraphicsRectItem[2];
     t_C = new QGraphicsTextItem[2];
 
+
+
     //在主界面中绘图
     for(int i=0;i<4;i++)
     {
+        //添加阴影效果
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(10);
+        effect->setOffset(6,6);
+        effect->setColor(Qt::black);
+
         m_R[i].setPen(pen1);
         //m_R[i].setFlag(QGraphicsItem::ItemIsMovable);
         //获取建筑参数，绘画矩形建筑
         m_R[i].setRect(R[i]->getPosition().x(),R[i]->getPosition().y(), R[i]->getWidth(), R[i]->getLength());
         m_R[i].setData(1,R[i]->getName());
+        m_R[i].setGraphicsEffect(effect);//设置建筑的阴影效果
+
         t_R[i].setPlainText(R[i]->getName());//添加建筑文字内容
-        t_R[i].setPos(R[i]->getPosition());
+        t_R[i].setPos(R[i]->getPosition()+QPoint(20,20));
+        t_R[i].setDefaultTextColor(Qt::white);
+        t_R[i].setFont(QFont(R[i]->getName(),15));
+
         scene->addItem(&this->m_R[i]);
         scene->addItem(&this->t_R[i]);
     }
     for(int i=0;i<4;i++)
     {
+        //添加阴影效果
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(10);
+        effect->setOffset(6,6);
+        effect->setColor(Qt::black);
+
         m_W[i].setPen(pen2);
         m_W[i].setRect(W[i]->getPosition().x(),W[i]->getPosition().y(), W[i]->getWidth(), W[i]->getLength());
         m_W[i].setData(1,W[i]->getName());
+        m_W[i].setGraphicsEffect(effect);//设置建筑的阴影效果
+
         t_W[i].setPlainText(W[i]->getName());
-        t_W[i].setPos(W[i]->getPosition());
+        t_W[i].setPos(W[i]->getPosition()+QPoint(20,20));
+        t_W[i].setDefaultTextColor(Qt::white);
+        t_W[i].setFont(QFont(R[i]->getName(),15));
+
         scene->addItem(&this->m_W[i]);
         scene->addItem(&this->t_W[i]);
     }
     for(int i=0;i<1;i++)
     {
+        //添加阴影效果
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(10);
+        effect->setOffset(6,6);
+        effect->setColor(Qt::black);
+
         m_H[i].setPen(pen3);
         m_H[i].setRect(H[i]->getPosition().x(),H[i]->getPosition().y(), H[i]->getWidth(), H[i]->getLength());
         m_H[i].setData(1,H[i]->getName());
+        m_H[i].setGraphicsEffect(effect);//设置建筑的阴影效果
+
         t_H[i].setPlainText(H[i]->getName());
-        t_H[i].setPos(H[i]->getPosition());
+        t_H[i].setPos(H[i]->getPosition()+QPoint(20,20));
+        t_H[i].setDefaultTextColor(Qt::white);
+        t_H[i].setFont(QFont(R[i]->getName(),15));
+
         scene->addItem(&this->m_H[0]);
         scene->addItem(&this->t_H[0]);
     }
     for(int i=0;i<1;i++)
     {
+        //添加阴影效果
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(10);
+        effect->setOffset(6,6);
+        effect->setColor(Qt::black);
+
         m_Z[i].setPen(pen4);
         m_Z[i].setRect(Z[i]->getPosition().x(),Z[i]->getPosition().y(), Z[i]->getWidth(),Z[i]->getLength());
         m_Z[i].setData(1,Z[i]->getName());
+        m_Z[i].setGraphicsEffect(effect);//设置建筑的阴影效果
+
         t_Z[i].setPlainText(Z[i]->getName());
-        t_Z[i].setPos(Z[i]->getPosition());
+        t_Z[i].setPos(Z[i]->getPosition()+QPoint(20,20));
+        t_Z[i].setDefaultTextColor(Qt::white);
+        t_Z[i].setFont(QFont(R[i]->getName(),15));
+
         scene->addItem(&this->m_Z[0]);
         scene->addItem(&this->t_Z[0]);
     }
     for(int i=0;i<2;i++)
     {
+        //添加阴影效果
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+        effect->setBlurRadius(10);
+        effect->setOffset(6,6);
+        effect->setColor(Qt::black);
+
         m_C[i].setPen(darkorange);
         m_C[i].setRect(C[i]->getPosition().x(),C[i]->getPosition().y(), C[i]->getWidth(),C[i]->getLength());
         m_C[i].setData(1,C[i]->getName());
+        m_C[i].setGraphicsEffect(effect);//设置建筑的阴影效果
+
         t_C[i].setPlainText(C[i]->getName());
-        t_C[i].setPos(C[i]->getPosition());
+        t_C[i].setPos(C[i]->getPosition()+QPoint(20,20));
+        t_C[i].setDefaultTextColor(QColor(255,140,0));
+        t_C[i].setFont(QFont(R[i]->getName(),15));
+
         scene->addItem(&this->m_C[i]);
         scene->addItem(&this->t_C[i]);
     }
 
     //把居民放进居民楼
-    const int r=4;//人图元的直径
+    const int r=5;//人图元的直径
     int temp=3*sqrt(initPopulation/12/4);
     int temp2=4*sqrt(initPopulation/12/4);
     for(int i=0;i<initPopulation;i++)
     {
+
         if(i<initPopulation/4)
         {
 
