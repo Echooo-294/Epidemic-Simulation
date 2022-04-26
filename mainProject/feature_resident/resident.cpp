@@ -68,6 +68,11 @@ void Resident::updateHealthStatus()
     //旧状态为健康
     if(oldHealthStatus==0)
     {
+        if(data(2).toString()=="mijie")//密接者隔离
+        {
+            activityStatus=2;
+            go_isolate();
+        }
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
             healthStatus=1;
@@ -159,6 +164,13 @@ void Resident::goHome()
     healthStatus=0;//健康状态为健康
     setBrush(QBrush(Qt::green));
     setData(1,"cure");//防止遍历被染成红色
+}
+
+void Resident::go_isolate()
+{
+    activityStatus=2;//活动状态为隔离
+    setPos(1095+randDouble()*180,445+randDouble()*300);
+    setBrush(QBrush(Qt::blue));
 }
 
 void Resident::setVirusDensity(double value)
