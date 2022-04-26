@@ -44,6 +44,7 @@ public:
     void goDeadth();//死亡函数，设置去墓地
     void goHospital(int &restroom);//去医院
     void goHome();//从隔离区、医院回家
+    void go_isolate();//去隔离
 
 private:
     double virusDensity;//病毒密度

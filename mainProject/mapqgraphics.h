@@ -39,6 +39,12 @@ public:
     //开放模拟，实现在fullyOpen中
     void fullyOpen();//完全开放模拟
     void simulation1();//完全开放模拟每半小时的过程
+    void policy2();//疫苗+基本不管控
+    void simulation2();
+    void policy3();//疫苗+口罩+部分管控
+    void simulation3();
+    void policy4();//严格管控
+    void simulation4();
     //涉及居民移动，实现在move.cpp中
     int judgeWhere(int i);//判断人在第几个建筑中，可以根据模拟活动简化判断，如果都不在则返回-1
     //随机移动，不在建筑中的随机移动还没写
@@ -52,6 +58,7 @@ public:
     //感染，实现在feature_virus/infecting.cpp
     bool judgeInfected(int i,int j);//计算感染概率
     void infecting1(int i);//由感染者去感染他人，调用前需要确定是感染者
+    void infecting4(int i);
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
     void mousePressPoint(QPoint point);//发送鼠标按下信号，传坐标

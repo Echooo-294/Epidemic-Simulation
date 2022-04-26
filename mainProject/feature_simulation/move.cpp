@@ -164,7 +164,7 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
                 {
                     int p=rand()%4;//获取进入写字楼的随机数
                     //获得建筑内的随机某点坐标
@@ -186,7 +186,7 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
                 {
                     int p=rand()%2;//获取进入食堂的随机数
                     //获得建筑内的随机某点坐标
@@ -204,7 +204,7 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
                 {
                     //获得建筑内的某点坐标
                     QPoint end;
@@ -222,7 +222,7 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
                 {
                     //获得建筑内的某点坐标
                     QPoint end;
