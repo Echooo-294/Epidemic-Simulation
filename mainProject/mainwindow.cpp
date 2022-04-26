@@ -70,9 +70,9 @@ void MainWindow::mapInit()
     //模拟疫情开始
     switch(policy)
     {
-    case 0:ui->mapView->fullyOpen();
-    case 1:ui->mapView->policy2();
-    case 2:ui->mapView->policy3();
+    case 0:ui->mapView->fullyOpen();break;
+    case 1:ui->mapView->policy2();break;
+    case 2:ui->mapView->policy3();break;
     case 3:ui->mapView->policy4();
     }
 
