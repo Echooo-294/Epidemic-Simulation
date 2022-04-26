@@ -64,7 +64,7 @@ Widget::Widget(QWidget *parent)
 
     //右下角版本
     QLabel *version=new QLabel(this);
-    version->setText("v0.5");
+    version->setText("v1.0");
     version->move(this->width()-version->width()+50,this->height()-20);
 
 }
