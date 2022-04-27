@@ -22,8 +22,8 @@ Virus v;
 int buildingNumber=12;//建筑数量
 
 //统计量初始值，通常在update
-int healthNumber=initPopulation;//正常人数
-int infectionNumber=initInfection;//总感染人数，包括隔离、无症状和重症
+int healthNumber;//正常人数
+int infectionNumber;//总感染人数，包括隔离、无症状和重症
 int isolationNumber=0;//隔离人数，治疗也算隔离，每有一人被隔离或进入医院，则+1
 int nosymNumber;//无症状感染者人数
 int seriousNumber=0;//重症人数
