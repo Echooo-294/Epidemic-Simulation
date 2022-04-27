@@ -38,7 +38,7 @@ private:
     QLabel *curbuiLab;
     //地图的视图
     QGraphicsScene *scene=NULL;
-    QTimer *timer1;//模拟每隔一定时间的更新
+    QTimer *timer;//模拟每隔一定时间的更新
 
 public slots:
     //获得鼠标移动和点击的槽函数

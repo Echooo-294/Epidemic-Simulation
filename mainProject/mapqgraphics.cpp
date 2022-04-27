@@ -17,17 +17,18 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         Resident adult;
         people[i]=adult;
         people[i].setBrush(QBrush(Qt::green));
+        people[i].setData(2,i);//在data(2)中存上序号，方便在退化为父类时仍能追踪到
     }
 
     //initInfection是定义在statistic.cpp中的初始感染人数
-    incubation = new Resident[initPopulation];//给感染者数组直接构造initPopulation的空间，避免超量
+    //incubation = new Resident[initPopulation];//给感染者数组直接构造initPopulation的空间，避免超量
     for(int i=0;i<initInfection;i++)//初始的感染者全部是感染潜伏
     {
         people[i%4*initPopulation/4+i/4].setHealthStatus(1);//全体人群从0开始感染
         people[i%4*initPopulation/4+i/4].setVirusDensity(0.03);//赋予初始病毒密度
         people[i%4*initPopulation/4+i/4].setData(1,"infected");//设置被感染的标志
         people[i%4*initPopulation/4+i/4].setBrush(QBrush(Qt::red));//变红
-        incubation[i%4*initPopulation/4+i/4]=people[i%4*initPopulation/4+i/4];//并且添加到感染潜伏数组
+        //incubation[i%4*initPopulation/4+i/4]=people[i%4*initPopulation/4+i/4];//并且添加到感染潜伏数组
     }
 
     //buildingNumber是定义在statistic.cpp中的建筑数量
@@ -111,8 +112,6 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     //食堂
     m_C = new QGraphicsRectItem[2];
     t_C = new QGraphicsTextItem[2];
-
-
 
     //在主界面中绘图
     for(int i=0;i<4;i++)
@@ -229,15 +228,12 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     int temp2=4*sqrt(initPopulation/12/4);
     for(int i=0;i<initPopulation;i++)
     {
-
         if(i<initPopulation/4)
         {
-
             this->people[i].setRect(QRectF(0,0,r,r));// 坐标(可以用随机数生成坐标让居民不用排的整整齐齐)，高，宽
             this->people[i].setStartAngle(16*0);//起始角度
             this->people[i].setSpanAngle(16*360);//旋转角度
             this->people[i].setPos(r1->getPosition().x()+i%temp*r1->getWidth()/temp,r1->getPosition().y()+i/temp*(r1->getLength()/temp2-2));
-
         }
         else if(i<initPopulation/2)
         {
@@ -264,7 +260,6 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
    //添加居民图元到场景中
     for(int i=0;i<initPopulation;i++)
         scene->addItem(&this->people[i]);
-
     interval=400;//400ms
 }
 
