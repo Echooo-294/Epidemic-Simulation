@@ -87,11 +87,14 @@ void Resident::updateHealthStatus()
     {
         if(healthStatus==2)//变为出症状
             nosymNumber--;//无症状-1
+        //变为健康的在treatment处设置
     }//旧状态为出症状
     else if(oldHealthStatus==2)
     {
         if(healthStatus==3)//变为重症
             seriousNumber++;//重症+1
+        else if(healthStatus==1)
+            nosymNumber++;
     }//旧状态为重症
     else if(oldHealthStatus==3)
     {
@@ -102,16 +105,8 @@ void Resident::updateHealthStatus()
             seriousNumber--;//重症-1
             goDeadth();//执行死亡函数
         }
-    }
-    else if(oldHealthStatus==3)
-    {
-        if(healthStatus==2)
+        else if(healthStatus==2)
             seriousNumber--;
-    }
-    else if(oldHealthStatus==2)
-    {
-        if(healthStatus==1)
-            nosymNumber++;
     }
 }
 
@@ -157,7 +152,7 @@ void Resident::goHospital(Space *h)
         return;
     activityStatus=4;//设置活动状态为治疗中4
     setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);//设置位置
-    setBrush(QBrush(Qt::yellow));
+    setBrush(QBrush(Qt::blue));
     h->restRoomDec();//剩余床位-1
     isolationNumber++;
 }
@@ -183,7 +178,7 @@ void Resident::goIsolate()
 {
     activityStatus=2;//活动状态为隔离
     setPos(1095+randDouble()*180,445+randDouble()*300);
-    setBrush(QBrush(Qt::blue));
+    setBrush(QBrush(Qt::yellow));
     isolationNumber++;
 }
 

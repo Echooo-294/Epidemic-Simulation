@@ -14,7 +14,7 @@ void Resident::treatment(Space *h)
     const double recoveryRate=0.08;//治疗速率
     const double successRate=0.9*immunity;//治疗有效率
     if (randDouble()<successRate)
-        virusDensity-=recoveryRate*immunity;
+        virusDensity-=recoveryRate;
     if(virusDensity<=0)
     {
         virusDensity=0;

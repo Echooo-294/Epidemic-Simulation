@@ -70,6 +70,9 @@ int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，
 }
 void MapQGraphics::randMove(int i)
 {
+    const int where=judgeWhere(i);
+    if(where==5||where==6)
+        return;
     const double w=activityWill();//获得当前时间的活动意愿
     double p=randDouble();//随机数，返回的是0-1的值
     if(p>=w)//不移动
@@ -80,7 +83,7 @@ void MapQGraphics::randMove(int i)
     const int distance=15;//移动距离
     int px=people[i].x();
     int py=people[i].y();
-    const int where=judgeWhere(i);
+
     if(where>=0)//如果在建筑中
     {
         Space *b=buildings[where];//获取所在的建筑

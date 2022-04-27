@@ -19,19 +19,18 @@ void MapQGraphics::policy2()
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer1->start(interval);//代表2小时
     timer2->start(interval*12);//代表24小时
+    //设置结束条件
+    if(deadNumber>=initPopulation)
+    {
+        timer1->stop();
+        timer2->stop();
+        return;
+    }
 }
 
 //每2小时全部人要做的
 void MapQGraphics::simulation2()
 {
-    if(deadNumber>=initPopulation)
-    {
-        timer1->stop();
-        timer2->stop();
-        showStatistic();//最后展示一遍
-        qDebug()<<"全部死亡";
-        return;
-    }
     updateShowTime();//时间更新
     //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
     if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
