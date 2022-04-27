@@ -68,11 +68,6 @@ void Resident::updateHealthStatus()
     //旧状态为健康
     if(oldHealthStatus==0)
     {
-        if(data(1).toString()=="mijie")//密接者隔离
-        {
-            activityStatus=2;
-            goIsolate();
-        }
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
             healthStatus=1;
@@ -179,12 +174,15 @@ void Resident::goHome()
     isolationNumber--;
 }
 
-void Resident::goIsolate()
+void Resident::goIsolate(Space *h)
 {
+    if(h->getRestRoom()==0)
+        return;
     activityStatus=2;//活动状态为隔离
     setPos(1095+randDouble()*180,445+randDouble()*300);
     setBrush(QBrush(Qt::blue));
     isolationNumber++;
+    h->restRoomDec();
 }
 
 int Resident::getIsolateDay() const

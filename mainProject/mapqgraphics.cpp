@@ -73,6 +73,9 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7,this->height()*0.4));
     this->buildings[11]=c2;
 
+    this->buildings[5]->setRestRoom(initPopulation*0.2);
+    this->buildings[6]->setRestRoom(initPopulation*0.4);
+
     Space *R[4]={r1,r2,r3,r4};
     Space *W[4]={w1,w2,w3,w4};
     Space *H[1]={h1};

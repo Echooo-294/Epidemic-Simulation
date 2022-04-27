@@ -44,7 +44,7 @@ public:
     void goDeadth();//死亡函数，设置去墓地
     void goHospital(Space *h);//去医院
     void goHome();//从隔离区、医院回家
-    void goIsolate();//去隔离
+    void goIsolate(Space *h);//去隔离
 
     int getIsolateDay() const;
     void isolateDayInc();//隔离天数+1

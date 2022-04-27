@@ -27,8 +27,11 @@ void MapQGraphics::everyday()
 
         if(people[i].getActivityStatus()==2&&people[i].getHealthStatus()==0)
         {
-            if(people[i].getIsolateDay()>=14)//把隔离区隔离时间大于14天的健康人移出来
+            if(people[i].getIsolateDay()>=7)//把隔离区隔离时间大于14天的健康人移出来
+            {
                 people[i].goHome();
+                buildings[6]->restRoomInc();
+            }
             else
                 people[i].isolateDayInc();//隔离天数+1
         }
