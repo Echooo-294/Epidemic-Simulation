@@ -33,6 +33,7 @@ void MapQGraphics::everyday()
             people[i].goHome();
         }
     }
+
     showStatistic();//展示数据
 }
 void MainWindow::everyday()
