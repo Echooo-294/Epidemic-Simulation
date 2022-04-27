@@ -9,7 +9,7 @@
 #ifndef SPACE_H
 #define SPACE_H
 
-#include<feature_resident/resident.h>
+
 #include <QObject>
 #include <QPoint>
 
@@ -37,7 +37,8 @@ public:
     void setAccessible(bool value);//设置和获取能否进入
 
     int getRestRoom() const;
-    void setRestRoom(int value);//设置和获取剩余容量
+    void restRoomDec();//剩余容量-1
+    void restRoomInc();//剩余容量+1
 
     double getInfectionRro() const;
     void setInfectionRro(double value);//设置和获取传播概率

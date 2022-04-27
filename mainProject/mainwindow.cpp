@@ -47,9 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     this->mapInit();
 
     //在主窗口左部上每2h更新统计结果,包括显示人数和视图
-    timer1=new QTimer(this);//初始化计时器
-    connect(timer1,&QTimer::timeout,this,&MainWindow::everyday);
-    timer1->start(ui->mapView->interval);//代表2小时
+    timer=new QTimer(this);//初始化计时器
+    connect(timer,&QTimer::timeout,this,&MainWindow::everyday);
+    timer->start(ui->mapView->interval);//代表2小时
 
     //在主窗口上方添加图表，展示每日各个人群状态
     chart = new Chart;
@@ -70,13 +70,11 @@ void MainWindow::mapInit()
     //模拟疫情开始
     switch(policy)
     {
-    case 0:ui->mapView->fullyOpen();break;
+    case 0:ui->mapView->policy1();break;
     case 1:ui->mapView->policy2();break;
     case 2:ui->mapView->policy3();break;
     case 3:ui->mapView->policy4();
     }
-
-
 }
 
 

@@ -89,9 +89,14 @@ int Space::getRestRoom() const
 {
     return restRoom;
 }
-void Space::setRestRoom(int value)
+void Space::restRoomDec()
 {
-    restRoom = value;
+    restRoom--;
+}
+
+void Space::restRoomInc()
+{
+    restRoom++;
 }
 
 bool Space::isAccessible() const

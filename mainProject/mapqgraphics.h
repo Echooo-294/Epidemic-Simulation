@@ -25,8 +25,8 @@ public:
     MapQGraphics(QWidget *parent = nullptr);
     //建筑、人群、感染潜伏数组，都在构造函数中初始化
     Space** buildings;//存放所有建筑
-    Resident *people;//人群图元，目前是400个
-//    Resident *incubation;//感染潜伏人群
+    Resident *people;//人群图元
+    //Resident *incubation;//感染潜伏人群
     //定时器
     QTimer *timer1;//模拟每隔一定时间的更新
     QTimer *timer2;//模拟每天的统计结果更新
@@ -37,7 +37,7 @@ public:
     //场景
     QGraphicsScene *scene;
     //开放模拟，实现在fullyOpen中
-    void fullyOpen();//完全开放模拟
+    void policy1();//完全开放模拟
     void simulation1();//完全开放模拟每半小时的过程
     void policy2();//疫苗+基本不管控
     void simulation2();
@@ -58,8 +58,8 @@ public:
     //感染，实现在feature_virus/infecting.cpp
     bool judgeInfected(int i,int j);//计算感染概率
     void infecting1(int i);//由感染者去感染他人，调用前需要确定是感染者
-    void infecting2(int i);//由健康人去被感染
-    void infecting4(int i);
+    //void infecting2(int i);//由健康人去被感染
+    void infecting3(int i);
 
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
