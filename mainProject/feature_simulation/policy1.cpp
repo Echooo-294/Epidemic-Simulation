@@ -28,7 +28,7 @@ void MapQGraphics::simulation1()
     {
         timer1->stop();
         timer2->stop();
-        everyday();//最后展示一遍
+        showStatistic();//最后展示一遍
         qDebug()<<"全部死亡";
         return;
     }

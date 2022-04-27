@@ -18,9 +18,7 @@ void MapQGraphics::everyday()
     {
         healthStatus=people[i].getHealthStatus();
         if(healthStatus!=0&&healthStatus!=4)//如果非健康非死亡
-        {
             people[i].virusGrowth();//病毒自然增长
-        }
         if(people[i].getActivityStatus()==4)//如果在治疗中
         {
             people[i].treatment(buildings[5]);//治疗

@@ -103,6 +103,16 @@ void Resident::updateHealthStatus()
             goDeadth();//执行死亡函数
         }
     }
+    else if(oldHealthStatus==3)
+    {
+        if(healthStatus==2)
+            seriousNumber--;
+    }
+    else if(oldHealthStatus==2)
+    {
+        if(healthStatus==1)
+            nosymNumber++;
+    }
 }
 
 double Resident::getImmunity() const
