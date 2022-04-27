@@ -18,19 +18,19 @@ void MapQGraphics::everyday()
     {
         healthStatus=people[i].getHealthStatus();
         if(healthStatus!=0&&healthStatus!=4)//如果非健康非死亡
-        {
             people[i].virusGrowth();//病毒自然增长
-        }
         if(people[i].getActivityStatus()==4)//如果在治疗中
         {
-            int restroom=buildings[5]->getRestRoom();
-            people[i].treatment(restroom);//治疗
+            people[i].treatment(buildings[5]);//治疗
         }
         //不需要更新状态，每隔一定时间的模拟都会更新状态
 
-        if(people[i].getActivityStatus()==2&&people[i].getHealthStatus()==0)//每天把隔离区的健康人移出来
+        if(people[i].getActivityStatus()==2&&people[i].getHealthStatus()==0)
         {
-            people[i].goHome();
+            if(people[i].getIsolateDay()>=14)//把隔离区隔离时间大于14天的健康人移出来
+                people[i].goHome();
+            else
+                people[i].isolateDayInc();//隔离天数+1
         }
     }
     showStatistic();//展示数据

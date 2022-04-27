@@ -12,7 +12,7 @@
 #include<feature_space/space.h>
 
 Resident::Resident(QObject *parent, double im) : QObject(parent),virusDensity(0),healthStatus(0)\
-  ,activityStatus(0),vaccine(0),immunity(im),infNumber(0)
+  ,activityStatus(0),vaccine(0),immunity(im),infNumber(0),isolateDay(0)
 {
     //创建时可以选择三种对象：adult,student,senior，仅免疫力不同，其他全部默认
 }
@@ -51,7 +51,7 @@ void Resident::updateHealthStatus()
 {
     const int oldHealthStatus=healthStatus;//记录旧的健康状态
 
-    //确认状态和密度绑定，并根据密度更新健康状态
+    //根据密度更新健康状态，确认和密度绑定
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
     double boundary2=v.getBoundary2();//非重症与重症的密度界限
     if(virusDensity==0)
@@ -71,7 +71,7 @@ void Resident::updateHealthStatus()
         if(data(1).toString()=="mijie")//密接者隔离
         {
             activityStatus=2;
-            go_isolate();
+            goIsolate();
         }
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
@@ -150,13 +150,16 @@ void Resident::goDeadth()
     //setBrush(QBrush(Qt::black));//设置颜色
 }
 
-void Resident::goHospital(int &restroom)
+void Resident::goHospital(Space *h)
 {
     //判断是否满床位，满床位则return
-    activityStatus=4;//设置了活动状态为治疗中4
-    setPos(1095+randDouble()*180,5+randDouble()*300);//设置位置
-    setBrush(QBrush(Qt::yellow));//变颜色？
-    restroom=restroom-1;
+    if(h->getRestRoom()==0)
+        return;
+    activityStatus=4;//设置活动状态为治疗中4
+    setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);//设置位置
+    setBrush(QBrush(Qt::yellow));
+    h->restRoomDec();//剩余床位-1
+    isolationNumber++;
 }
 
 void Resident::goHome()
@@ -173,14 +176,25 @@ void Resident::goHome()
     activityStatus=0;//设置活动状态为自由0
     healthStatus=0;//健康状态为健康
     setBrush(QBrush(Qt::green));
-    setData(1,"cure");//防止遍历被染成红色
+    isolationNumber--;
 }
 
-void Resident::go_isolate()
+void Resident::goIsolate()
 {
     activityStatus=2;//活动状态为隔离
     setPos(1095+randDouble()*180,445+randDouble()*300);
     setBrush(QBrush(Qt::blue));
+    isolationNumber++;
+}
+
+int Resident::getIsolateDay() const
+{
+    return isolateDay;
+}
+
+void Resident::isolateDayInc()
+{
+    isolateDay++;
 }
 
 void Resident::setVirusDensity(double value)

@@ -20,12 +20,12 @@ SOURCES += \
     feature_resident/resident.cpp \
     feature_simulation/everyday.cpp \
     feature_simulation/move.cpp \
+    feature_simulation/policy1.cpp \
     feature_simulation/policy2.cpp \
     feature_simulation/policy3.cpp \
     feature_simulation/policy4.cpp \
     feature_space/door.cpp \
     feature_timeAndStatistic/statistic.cpp \
-    feature_simulation/fullyOpen.cpp \
     feature_timeAndStatistic/timeRelevant.cpp \
     feature_virus/infecting.cpp \
     feature_virus/treatment.cpp \
