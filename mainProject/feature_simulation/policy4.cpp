@@ -46,9 +46,15 @@ void MapQGraphics::simulation4()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        double p=0;//用于判断是否进入医院的随机数
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
+            //是否隔离
+            if(people[i].data(2).toString()=="mijie")//密接者隔离
+            {
+                people[i].goIsolate(buildings[6]);
+//                if(people[i].data(1).toString()=="infected")
+//                    people[i].setBrush(QBrush(Qt::red));
+            }
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
@@ -60,11 +66,8 @@ void MapQGraphics::simulation4()
                 if(healthStatus==2&&restroom>0)//有症状进入医院
                     people[i].goHospital(buildings[5]);
                 else if(healthStatus==1&&restroom>0)//无症状的有概率进医院(核酸检测,病毒密度大于0.05才有可能检测出来)
-                {
-                    p=randDouble();
-                    if(p<=0.4&&people[i].getVirusDensity()>0.05)
+                    if(randDouble()<=0.6&&people[i].getVirusDensity()>0.05)
                         people[i].goHospital(buildings[5]);
-                }
             }
             if(healthStatus==4||activityStatus==4||activityStatus==2)//如果死亡或在医院或在隔离，则跳到下一个人
                 continue;

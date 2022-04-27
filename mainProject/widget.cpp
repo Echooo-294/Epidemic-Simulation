@@ -91,7 +91,6 @@ void Widget::on_startBtn_clicked()
     initInfection=initinfline->text().toInt();
     healthNumber=initPopulation-initInfection;
     infectionNumber=initInfection;
-    nosymNumber=initInfection;
     policy=initpolBox->currentIndex();
     //点击开始按钮，界面跳转
     this->close();

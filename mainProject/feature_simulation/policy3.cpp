@@ -46,7 +46,6 @@ void MapQGraphics::simulation3()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        double p=0;//用于判断是否进入医院的随机数
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             people[i].updateHealthStatus();//更新自身状态
@@ -60,11 +59,8 @@ void MapQGraphics::simulation3()
                 if(healthStatus==2&&restroom>0)//有症状直接进入医院
                     people[i].goHospital(buildings[5]);
                 else if(healthStatus==1&&restroom>0)//无症状的有概率进医院
-                {
-                    p=randDouble();
-                    if(p<=0.4)
+                    if(randDouble()<=0.4)
                         people[i].goHospital(buildings[5]);
-                }
             }
             if(healthStatus==4||activityStatus==4)//如果死亡，则跳到下一个人
                 continue;

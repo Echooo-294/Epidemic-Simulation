@@ -20,8 +20,6 @@ void Resident::treatment(Space *h)
         virusDensity=0;
         immunity+=3;//免疫力+3
         setData(1,"heal");//设置标志痊愈
-        if(healthStatus==1)
-            nosymNumber--;
         goHome();//出院回家
         h->restRoomInc();//剩余床位+1
         infectionNumber--;//感染-1

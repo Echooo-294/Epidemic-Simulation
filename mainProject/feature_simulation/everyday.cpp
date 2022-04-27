@@ -19,13 +19,16 @@ void MapQGraphics::everyday()
         healthStatus=people[i].getHealthStatus();
         if(healthStatus!=0&&healthStatus!=4)//如果非健康非死亡
             people[i].virusGrowth();//病毒自然增长
-        if(people[i].getActivityStatus()==4)//如果在治疗中
+        if(people[i].getActivityStatus()==4&&people[i].getHealthStatus()!=0)//如果在治疗中
             people[i].treatment(buildings[5]);//治疗
 
         if(people[i].getActivityStatus()==2&&people[i].getHealthStatus()==0)
         {
-            if(people[i].getIsolateDay()>14)//把隔离区隔离时间大于14天的健康人移出来
+            if(people[i].getIsolateDay()>=7)//把隔离区隔离时间大于14天的健康人移出来
+            {
                 people[i].goHome();
+                buildings[6]->restRoomInc();
+            }
             else
                 people[i].isolateDayInc();//隔离天数+1
         }
@@ -38,7 +41,7 @@ void MainWindow::everyday()
     ui->lineEdit_3->setText(QString::number(healthNumber));
     ui->lineEdit_4->setText(QString::number(infectionNumber));
     ui->lineEdit_5->setText(QString::number(isolationNumber));
-    ui->lineEdit_6->setText(QString::number(nosymNumber));
+
     ui->lineEdit_7->setText(QString::number(seriousNumber));
     ui->lineEdit_8->setText(QString::number(deadNumber));
     ui->timeEdit->setTime(QTime(showTime,0));

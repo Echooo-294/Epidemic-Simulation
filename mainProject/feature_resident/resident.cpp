@@ -68,33 +68,23 @@ void Resident::updateHealthStatus()
     //旧状态为健康
     if(oldHealthStatus==0)
     {
-        if(data(1).toString()=="mijie")//密接者隔离
-        {
-            activityStatus=2;
-            goIsolate();
-        }
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
             healthStatus=1;
             virusDensity=0.03;//初始密度
             setBrush(QBrush(Qt::red));
             infectionNumber++;//总感染+1
-            nosymNumber++;//无症状+1
             healthNumber--;//正常-1
         }
     }//旧状态为感染潜伏
     else if(oldHealthStatus==1)
     {
-        if(healthStatus==2)//变为出症状
-            nosymNumber--;//无症状-1
         //变为健康的在treatment处设置
     }//旧状态为出症状
     else if(oldHealthStatus==2)
     {
         if(healthStatus==3)//变为重症
             seriousNumber++;//重症+1
-        else if(healthStatus==1)
-            nosymNumber++;
     }//旧状态为重症
     else if(oldHealthStatus==3)
     {
@@ -174,12 +164,15 @@ void Resident::goHome()
     isolationNumber--;
 }
 
-void Resident::goIsolate()
+void Resident::goIsolate(Space *h)
 {
+    if(h->getRestRoom()==0)
+        return;
     activityStatus=2;//活动状态为隔离
     setPos(1095+randDouble()*180,445+randDouble()*300);
     setBrush(QBrush(Qt::yellow));
     isolationNumber++;
+    h->restRoomDec();
 }
 
 int Resident::getIsolateDay() const
