@@ -27,6 +27,11 @@ void MapQGraphics::everyday()
             people[i].treatment(restroom);//治疗
         }
         //不需要更新状态，每隔一定时间的模拟都会更新状态
+
+        if(people[i].getActivityStatus()==2&&people[i].getHealthStatus()==0)//每天把隔离区的健康人移出来
+        {
+            people[i].goHome();
+        }
     }
     showStatistic();//展示数据
 }
@@ -40,4 +45,5 @@ void MainWindow::everyday()
     ui->lineEdit_6->setText(QString::number(nosymNumber));
     ui->lineEdit_7->setText(QString::number(seriousNumber));
     ui->lineEdit_8->setText(QString::number(deadNumber));
+    ui->timeEdit->setTime(QTime(showTime,0));
 }

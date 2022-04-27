@@ -9,8 +9,8 @@
 #include<feature_resident/resident.h>
 
 //初始参数定义
-int initPopulation=400;//初始总人数
-int initInfection=1;//初始感染人数
+int initPopulation;//初始总人数
+int initInfection;//初始感染人数
 double updateTime=2;//更新间隔时间
 int policy=0;//政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
 Virus v;
@@ -19,13 +19,13 @@ Virus v;
       double growthRate1=0.03,double growthRate2=0.05,\
       double policyEffect=1,double boundary1=0.3,double boundary2=0.75,double R0=3
 */
-int buildingNumber=7;//建筑数量
+int buildingNumber=12;//建筑数量
 
 //统计量初始值，通常在update
-int healthNumber=initPopulation-initInfection;//正常人数
-int infectionNumber=initInfection;//总感染人数，包括隔离、无症状和重症
+int healthNumber;//正常人数
+int infectionNumber;//总感染人数，包括隔离、无症状和重症
 int isolationNumber=0;//隔离人数，治疗也算隔离，每有一人被隔离或进入医院，则+1
-int nosymNumber=initInfection;//无症状感染者人数
+int nosymNumber;//无症状感染者人数
 int seriousNumber=0;//重症人数
 int deadNumber=0;//死亡人数，不影响其他累计数量
 int immunityNumber=0;//疫苗接种人数

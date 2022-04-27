@@ -68,7 +68,15 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::mapInit()
 {
     //模拟疫情开始
-    ui->mapView->fullyOpen();
+    switch(policy)
+    {
+    case 0:ui->mapView->fullyOpen();break;
+    case 1:ui->mapView->policy2();break;
+    case 2:ui->mapView->policy3();break;
+    case 3:ui->mapView->policy4();
+    }
+
+
 }
 
 
@@ -125,4 +133,11 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
     ui->mapView->timer1->setInterval(ui->mapView->interval/arg1.toFloat());
     ui->mapView->timer2->setInterval((ui->mapView->interval/arg1.toFloat())*12);
     chart->m_timer.setInterval((ui->mapView->interval/arg1.toFloat())*12);
+    //interval重新设置
+    ui->mapView->interval=400/arg1.toFloat();
+}
+
+void MainWindow::on_actexit_triggered()
+{
+    emit emitExit();
 }

@@ -15,7 +15,6 @@
 #include <feature_timeAndStatistic/statistic.h>
 #include "chart.h"
 #include <QtCharts/QChartView>
-
 namespace Ui {
 class MainWindow;
 }
@@ -30,7 +29,7 @@ public:
     void mapInit();
     void everyday();
     ~MainWindow();
-private slots:
+public slots:
     void on_actionexit_triggered();
 private:
     Ui::MainWindow *ui;
@@ -41,7 +40,7 @@ private:
     QGraphicsScene *scene=NULL;
     QTimer *timer1;//模拟每隔一定时间的更新
 
-private slots:
+public slots:
     //获得鼠标移动和点击的槽函数
     void get_Mouse_Point(QPoint point);
     void get_Mouse_Point_Press(QPoint point);
@@ -49,6 +48,9 @@ private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_lineEdit_9_textChanged(const QString &arg1);
+    void on_actexit_triggered();
+signals:
+    void emitExit();//发射退出信号，退回开始页面
 };
 
 #endif // MAINWINDOW_H

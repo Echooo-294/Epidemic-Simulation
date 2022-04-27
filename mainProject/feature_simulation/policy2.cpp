@@ -3,18 +3,18 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-22
+ * @Last Modified time: 2022-04-21
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include<mapqgraphics.h>
 #include<mainwindow.h>
 
-//只有进入医院一个特殊步骤
-void MapQGraphics::fullyOpen()
+//疫苗接种+基本不管控
+void MapQGraphics::policy2()
 {
     timer1=new QTimer(this);//初始化计时器
-    connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
+    connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation2);//每500ms全部人要做的
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer1->start(interval);//代表2小时
@@ -22,7 +22,7 @@ void MapQGraphics::fullyOpen()
 }
 
 //每2小时全部人要做的(分组类并行，分三十趟，100个先移动，再感染或者其他，重复)
-void MapQGraphics::simulation1()
+void MapQGraphics::simulation2()
 {
     if(deadNumber>=initPopulation)
     {
@@ -59,19 +59,17 @@ void MapQGraphics::simulation1()
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
-            if(healthStatus==4||activityStatus==4)//如果死亡，则跳到下一个人
-                continue;
             //完全开放唯一的措施是自行进入医院
             //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
             if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
             {
                 int restroom=buildings[5]->getRestRoom();
-                if(healthStatus==3&&restroom>0)//重症直接进入医院
+                if(healthStatus==2&&restroom>0)//有症状直接进入医院
                 {
                     people[i].goHospital(restroom);
                     buildings[5]->setRestRoom(restroom);
                 }
-                else if(healthStatus==2&&restroom>0)//出症状的有概率进医院
+                else if(healthStatus==1&&restroom>0)//无症状的有概率进医院
                 {
                     p=randDouble();
                     if(p<=0.4)
@@ -81,6 +79,8 @@ void MapQGraphics::simulation1()
                     }
                 }
             }
+            if(healthStatus==4||activityStatus==4)//如果死亡，则跳到下一个人
+                continue;
             randMove(i);//随机移动
             if(flag==0)//健康人多，让感染者去感染他人
             {

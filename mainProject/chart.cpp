@@ -12,7 +12,7 @@
 #include <QtCharts/QValueAxis>
 #include <QtCore/QRandomGenerator>
 #include <QtCore/QDebug>
-#include<feature_timeAndStatistic/statistic.h>
+#include <feature_timeAndStatistic/statistic.h>
 
 Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     QChart(QChart::ChartTypeCartesian, parent, wFlags),
@@ -24,7 +24,7 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     m_step(0),
     m_x(0),//初始点x坐标值
     m_y(0),//初始点y坐标值
-    m_y2(400),//初始点y2坐标值
+    m_y2(initPopulation),//初始点y2坐标值
     m_y3(0)//初始点y3坐标值
 {
     QObject::connect(&m_timer, &QTimer::timeout, this, &Chart::handleTimeout);
@@ -69,9 +69,13 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
 
     //可以理解为设置刻度格数
     m_axisX->setTickCount(8);
-    m_axisY->setTickCount(6);
+    int tickCount;
+    if(initPopulation<100)tickCount=initPopulation/10;
+    else if(initPopulation<1000)tickCount=initPopulation/100;
+    else tickCount=initPopulation/1000;
+    m_axisY->setTickCount(tickCount+1);
     m_axisX->setRange(0, 7);//设置x坐标轴的范围
-    m_axisY->setRange(0, 500);//设置y坐标轴的范围
+    m_axisY->setRange(0, initPopulation+100);//设置y坐标轴的范围
 
     m_timer.start();
 }
@@ -83,7 +87,8 @@ Chart::~Chart()
 
 void Chart::handleTimeout()
 {
-    qreal x = plotArea().width() / (m_axisX->tickCount()-1);//设置坐标轴每次回滚的距离
+    qreal x = plotArea().width() / (m_axisX->tickCount()-1);//设置x坐标轴每次回滚的距离
+    qreal y = plotArea().height() / (m_axisY->tickCount()-1);//设置y坐标轴每次回滚的距离
     qDebug()<<m_axisX->tickCount();
     //qreal y = (m_axisX->max() - m_axisX->min()) / m_axisX->tickCount();//x每次移动的距离
     //qDebug()<< plotArea().width()<<m_axisX->max()<<m_axisX->min()<< m_axisX->tickCount();
@@ -98,6 +103,8 @@ void Chart::handleTimeout()
     //设置回滚，让线条变化处于中心位置
     if(m_x>=5)
         scroll(x, 0);
+//    if(m_y>=initPopulation/2)
+//        scroll(0, y);
     //暂停条件，m_x即天数大于300时停止
     if (m_x >= 300)
         m_timer.stop();
