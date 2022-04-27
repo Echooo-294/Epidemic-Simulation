@@ -33,7 +33,7 @@ Widget::Widget(QWidget *parent)
     initpoplab->setText("初始总人数");
     initpoplab->move(this->width()*0.25,this->height()*0.4);
     initpopline->setGeometry(this->width()*0.25+150,this->height()*0.4,100,initpoplab->height());
-    initpopline->setText("400");
+    initpopline->setText("1000");
     //感染人数
     initinflab=new QLabel(this);
     initinfline=new QLineEdit(this);

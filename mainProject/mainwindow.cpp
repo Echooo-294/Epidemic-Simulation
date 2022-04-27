@@ -43,8 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //将地图上鼠标位置显示在状态栏中
     connect(ui->mapView,SIGNAL(mouseMovePoint(QPoint)),this,SLOT(get_Mouse_Point(QPoint)));
     connect(ui->mapView,SIGNAL(mousePressPoint(QPoint)),this,SLOT(get_Mouse_Point_Press(QPoint)));
-    //绘画初始化地图
-    this->mapInit();
+
 
     //在主窗口左部上每2h更新统计结果,包括显示人数和视图
     timer1=new QTimer(this);//初始化计时器
@@ -60,8 +59,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setChart(chart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);//设置抗锯齿，让曲线看起来更加平滑
     //ui->graphicsView->setRubberBand(QChartView::HorizontalRubberBand);实现放大功能
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,Qt::white);
+    ui->label_9->setPalette(pa);
 
-
+    //开始分政策模拟
+    this->mapInit();
 
 }
 
@@ -70,13 +73,11 @@ void MainWindow::mapInit()
     //模拟疫情开始
     switch(policy)
     {
-    case 0:ui->mapView->fullyOpen();
-    case 1:ui->mapView->policy2();
-    case 2:ui->mapView->policy3();
-    case 3:ui->mapView->policy4();
+    case 0:ui->mapView->fullyOpen();break;
+    case 1:ui->mapView->policy2();break;
+    case 2:ui->mapView->policy3();break;
+    case 3:ui->mapView->policy4();break;
     }
-
-
 }
 
 
