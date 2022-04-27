@@ -68,7 +68,7 @@ void Resident::updateHealthStatus()
     //旧状态为健康
     if(oldHealthStatus==0)
     {
-        if(data(2).toString()=="mijie")//密接者隔离
+        if(data(1).toString()=="mijie")//密接者隔离
         {
             activityStatus=2;
             go_isolate();
@@ -102,6 +102,16 @@ void Resident::updateHealthStatus()
             seriousNumber--;//重症-1
             goDeadth();//执行死亡函数
         }
+    }
+    else if(oldHealthStatus==3)
+    {
+        if(healthStatus==2)
+            seriousNumber--;
+    }
+    else if(oldHealthStatus==2)
+    {
+        if(healthStatus==1)
+            nosymNumber++;
     }
 }
 

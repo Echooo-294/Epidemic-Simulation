@@ -27,5 +27,6 @@ void Resident::treatment(int &restroom)
         restroom=restroom+1;
         infectionNumber--;//感染-1
         healthNumber++;//健康+1
+        nosymNumber--;
     }
 }

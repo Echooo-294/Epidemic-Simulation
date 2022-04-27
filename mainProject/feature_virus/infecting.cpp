@@ -68,7 +68,7 @@ void MapQGraphics::infecting4(int i)
     {
         if(list[j]->data(1).toString()!="infected")//如果未被感染 变成密接
         {
-            list[j]->setData(2,"mijie");
+            list[j]->setData(1,"mijie");
         }
         if(people[i].getInfNumber()>=v.getR0())//如果感染者感染人数超限，则退出
             return;
