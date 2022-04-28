@@ -71,7 +71,7 @@ int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，
 void MapQGraphics::randMove(int i)
 {
     const int where=judgeWhere(i);
-    if(where==5||where==6)
+    if(where==5||where==6||people[i].getActivityStatus()==2||people[i].getActivityStatus()==4)
         return;
     double p=randDouble();//随机数，返回的是0-1的值
 
@@ -140,13 +140,13 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
 
     //设置时间轴，动画时长为t ms
     QTimeLine *tline=new QTimeLine(t);
-    tline->setFrameRange(0,100);
+    tline->setFrameRange(0,75);
     //设置动画对象
     QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;//初始化
-    //设置运行轨迹，共200步
-    for(int j=0;j<200;j++)
-        anima->setPosAt(j / 200.0
-                        ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
+    //设置运行轨迹，共n步
+    int n=75;
+    for(int j=0;j<n;j++)
+        anima->setPosAt(j /n,QPointF(sta.x()+dx*j/n,sta.y()+dy*j/n));
     anima->setItem(&people[i]);//设置对象
     anima->setTimeLine(tline);//设置时间轴
     //动画开始
@@ -156,17 +156,18 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
 void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3：继续上班；4：下班
 {
     int time=interval*0.75;
+    int p=0;
+    QPoint end;
     switch (c)
     {
         case 1://上班
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()<=1)
                 {
-                    int p=rand()%4;//获取进入写字楼的随机数
+                    p=rand()%4;//获取进入写字楼的随机数
                     //获得建筑内的随机某点坐标
-                    QPoint end;
                     if(p==0)
                        end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
                     else if(p==1)
@@ -184,11 +185,10 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()<=1)
                 {
-                    int p=rand()%2;//获取进入食堂的随机数
+                    p=rand()%2;//获取进入食堂的随机数
                     //获得建筑内的随机某点坐标
-                    QPoint end;
                     if(p==0)
                         end=QPoint(buildings[10]->getPosition().x()+rand()% (int)buildings[10]->getWidth(),buildings[10]->getPosition().y()+rand()%(int) buildings[10]->getLength());
                     else
@@ -202,10 +202,9 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()<=1)
                 {
                     //获得建筑内的某点坐标
-                    QPoint end;
                     //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
                     if(i<initPopulation*0.25) end=QPoint(buildings[4]->getPosition().x()+rand()% (int)buildings[4]->getWidth(),buildings[4]->getPosition().y()+rand()%(int) buildings[4]->getLength());
                     else if(i<initPopulation*0.5)  end=QPoint(buildings[7]->getPosition().x()+rand()% (int)buildings[7]->getWidth(),buildings[7]->getPosition().y()+rand()%(int) buildings[7]->getLength());
@@ -220,10 +219,9 @@ void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3�
         {
             for (int i=0;i<initPopulation;i++)
             {
-                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()!=4&&people[i].getActivityStatus()!=2)
+                if(people[i].getHealthStatus()!=4&&people[i].getActivityStatus()<=1)
                 {
                     //获得建筑内的某点坐标
-                    QPoint end;
                     //居民数组中0-99设置终点为1号居民楼，即buildings[0],以此类推
                     if(i<initPopulation*0.25) end=QPoint(buildings[0]->getPosition().x()+rand()% (int)buildings[0]->getWidth(),buildings[0]->getPosition().y()+rand()%(int) buildings[0]->getLength());
                     else if(i<initPopulation*0.5)  end=QPoint(buildings[1]->getPosition().x()+rand()% (int)buildings[1]->getWidth(),buildings[1]->getPosition().y()+rand()%(int) buildings[1]->getLength());

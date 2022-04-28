@@ -54,7 +54,7 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
-            if(healthStatus==4||activityStatus==4)//如果死亡或在医院，则跳到下一个人
+            if(healthStatus==4||activityStatus==4)//如果死亡/治疗中，则跳到下一个人
                 continue;
             //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();

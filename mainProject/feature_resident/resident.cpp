@@ -161,6 +161,7 @@ void Resident::goHome()
         setPos(973,671);//随便回一栋居民楼即可，但是不要集中
     activityStatus=0;//设置活动状态为自由0
     healthStatus=0;//健康状态为健康
+    isolateDay=0;//隔离时间归零
     setBrush(QBrush(Qt::green));
     isolationNumber--;
 }
@@ -184,6 +185,11 @@ int Resident::getIsolateDay() const
 void Resident::isolateDayInc()
 {
     isolateDay++;
+}
+
+void Resident::setIsolateDay(int value)
+{
+    isolateDay = value;
 }
 
 void Resident::setVirusDensity(double value)

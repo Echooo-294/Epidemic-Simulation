@@ -49,10 +49,12 @@ public:
     int getIsolateDay() const;
     void isolateDayInc();//隔离天数+1
 
+    void setIsolateDay(int value);
+
 private:
     double virusDensity;//病毒密度
     int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
-    int activityStatus;//活动状态（自由活动0、密切接触1、独立隔离2、确诊3、治疗中4）
+    int activityStatus;//活动状态（自由活动0、密切接触1、独立隔离2、居家隔离3、治疗中4）
     //data1：表示感染，data2：表示密接，data3：记录序号
     bool vaccine;//1表示接种了疫苗，0表示没有接种疫苗，感染概率因子为0.4，重症因子为0.2，免疫力+1
     double immunity;

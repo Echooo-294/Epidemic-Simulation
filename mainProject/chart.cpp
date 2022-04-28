@@ -89,7 +89,6 @@ void Chart::handleTimeout()
 {
     qreal x = plotArea().width() / (m_axisX->tickCount()-1);//设置x坐标轴每次回滚的距离
     qreal y = plotArea().height() / (m_axisY->tickCount()-1);//设置y坐标轴每次回滚的距离
-    qDebug()<<m_axisX->tickCount();
     //qreal y = (m_axisX->max() - m_axisX->min()) / m_axisX->tickCount();//x每次移动的距离
     //qDebug()<< plotArea().width()<<m_axisX->max()<<m_axisX->min()<< m_axisX->tickCount();
     m_x += 1;

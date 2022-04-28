@@ -14,7 +14,8 @@
 void MapQGraphics::policy2()
 {
     policy=2;
-    v.setSocialEffect(0.9);//社交影响只有一点点
+    v.setSocialEffect(0.8);
+    v.setMaskEffect(0.9);//影响只有一点点
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation2);//每500ms全部人要做的
  //   timer2=new QTimer(this);
@@ -54,6 +55,8 @@ void MapQGraphics::simulation2()
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
+            if(healthStatus==4||activityStatus==4)//如果死亡/治疗中，则跳到下一个人
+                continue;
             //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
@@ -64,8 +67,7 @@ void MapQGraphics::simulation2()
                     if(randDouble()<0.5)
                         people[i].goHospital(buildings[5]);
             }
-            if(healthStatus==4||activityStatus==4)//如果死亡，则跳到下一个人
-                continue;
+
             if(randDouble()<activityWill())//获得当前时间的活动意愿)//不移动
                 randMove(i);//随机移动
             //如果是感染者且不在治疗和隔离中，则去感染别人

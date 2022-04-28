@@ -27,11 +27,16 @@ void MapQGraphics::everyday()
     int healthStatus=0;
     int activityStatus=0;
     int i=0;
-    int sum=0;
+    int sum1=0;
+    int sum2=0;
+    int isolateday=0;
     for(;i<initPopulation;i++)
     {
         healthStatus=people[i].getHealthStatus();
         activityStatus=people[i].getActivityStatus();
+        if(activityStatus>=2)
+            people[i].isolateDayInc();//隔离天数+1
+        isolateday=people[i].getIsolateDay();
         //病毒自然增长
         if(healthStatus!=0&&healthStatus!=4)//如果非健康非死亡
             people[i].virusGrowth();
@@ -39,25 +44,31 @@ void MapQGraphics::everyday()
         if(activityStatus==4&&people[i].getHealthStatus()!=0)
             people[i].treatment(buildings[5]);//治疗
         //隔离相关
-        if(activityStatus==2&&people[i].getHealthStatus()==0)
+        if(activityStatus==2&&healthStatus<2&&isolateday>3)//释放无症状、健康的居家隔离超过三天的人
         {
-            if(people[i].getIsolateDay()>=7)//把隔离区隔离时间大于14天的健康人移出来
-            {
-                people[i].goHome();
-                buildings[6]->restRoomInc();
-            }
-            else
-                people[i].isolateDayInc();//隔离天数+1
+            people[i].setActivityStatus(0);
+            people[i].setIsolateDay(0);
         }
-        if(policy>=2&&people[i].getVaccine()!=0&&sum<=100)//一天最多一百人接种
+        if(activityStatus==2&&people[i].getHealthStatus()==0&&isolateday>7)//把隔离区隔离时间大于7天的健康人释放
+        {
+            people[i].goHome();
+            buildings[6]->restRoomInc();
+        }
+        if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*125)//有上限
         {
             if(randDouble()<0.4)
             {
                 people[i].setVaccine();
-                sum++;
+                sum1++;
                 immunityNumber++;
             }
         }
+        if(policy>=3&&activityStatus<=1&&sum2<=policy*40)//如果有管控政策，有上限
+            if(randDouble()>v.getSocialEffect()*1.8)//适度管控为0.5，严格管控为0.2
+            {
+                people[i].setActivityStatus(3);//设为居家隔离
+                sum2++;
+            }
     }
 }
 
