@@ -145,7 +145,6 @@ void Resident::goHospital(Space *h)
     setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);//设置位置
     setBrush(QBrush(Qt::blue));
     h->restRoomDec();//剩余床位-1
-    isolationNumber++;
 }
 
 void Resident::goHome()
