@@ -30,7 +30,7 @@ public slots:
 private:
     QSplineSeries *m_series;//可以理解为构成曲线的一系列的点,此处为感染人数
     QSplineSeries *m_series2;//可以理解为构成曲线的一系列的点,此处为健康人数
-    QSplineSeries *m_series3;//可以理解为构成曲线的一系列的点,此处为死亡人数
+    QSplineSeries *m_series3;//可以理解为构成曲线的一系列的点,此处为疫苗接种人数
     QStringList m_titles;
     QValueAxis *m_axisX;//x轴
     QValueAxis *m_axisY;//y轴
@@ -38,7 +38,7 @@ private:
     qreal m_x;//点的x坐标
     qreal m_y;//感染人数点的y坐标
     qreal m_y2;//健康人数点的y坐标
-    qreal m_y3;//死亡人数点的y坐标
+    qreal m_y3;//疫苗接种人数点的y坐标
 };
 
 

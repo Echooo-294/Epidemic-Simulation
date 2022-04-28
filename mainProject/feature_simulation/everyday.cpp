@@ -54,7 +54,7 @@ void MainWindow::everyday()
     ui->lineEdit_3->setText(QString::number(healthNumber));
     ui->lineEdit_4->setText(QString::number(infectionNumber));
     ui->lineEdit_5->setText(QString::number(isolationNumber));
-
+    ui->lineEdit_6->setText(QString::number(immunityNumber));
     ui->lineEdit_7->setText(QString::number(seriousNumber));
     ui->lineEdit_8->setText(QString::number(deadNumber));
     ui->timeEdit->setTime(QTime(showTime,0));

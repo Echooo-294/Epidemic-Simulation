@@ -52,7 +52,7 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     blue.setWidth(1);//设置曲线宽度
     m_series3->setPen(x);
     m_series3->append(m_x, m_y3);//加入初始点
-    m_series3->setName("死亡人数");
+    m_series3->setName("疫苗接种人数");
 
     addSeries(m_series);
     addSeries(m_series2);
@@ -88,14 +88,12 @@ Chart::~Chart()
 void Chart::handleTimeout()
 {
     qreal x = plotArea().width() / (m_axisX->tickCount()-1);//设置x坐标轴每次回滚的距离
-    qreal y = plotArea().height() / (m_axisY->tickCount()-1);//设置y坐标轴每次回滚的距离
-    qDebug()<<m_axisX->tickCount();
-    //qreal y = (m_axisX->max() - m_axisX->min()) / m_axisX->tickCount();//x每次移动的距离
-    //qDebug()<< plotArea().width()<<m_axisX->max()<<m_axisX->min()<< m_axisX->tickCount();
+    //qreal y = plotArea().height() / (m_axisY->tickCount()-1);//设置y坐标轴每次回滚的距离
+    //qreal y = (m_axisX->max() - m_axisX->min()) / m_axisX->tickCount();//x每次移动的距离    
     m_x += 1;
     m_y = infectionNumber;/*QRandomGenerator::global()->bounded(5) - 2.5;*/
     m_y2 = healthNumber;
-    m_y3 = deadNumber;
+    m_y3 = immunityNumber;
     //增加新增的点，连接成曲线
     m_series->append(m_x, m_y);
     m_series2->append(m_x, m_y2);

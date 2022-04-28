@@ -52,7 +52,7 @@
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>30</y>
        <width>241</width>
        <height>471</height>
@@ -104,26 +104,13 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>190</y>
+        <y>200</y>
         <width>75</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
        <string>隔离人数：</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>230</y>
-        <width>105</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>无症状感染者：</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
@@ -237,20 +224,7 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>180</y>
-        <width>51</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_6">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>220</y>
+        <y>190</y>
         <width>51</width>
         <height>31</height>
        </rect>
@@ -328,6 +302,32 @@
       </property>
       <property name="placeholderText">
        <string>请输入倍速</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>240</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>疫苗接种人数：</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_6">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>230</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
