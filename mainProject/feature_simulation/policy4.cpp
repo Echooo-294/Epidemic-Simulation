@@ -64,10 +64,16 @@ void MapQGraphics::simulation4()
             if(activityStatus!=4&&healthStatus!=0)
             {
                 if(healthStatus==3&&restroom>0)//重症进入医院
+                {
+                    if(judgeWhere(i)!=6)isolationNumber++;
                     people[i].goHospital(buildings[5]);
+                }
                 else if(people[i].getVirusDensity()>0.1&&restroom>0)//无症状的有概率进医院(核酸检测,病毒密度大于0.05才有可能检测出来)
                     if(randDouble()<0.8)
+                    {
+                        if(judgeWhere(i)!=6)isolationNumber++;
                         people[i].goHospital(buildings[5]);
+                    }
             }
             if(activityStatus==2||activityStatus==4)//如果被隔离则跳过
                 continue;
