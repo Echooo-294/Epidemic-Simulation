@@ -31,6 +31,7 @@ public:
     bool isAccessible() const;
     void setAccessible(bool value);//设置和获取能否进入
     int getRestRoom() const;
+    void setRestRoom(int value);
     void restRoomDec();//剩余容量-1
     void restRoomInc();//剩余容量+1
     double getInfectionRro() const;
@@ -41,6 +42,9 @@ public:
     void setType(char value);   
     double area()const;//返回面积
     //void addResident(const Resident&);//居民进入函数，居民类可以作为参数
+
+
+
 private:
     char type;//建筑种类--R：居民楼；W：写字楼；H：医院；Z：隔离区；O：开发空间
     int capacity;//容量

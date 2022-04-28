@@ -67,6 +67,11 @@ void Space::setType(char value)
     type = value;
 }
 
+void Space::setRestRoom(int value)
+{
+    restRoom = value;
+}
+
 int Space::getMoveMode() const
 {
     return moveMode;

@@ -42,9 +42,9 @@ void Resident::setActivityStatus(int value)
     activityStatus = value;
 }
 
-void Resident::setVaccine(bool value)
+void Resident::setVaccine()
 {
-    vaccine = value;
+    vaccine = 1;
 }
 
 void Resident::updateHealthStatus()
@@ -68,25 +68,18 @@ void Resident::updateHealthStatus()
     //旧状态为健康
     if(oldHealthStatus==0)
     {
-        if(data(1).toString()=="mijie")//密接者隔离
-        {
-            activityStatus=2;
-            goIsolate();
-        }
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
             healthStatus=1;
             virusDensity=0.03;//初始密度
             setBrush(QBrush(Qt::red));
             infectionNumber++;//总感染+1
-            nosymNumber++;//无症状+1
             healthNumber--;//正常-1
         }
     }//旧状态为感染潜伏
     else if(oldHealthStatus==1)
     {
-        if(healthStatus==2)//变为出症状
-            nosymNumber--;//无症状-1
+        //变为健康的在treatment处设置
     }//旧状态为出症状
     else if(oldHealthStatus==2)
     {
@@ -102,16 +95,8 @@ void Resident::updateHealthStatus()
             seriousNumber--;//重症-1
             goDeadth();//执行死亡函数
         }
-    }
-    else if(oldHealthStatus==3)
-    {
-        if(healthStatus==2)
+        else if(healthStatus==2)
             seriousNumber--;
-    }
-    else if(oldHealthStatus==2)
-    {
-        if(healthStatus==1)
-            nosymNumber++;
     }
 }
 
@@ -157,7 +142,7 @@ void Resident::goHospital(Space *h)
         return;
     activityStatus=4;//设置活动状态为治疗中4
     setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);//设置位置
-    setBrush(QBrush(Qt::yellow));
+    setBrush(QBrush(Qt::blue));
     h->restRoomDec();//剩余床位-1
     isolationNumber++;
 }
@@ -179,12 +164,15 @@ void Resident::goHome()
     isolationNumber--;
 }
 
-void Resident::goIsolate()
+void Resident::goIsolate(Space *h)
 {
+    if(h->getRestRoom()==0)
+        return;
     activityStatus=2;//活动状态为隔离
     setPos(1095+randDouble()*180,445+randDouble()*300);
-    setBrush(QBrush(Qt::blue));
+    setBrush(QBrush(Qt::yellow));
     isolationNumber++;
+    h->restRoomDec();
 }
 
 int Resident::getIsolateDay() const

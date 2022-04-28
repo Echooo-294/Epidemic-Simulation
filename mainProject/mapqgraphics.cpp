@@ -17,7 +17,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         Resident adult;
         people[i]=adult;
         people[i].setBrush(QBrush(Qt::green));
-        people[i].setData(2,i);//在data(2)中存上序号，方便在退化为父类时仍能追踪到
+        people[i].setData(3,i);//在data(3)中存上序号，方便在退化为父类时仍能追踪到
     }
 
     //initInfection是定义在statistic.cpp中的初始感染人数
@@ -72,6 +72,9 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     this->buildings[10]=c1;
     Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7,this->height()*0.4));
     this->buildings[11]=c2;
+
+    this->buildings[5]->setRestRoom(initPopulation*0.2);
+    this->buildings[6]->setRestRoom(initPopulation*0.4);
 
     Space *R[4]={r1,r2,r3,r4};
     Space *W[4]={w1,w2,w3,w4};

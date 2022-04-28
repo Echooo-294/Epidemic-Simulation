@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <QDesktopWidget>
 #include<mapqgraphics.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //基本设置
     this->setWindowTitle("疫情模拟系统");
-    this->resize(1600,1000);
+    QDesktopWidget *desk=QApplication::desktop();
+    this->resize(desk->width(),desk->height()-50);
     //界面布局
     ui->groupBox->setGeometry(0,0,this->width(),this->height()*0.2);
     ui->groupBox_3->setGeometry(0,this->height()*0.2,this->width(),this->height()*0.8);
