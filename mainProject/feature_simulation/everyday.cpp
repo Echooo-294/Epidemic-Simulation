@@ -54,7 +54,7 @@ void MapQGraphics::everyday()
             people[i].goHome();
             buildings[6]->restRoomInc();
         }
-        if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*125)//有上限
+        if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*75)//有上限
         {
             if(randDouble()<0.4)
             {
