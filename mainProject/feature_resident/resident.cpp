@@ -77,10 +77,6 @@ void Resident::updateHealthStatus()
             infectionNumber++;//总感染+1
             healthNumber--;//正常-1
         }
-    }//旧状态为感染潜伏
-    else if(oldHealthStatus==1)
-    {
-        //变为健康的在treatment处设置
     }//旧状态为出症状
     else if(oldHealthStatus==2)
     {
