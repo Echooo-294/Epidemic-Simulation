@@ -45,15 +45,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->mapView,SIGNAL(mousePressPoint(QPoint)),this,SLOT(get_Mouse_Point_Press(QPoint)));
 
 
-    //在主窗口左部上每2h更新统计结果,包括显示人数和视图
-    timer=new QTimer(this);//初始化计时器
-    connect(timer,&QTimer::timeout,this,&MainWindow::everyday);
-    timer->start(ui->mapView->interval);//代表2小时
+
+    //timer=new QTimer(this);//初始化计时器
+    //timer->start(ui->mapView->interval);//代表2小时
 
     //在主窗口上方添加图表，展示每日各个人群状态
-    chart = new Chart;
     //chart->setTitle("累计健康/累计感染");//设置图表名称
     //chart->legend()->hide();
+    chart = new Chart;
     chart->legend()->setAlignment(Qt::AlignRight);//在图表右侧显示曲线名称
     chart->setAnimationOptions(QChart::AllAnimations);//设置图表动画效果
     ui->graphicsView->setChart(chart);
@@ -65,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //开始分政策模拟
     this->mapInit();
+    //在主窗口左部上每2h更新统计结果,包括显示人数和视图
+    connect(ui->mapView->timer1,&QTimer::timeout,this,&MainWindow::everyday);
 
 }
 

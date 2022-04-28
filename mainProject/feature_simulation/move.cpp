@@ -137,14 +137,12 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
     QPoint sta=people[i].pos().toPoint();
     int dx=des.x()-sta.x();
     int dy=des.y()-sta.y();
-
     //---------------------实现动画效果-------------------------//
-
     //设置时间轴，动画时长为t ms
     QTimeLine *tline=new QTimeLine(t);
     tline->setFrameRange(0,100);
     //设置动画对象
-    QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;//初始化
+    //anima=new QGraphicsItemAnimation;//初始化
     //设置运行轨迹，共200步
     for(int j=0;j<200;j++)
         anima->setPosAt(j / 200.0

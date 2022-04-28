@@ -25,10 +25,8 @@ public:
     Chart(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0); 
     QTimer m_timer;//动态图表的定时器
     virtual ~Chart();
-
 public slots:
     void handleTimeout();
-
 private:
     QSplineSeries *m_series;//可以理解为构成曲线的一系列的点,此处为感染人数
     QSplineSeries *m_series2;//可以理解为构成曲线的一系列的点,此处为健康人数
@@ -38,9 +36,9 @@ private:
     QValueAxis *m_axisY;//y轴
     qreal m_step;
     qreal m_x;//点的x坐标
-    qreal m_y;//点的y坐标
-    qreal m_y2;
-    qreal m_y3;
+    qreal m_y;//感染人数点的y坐标
+    qreal m_y2;//健康人数点的y坐标
+    qreal m_y3;//死亡人数点的y坐标
 };
 
 
