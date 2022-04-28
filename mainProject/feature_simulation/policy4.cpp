@@ -18,15 +18,14 @@ void MapQGraphics::policy4()
     v.setSocialEffect(0.2);//严格管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
-    timer2=new QTimer(this);
-    connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
+//    timer2=new QTimer(this);
+//    connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer1->start(interval);//代表2小时
-    timer2->start(interval*12);//代表24小时
+//    timer2->start(interval*12);//代表24小时
     //设置结束条件
     if(deadNumber>=initPopulation)
     {
         timer1->stop();
-        timer2->stop();
         return;
     }
 }
@@ -40,6 +39,8 @@ void MapQGraphics::simulation4()
         path(1);
     else if(showTime==20.0)
         path(4);
+    else if(showTime==0.0)
+        everyday();
     else
     {
         int i=0;
@@ -62,15 +63,16 @@ void MapQGraphics::simulation4()
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&healthStatus!=0)
             {
-                if(healthStatus==2&&restroom>0)//有症状进入医院
+                if(healthStatus==3&&restroom>0)//重症进入医院
                     people[i].goHospital(buildings[5]);
-                else if(healthStatus==1&&restroom>0)//无症状的有概率进医院(核酸检测,病毒密度大于0.05才有可能检测出来)
-                    if(randDouble()<=0.6&&people[i].getVirusDensity()>0.05)
+                else if(people[i].getVirusDensity()>0.1&&restroom>0)//无症状的有概率进医院(核酸检测,病毒密度大于0.05才有可能检测出来)
+                    if(randDouble()<0.8)
                         people[i].goHospital(buildings[5]);
             }
             if(healthStatus==4||activityStatus==4||activityStatus==2)//如果死亡或在医院或在隔离，则跳到下一个人
                 continue;
-            randMove(i);//随机移动
+            if(randDouble()<activityWill())//获得当前时间的活动意愿)//不移动
+                randMove(i);//随机移动
             //如果是感染者且不在治疗和隔离中，则去感染别人
             if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
                 if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人

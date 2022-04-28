@@ -45,6 +45,7 @@ void Resident::setActivityStatus(int value)
 void Resident::setVaccine()
 {
     vaccine = 1;
+    immunity++;
 }
 
 void Resident::updateHealthStatus()

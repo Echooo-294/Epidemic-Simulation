@@ -12,7 +12,7 @@
 
 #include<QTimeLine>
 
-double activityWill()//一天中不同时间段活动意愿不同
+double MapQGraphics::activityWill()//一天中不同时间段活动意愿不同
 {
     double activityWill=0;
      if(showTime>0&&showTime<=6.0)//凌晨
@@ -73,14 +73,9 @@ void MapQGraphics::randMove(int i)
     const int where=judgeWhere(i);
     if(where==5||where==6)
         return;
-    const double w=activityWill();//获得当前时间的活动意愿
     double p=randDouble();//随机数，返回的是0-1的值
-    if(p>=w)//不移动
-        return;
-    else
-        p=p/w;//移动，并且修正概率为0-1之间的值
 
-    const int distance=15;//移动距离
+    const int distance=10;//移动距离
     int px=people[i].x();
     int py=people[i].y();
 
@@ -93,42 +88,42 @@ void MapQGraphics::randMove(int i)
         const int bl=b->getLength();
 
         //判断移动方向，且移动后是否出界，出了就反向走
-        int time=interval*0.25;//设置移动动画时间
+        //int time=interval*0.25;//设置移动动画时间
         if(p<0.25)//右
             {
                 if(px+distance<=bx+bw)
-                    //people[i].moveBy(distance,0);//一次移动10
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
+                    people[i].moveBy(distance,0);//一次移动10
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
                 else
-                    //people[i].moveBy(-distance,0);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
+                    people[i].moveBy(-distance,0);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
             }
             else if(p<0.5&&p>=0.25)//下
             {
                 if(py+distance<=by+bl)
-                    //people[i].moveBy(0,distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
+                    people[i].moveBy(0,distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
                 else
-                    //people[i].moveBy(0,-distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
+                    people[i].moveBy(0,-distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
             }
             else if(p<0.75&&p>=0.5)//左
             {
                 if(px-distance>=bx)
-                    //people[i].moveBy(-distance,0);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
+                    people[i].moveBy(-distance,0);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
                 else
-                    //people[i].moveBy(distance,0);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
+                    people[i].moveBy(distance,0);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
             }
             else//上
             {
                 if(py-distance>=by)
-                    //people[i].moveBy(0,-distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
+                    people[i].moveBy(0,-distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
                 else
-                    //people[i].moveBy(0,distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
+                    people[i].moveBy(0,distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
             }
     }
 }

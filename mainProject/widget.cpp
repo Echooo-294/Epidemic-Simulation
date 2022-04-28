@@ -33,7 +33,7 @@ Widget::Widget(QWidget *parent)
     initpoplab->setText("初始总人数");
     initpoplab->move(this->width()*0.25,this->height()*0.4);
     initpopline->setGeometry(this->width()*0.25+150,this->height()*0.4,100,initpoplab->height());
-    initpopline->setText("400");
+    initpopline->setText("1000");
     //感染人数
     initinflab=new QLabel(this);
     initinfline=new QLineEdit(this);
@@ -41,15 +41,15 @@ Widget::Widget(QWidget *parent)
     initinflab->setText("初始感染人数");
     initinflab->move(this->width()*0.25,this->height()*0.4+50);
     initinfline->setGeometry(this->width()*0.25+150,this->height()*0.4+50,100,initinflab->height());
-    initinfline->setText("1");
+    initinfline->setText("3");
     //政策
     initpollab=new QLabel(this);
     initpolBox=new QComboBox(this);
     initpollab->setFont(font2);
     initpollab->setText("初始政策");
     initpolBox->addItem("完全开放");
-    initpolBox->addItem("仅接种疫苗");
-    initpolBox->addItem("接种疫苗+戴口罩");
+    initpolBox->addItem("接种疫苗+基本不管控");
+    initpolBox->addItem("接种疫苗+戴口罩+适度管控");
     initpolBox->addItem("接种疫苗+戴口罩+严格管控");
     initpollab->move(this->width()*0.25,this->height()*0.4+100);
     initpolBox->setGeometry(this->width()*0.25+150,this->height()*0.4+100,initpolBox->width()+100,initinflab->height());
