@@ -44,7 +44,7 @@ void MapQGraphics::everyday()
         if(activityStatus==4&&people[i].getHealthStatus()!=0)
             people[i].treatment(buildings[5]);//治疗
         //隔离相关
-        if(activityStatus==2&&healthStatus<2&&isolateday>3)//释放无症状、健康的居家隔离超过三天的人
+        if(activityStatus==3&&healthStatus<2&&isolateday>3)//释放无症状、健康的居家隔离超过三天的人
         {
             people[i].setActivityStatus(0);
             people[i].setIsolateDay(0);
@@ -54,7 +54,7 @@ void MapQGraphics::everyday()
             people[i].goHome();
             buildings[6]->restRoomInc();
         }
-        if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*125)//有上限
+        if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*75)//有上限
         {
             if(randDouble()<0.4)
             {
