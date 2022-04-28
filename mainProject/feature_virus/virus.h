@@ -24,10 +24,10 @@ public:
 private:
     double infectionP1;//潜伏期感染概率，默认=0.2
     double infectionP2;//出症状感染概率，默认=0.8
-    double socialEffect;//管控社交导致的感染概率，对应1，0.9，0.5，0.2
+    double socialEffect;//管控社交导致的感染概率，对应1，0.8，0.5，0.2
     double growthRate1;//潜伏期病毒增长率，默认=0.03
     double growthRate2;//出症状病毒增长率，默认=0.05
-    double maskEffect;//政策影响的感染概率因子（口罩），对应1，1，0.7，0.6
+    double maskEffect;//政策影响的感染概率因子（口罩），对应1，0.9，0.7，0.6
     double boundary1;//潜伏期的界限，默认=0.3
     double boundary2;//重症界限，默认=0.75
     double R0;//传染指数，感染人数上限，默认=3

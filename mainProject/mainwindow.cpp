@@ -120,14 +120,12 @@ void MainWindow::get_Mouse_Point_Press(QPoint point)
 void MainWindow::on_pushButton_clicked()
 {
     ui->mapView->timer1->stop();
-    ui->mapView->timer2->stop();
     chart->m_timer.stop();
 }
 //开始按钮
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->mapView->timer1->start();
-    ui->mapView->timer2->start();
     chart->m_timer.start();
 }
 //加速调节
@@ -135,7 +133,6 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
 {
     //调节定时器间隔达到加速的效果
     ui->mapView->timer1->setInterval(ui->mapView->interval/arg1.toFloat());
-    ui->mapView->timer2->setInterval((ui->mapView->interval/arg1.toFloat())*12);
     chart->m_timer.setInterval((ui->mapView->interval/arg1.toFloat())*12);
     //interval重新设置
     ui->mapView->interval=400/arg1.toFloat();

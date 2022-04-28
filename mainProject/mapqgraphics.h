@@ -29,7 +29,7 @@ public:
     //Resident *incubation;//感染潜伏人群
     //定时器
     QTimer *timer1;//模拟每隔一定时间的更新
-    QTimer *timer2;//模拟每天的统计结果更新
+    //QTimer *timer2;//模拟每天的统计结果更新
     int interval;//每次更新的时间间隔，默认2小时-400ms
     //建筑图元和名称定义
     QGraphicsRectItem *m_R,*m_W,*m_H,*m_Z,*m_C;
@@ -46,6 +46,7 @@ public:
     void policy4();//严格管控
     void simulation4();
     //涉及居民移动，实现在move.cpp中
+    double activityWill();
     int judgeWhere(int i);//判断人在第几个建筑中，可以根据模拟活动简化判断，如果都不在则返回-1
     //随机移动，不在建筑中的随机移动还没写
     void randMove(int i);

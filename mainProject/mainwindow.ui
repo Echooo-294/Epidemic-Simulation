@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>上方区域</string>
+     <string/>
     </property>
     <widget class="QChartView" name="graphicsView">
      <property name="geometry">
@@ -59,7 +59,7 @@
       </rect>
      </property>
      <property name="title">
-      <string>左侧区域</string>
+      <string/>
      </property>
      <widget class="QLabel" name="label">
       <property name="geometry">
