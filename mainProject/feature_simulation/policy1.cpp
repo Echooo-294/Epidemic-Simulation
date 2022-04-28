@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-27
+ * @Last Modified time: 2022-04-28
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -13,6 +13,7 @@
 //只有进入医院一个特殊步骤
 void MapQGraphics::policy1()
 {
+    policy=1;
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每500ms全部人要做的
     timer2=new QTimer(this);
@@ -29,11 +30,11 @@ void MapQGraphics::policy1()
 }
 
 //每2小时全部人要做的
-void MapQGraphics::simulation1()
+void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医院
 {
     updateShowTime();//时间更新
-    //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
-    if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
+    //不同时间段活动
+    if(showTime==6.0)
         path(1);
     else if(showTime==10.0)
         path(2);
@@ -53,7 +54,6 @@ void MapQGraphics::simulation1()
             activityStatus=people[i].getActivityStatus();//活动状态
             if(healthStatus==4||activityStatus==4)//如果死亡或在医院，则跳到下一个人
                 continue;
-            //完全开放唯一的措施是自行进入医院
             //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)

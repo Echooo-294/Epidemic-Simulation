@@ -10,9 +10,12 @@
 #include<mapqgraphics.h>
 #include<mainwindow.h>
 
-//疫苗+口罩+严格管控
+//疫苗接种+戴口罩+严格管控
 void MapQGraphics::policy4()
 {
+    policy=4;
+    v.setMaskEffect(0.6);//口罩影响
+    v.setSocialEffect(0.2);//严格管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
     timer2=new QTimer(this);
@@ -32,13 +35,9 @@ void MapQGraphics::policy4()
 void MapQGraphics::simulation4()
 {
     updateShowTime();//时间更新
-    //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
-    if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
+    //不同时间段活动
+    if(showTime==6.0)
         path(1);
-    else if(showTime==10.0)
-        path(2);
-    else if(showTime==14.0)
-        path(3);
     else if(showTime==20.0)
         path(4);
     else

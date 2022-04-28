@@ -42,9 +42,9 @@ void Resident::setActivityStatus(int value)
     activityStatus = value;
 }
 
-void Resident::setVaccine(bool value)
+void Resident::setVaccine()
 {
-    vaccine = value;
+    vaccine = 1;
 }
 
 void Resident::updateHealthStatus()

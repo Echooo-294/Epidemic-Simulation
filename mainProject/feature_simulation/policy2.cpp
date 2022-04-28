@@ -13,6 +13,8 @@
 //疫苗接种+基本不管控
 void MapQGraphics::policy2()
 {
+    policy=2;
+    v.setSocialEffect(0.9);//社交影响只有一点点
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation2);//每500ms全部人要做的
     timer2=new QTimer(this);
@@ -32,8 +34,8 @@ void MapQGraphics::policy2()
 void MapQGraphics::simulation2()
 {
     updateShowTime();//时间更新
-    //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
-    if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
+    //不同时间段活动
+    if(showTime==6.0)
         path(1);
     else if(showTime==10.0)
         path(2);
@@ -51,7 +53,6 @@ void MapQGraphics::simulation2()
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
-            //完全开放唯一的措施是自行进入医院
             //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)

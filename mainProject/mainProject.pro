@@ -24,7 +24,6 @@ SOURCES += \
     feature_simulation/policy2.cpp \
     feature_simulation/policy3.cpp \
     feature_simulation/policy4.cpp \
-    feature_space/door.cpp \
     feature_timeAndStatistic/statistic.cpp \
     feature_timeAndStatistic/timeRelevant.cpp \
     feature_virus/infecting.cpp \
@@ -40,7 +39,6 @@ SOURCES += \
 HEADERS += \
     chart.h \
     feature_resident/resident.h \
-    feature_space/door.h \
     feature_timeAndStatistic/statistic.h \
     feature_virus/virus.h \
     feature_space/space.h \

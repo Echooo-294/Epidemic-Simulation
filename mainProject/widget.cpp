@@ -89,6 +89,7 @@ void Widget::on_startBtn_clicked()
     //传总人数数据和感染人数数据
     initPopulation=initpopline->text().toInt();
     initInfection=initinfline->text().toInt();
+
     healthNumber=initPopulation-initInfection;
     infectionNumber=initInfection;
     policy=initpolBox->currentIndex();
@@ -97,10 +98,6 @@ void Widget::on_startBtn_clicked()
     //实例化主界面
     mainwin = new MainWindow;
     mainwin->show();
-
-
-    connect(this,SIGNAL(initdata(int,int,QString)),mainwin,SLOT(bridgeRec(int,int,QString)));
-
 
     connect(mainwin,&MainWindow::emitExit,this,[=](){
         mainwin->hide();

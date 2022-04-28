@@ -22,13 +22,13 @@ bool MapQGraphics::judgeInfected(int i,int j)//i为感染者，j为健康人
     double vaccine=1;
     if(people[j].getVaccine())//如果接种了疫苗
         vaccine=0.4;
-    const double policyEffect=v.getPolicyEffect(); //政策
-    //密闭or开放空间
-    const double place=v.getcloseInfectionP(); //所处空间的感染概率，公共/密闭
+    const double maskEffect=v.getMaskEffect();//政策——戴口罩、消毒
+    //社交管控
+    const double socialEffect=v.getSocialEffect();
     //和免疫力相关
     const double immunityP=3/(4*people[j].getImmunity());
 
-    P=P*vaccine*policyEffect*place*immunityP;
+    P=P*vaccine*maskEffect*socialEffect*immunityP;
     //随机数判断是否感染
     if(randDouble()<P)
     {
