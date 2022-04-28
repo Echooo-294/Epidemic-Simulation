@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-21
+ * @Last Modified time: 2022-04-28
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -59,7 +59,7 @@ void MapQGraphics::simulation2()
                 continue;
             //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
-            if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
+            if(activityStatus!=4&&healthStatus!=0)
             {
                 if(healthStatus==3&&restroom>0)//重症直接进入医院
                     people[i].goHospital(buildings[5]);
@@ -67,11 +67,10 @@ void MapQGraphics::simulation2()
                     if(randDouble()<0.5)
                         people[i].goHospital(buildings[5]);
             }
-
-            if(randDouble()<activityWill())//获得当前时间的活动意愿)//不移动
+            if(randDouble()<activityWill())//获得当前时间的活动意愿
                 randMove(i);//随机移动
             //如果是感染者且不在治疗和隔离中，则去感染别人
-            if(activityStatus!=4&&activityStatus!=2&&healthStatus!=0)
+            if(activityStatus<=1&&healthStatus!=0)
                 if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人
                     infecting1(i);
         }

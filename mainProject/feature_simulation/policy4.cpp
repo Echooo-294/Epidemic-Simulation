@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-21
+ * @Last Modified time: 2022-04-28
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -69,7 +69,7 @@ void MapQGraphics::simulation4()
                     if(randDouble()<0.8)
                         people[i].goHospital(buildings[5]);
             }
-            if(activityStatus==2)//如果被隔离则跳过
+            if(activityStatus==2||activityStatus==4)//如果被隔离则跳过
                 continue;
             if(randDouble()<activityWill())//获得当前时间的活动意愿)//不移动
                 randMove(i);//随机移动

@@ -37,7 +37,6 @@ double MapQGraphics::activityWill()//一天中不同时间段活动意愿不同
 }
 int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，如果是，就返回该建筑标号
 {
-    //可以根据模拟活动简化判断
     //获取人的位置
     int px=people[i].x();
     int py=people[i].y();
@@ -137,18 +136,12 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
     int dy=des.y()-sta.y();
     //---------------------实现动画效果-------------------------//
     //设置时间轴，动画时长为t ms
-    QTimeLine *tline=new QTimeLine(t);
-    tline->setFrameRange(0,75);
+    tline=new QTimeLine(t);
+    int n=75;
+    tline->setFrameRange(0,n);
     //设置动画对象
     anima=new QGraphicsItemAnimation;//初始化
-    //设置运行轨迹，共200步
-    for(int j=0;j<200;j++)
-        anima->setPosAt(j / 200.0
-                        ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
-
-    //QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;//初始化
     //设置运行轨迹，共n步
-    int n=75;
     for(int j=0;j<n;j++)
         anima->setPosAt(j /n,QPointF(sta.x()+dx*j/n,sta.y()+dy*j/n));
     anima->setItem(&people[i]);//设置对象

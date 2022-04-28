@@ -61,7 +61,9 @@ public:
     void infecting1(int i);//由感染者去感染他人，调用前需要确定是感染者
     //void infecting2(int i);//由健康人去被感染
     void infecting3(int i);
-    QGraphicsItemAnimation *anima;
+
+    QTimeLine *tline;//时间轴
+    QGraphicsItemAnimation *anima;//动画对象
 signals:
     void mouseMovePoint(QPoint point);//发送鼠标移动信号，传坐标
     void mousePressPoint(QPoint point);//发送鼠标按下信号，传坐标
