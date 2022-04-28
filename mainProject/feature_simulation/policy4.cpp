@@ -10,36 +10,34 @@
 #include<mapqgraphics.h>
 #include<mainwindow.h>
 
-//疫苗+口罩+严格管控
+//疫苗接种+戴口罩+严格管控
 void MapQGraphics::policy4()
 {
+    policy=4;
+    v.setMaskEffect(0.6);//口罩影响
+    v.setSocialEffect(0.2);//严格管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer1->start(interval);//代表2小时
     timer2->start(interval*12);//代表24小时
+    //设置结束条件
+    if(deadNumber>=initPopulation)
+    {
+        timer1->stop();
+        timer2->stop();
+        return;
+    }
 }
 
 //每2小时全部人要做的
 void MapQGraphics::simulation4()
 {
-    if(deadNumber>=initPopulation)
-    {
-        timer1->stop();
-        timer2->stop();
-        showStatistic();//最后展示一遍
-        qDebug()<<"全部死亡";
-        return;
-    }
     updateShowTime();//时间更新
-    //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
-    if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
+    //不同时间段活动
+    if(showTime==6.0)
         path(1);
-    else if(showTime==10.0)
-        path(2);
-    else if(showTime==14.0)
-        path(3);
     else if(showTime==20.0)
         path(4);
     else
@@ -47,7 +45,6 @@ void MapQGraphics::simulation4()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        double p=0;//用于判断是否进入医院的随机数
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             //是否隔离
@@ -68,11 +65,8 @@ void MapQGraphics::simulation4()
                 if(healthStatus==2&&restroom>0)//有症状进入医院
                     people[i].goHospital(buildings[5]);
                 else if(healthStatus==1&&restroom>0)//无症状的有概率进医院(核酸检测,病毒密度大于0.05才有可能检测出来)
-                {
-                    p=randDouble();
-                    if(p<=0.6&&people[i].getVirusDensity()>0.05)
+                    if(randDouble()<=0.6&&people[i].getVirusDensity()>0.05)
                         people[i].goHospital(buildings[5]);
-                }
             }
             if(healthStatus==4||activityStatus==4||activityStatus==2)//如果死亡或在医院或在隔离，则跳到下一个人
                 continue;

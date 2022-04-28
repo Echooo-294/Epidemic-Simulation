@@ -17,7 +17,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         Resident adult;
         people[i]=adult;
         people[i].setBrush(QBrush(Qt::green));
-        people[i].setData(2,i);//在data(2)中存上序号，方便在退化为父类时仍能追踪到
+        people[i].setData(3,i);//在data(3)中存上序号，方便在退化为父类时仍能追踪到
     }
 
     //initInfection是定义在statistic.cpp中的初始感染人数

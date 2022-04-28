@@ -10,36 +10,34 @@
 #include<mapqgraphics.h>
 #include<mainwindow.h>
 
-//疫苗接种+戴口罩
+//疫苗接种+戴口罩+适度管控
 void MapQGraphics::policy3()
 {
+    policy=3;
+    v.setMaskEffect(0.7);//口罩影响
+    v.setSocialEffect(0.5);//适度管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation3);//每500ms全部人要做的
     timer2=new QTimer(this);
     connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
     timer1->start(interval);//代表2小时
     timer2->start(interval*12);//代表24小时
+    //设置结束条件
+    if(deadNumber>=initPopulation)
+    {
+        timer1->stop();
+        timer2->stop();
+        return;
+    }
 }
 
 //每2小时全部人要做的
 void MapQGraphics::simulation3()
 {
-    if(deadNumber>=initPopulation)
-    {
-        timer1->stop();
-        timer2->stop();
-        showStatistic();//最后展示一遍
-        qDebug()<<"全部死亡";
-        return;
-    }
     updateShowTime();//时间更新
-    //不同时间段活动，分为上下班时间在路径移动，和其他时间随机移动
-    if(showTime==6.0)//上下班不需要QTimer，只需要根据showtime判断
+    //不同时间段活动
+    if(showTime==6.0)//仅上下班，不去堂食
         path(1);
-    else if(showTime==10.0)
-        path(2);
-    else if(showTime==14.0)
-        path(3);
     else if(showTime==20.0)
         path(4);
     else
@@ -47,7 +45,6 @@ void MapQGraphics::simulation3()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        double p=0;//用于判断是否进入医院的随机数
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             people[i].updateHealthStatus();//更新自身状态
@@ -61,11 +58,8 @@ void MapQGraphics::simulation3()
                 if(healthStatus==2&&restroom>0)//有症状直接进入医院
                     people[i].goHospital(buildings[5]);
                 else if(healthStatus==1&&restroom>0)//无症状的有概率进医院
-                {
-                    p=randDouble();
-                    if(p<=0.4)
+                    if(randDouble()<=0.4)
                         people[i].goHospital(buildings[5]);
-                }
             }
             if(healthStatus==4||activityStatus==4)//如果死亡，则跳到下一个人
                 continue;

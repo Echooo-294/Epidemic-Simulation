@@ -89,10 +89,9 @@ void Widget::on_startBtn_clicked()
     //传总人数数据和感染人数数据
     initPopulation=initpopline->text().toInt();
     initInfection=initinfline->text().toInt();
-    nosymNumber=initinfline->text().toInt();
+
     healthNumber=initPopulation-initInfection;
     infectionNumber=initInfection;
-
     policy=initpolBox->currentIndex();
     //点击开始按钮，界面跳转
     this->close();

@@ -14,14 +14,12 @@ void Resident::treatment(Space *h)
     const double recoveryRate=0.08;//治疗速率
     const double successRate=0.9*immunity;//治疗有效率
     if (randDouble()<successRate)
-        virusDensity-=recoveryRate*immunity;
+        virusDensity-=recoveryRate;
     if(virusDensity<=0)
     {
         virusDensity=0;
         immunity+=3;//免疫力+3
         setData(1,"heal");//设置标志痊愈
-        if(healthStatus==1)
-            nosymNumber--;
         goHome();//出院回家
         h->restRoomInc();//剩余床位+1
         infectionNumber--;//感染-1

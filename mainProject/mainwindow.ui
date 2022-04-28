@@ -140,7 +140,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>感染者：</string>
+       <string>感染人数：</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_5">

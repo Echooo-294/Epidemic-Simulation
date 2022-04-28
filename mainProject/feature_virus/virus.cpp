@@ -1,25 +1,14 @@
 #include "virus.h"
 
-Virus::Virus(double infectionP1,double infectionP2,double openInfectionP,double closeInfectionP,\
+Virus::Virus(double infectionP1,double infectionP2,double socialEffect,\
              double growthRate1,double growthRate2,double policyEffect,\
              double boundary1,double boundary2, double R0):\
     infectionP1(infectionP1),infectionP2(infectionP2),\
-    openInfectionP(openInfectionP),closeInfectionP(closeInfectionP),\
+    socialEffect(socialEffect),\
     growthRate1(growthRate1),growthRate2(growthRate2),\
-    policyEffect(policyEffect),boundary1(boundary1),boundary2(boundary2),R0(R0)
+    maskEffect(policyEffect),boundary1(boundary1),boundary2(boundary2),R0(R0)
 {
 }
-
-double Virus::getopenInfectionP() const
-{
-    return openInfectionP;
-}
-
-double Virus::getcloseInfectionP() const
-{
-    return closeInfectionP;
-}
-
 
 double Virus::getgrowthRate1() const
 {
@@ -41,19 +30,29 @@ double Virus::getBoundary2() const
     return boundary2;
 }
 
-double Virus::getPolicyEffect() const
+double Virus::getMaskEffect() const
 {
-    return policyEffect;
+    return maskEffect;
 }
 
-void Virus::setPolicyEffect(double value)
+void Virus::setMaskEffect(double value)
 {
-    policyEffect = value;
+    maskEffect = value;
 }
 
 double Virus::getR0() const
 {
     return R0;
+}
+
+double Virus::getSocialEffect() const
+{
+    return socialEffect;
+}
+
+void Virus::setSocialEffect(double value)
+{
+    socialEffect = value;
 }
 
 double Virus::getInfectionP1() const
