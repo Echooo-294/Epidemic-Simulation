@@ -60,7 +60,7 @@ void MapQGraphics::simulation3()
                 if(healthStatus==3&&restroom>0)//重症直接进入医院
                     people[i].goHospital(buildings[5]);
                 else if(healthStatus==2&&restroom>0)//有症状的有概率进医院
-                    if(randDouble()<0.7)
+                    if(randDouble()<0.8)
                         people[i].goHospital(buildings[5]);
             }
             if(randDouble()<activityWill())//获得当前时间的活动意愿

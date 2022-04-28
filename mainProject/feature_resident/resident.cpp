@@ -73,15 +73,30 @@ void Resident::updateHealthStatus()
         {
             healthStatus=1;
             virusDensity=0.03;//初始密度
-            setBrush(QBrush(Qt::red));
+            if(activityStatus!=2&&activityStatus!=4)
+                setBrush(QBrush("#dc6b82"));
             infectionNumber++;//总感染+1
             healthNumber--;//正常-1
         }
-    }//旧状态为出症状
-    else if(oldHealthStatus==2)
+    }//旧状态为无症状
+    else if(oldHealthStatus==1)
+    {
+        if(healthStatus==2&&activityStatus!=2&&activityStatus!=4)
+            setBrush(QBrush("#a64036"));
+        else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)
+            setBrush(QBrush("#75fa85"));
+    }
+    else if(oldHealthStatus==2)//旧状态为出症状
     {
         if(healthStatus==3)//变为重症
+        {
             seriousNumber++;//重症+1
+            if(activityStatus!=2&&activityStatus!=4)
+                setBrush(QBrush("#7c191e"));
+        }
+        else if(healthStatus==1)
+            if(activityStatus!=2&&activityStatus!=4)
+                setBrush(QBrush("#dc6b82"));
     }//旧状态为重症
     else if(oldHealthStatus==3)
     {
@@ -93,7 +108,11 @@ void Resident::updateHealthStatus()
             goDeadth();//执行死亡函数
         }
         else if(healthStatus==2)
+        {
             seriousNumber--;
+            if(activityStatus!=2&&activityStatus!=4)
+                setBrush(QBrush("#a64036"));
+        }
     }
 }
 
@@ -139,7 +158,7 @@ void Resident::goHospital(Space *h)
         return;
     activityStatus=4;//设置活动状态为治疗中4
     setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);//设置位置
-    setBrush(QBrush(Qt::blue));
+    setBrush(QBrush("#2adedb"));
     h->restRoomDec();//剩余床位-1
 }
 
@@ -157,7 +176,7 @@ void Resident::goHome()
     activityStatus=0;//设置活动状态为自由0
     healthStatus=0;//健康状态为健康
     isolateDay=0;//隔离时间归零
-    setBrush(QBrush(Qt::green));
+    setBrush(QBrush("#75fa85"));
     isolationNumber--;
 }
 
@@ -167,7 +186,7 @@ void Resident::goIsolate(Space *h)
         return;
     activityStatus=2;//活动状态为隔离
     setPos(1095+randDouble()*180,445+randDouble()*300);
-    setBrush(QBrush(Qt::yellow));
+    setBrush(QBrush("#fedc5e"));
     isolationNumber++;
     h->restRoomDec();
 }

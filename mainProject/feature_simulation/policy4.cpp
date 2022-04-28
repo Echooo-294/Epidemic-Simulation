@@ -15,7 +15,7 @@ void MapQGraphics::policy4()
 {
     policy=4;
     v.setMaskEffect(0.6);//口罩影响
-    v.setSocialEffect(0.2);//严格管控
+    v.setSocialEffect(0.3);//严格管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
 //    timer2=new QTimer(this);
@@ -65,15 +65,16 @@ void MapQGraphics::simulation4()
             {
                 if(healthStatus==3&&restroom>0)//重症进入医院
                 {
-                    if(judgeWhere(i)!=6)isolationNumber++;
+                    if(judgeWhere(i)!=6)
+                        isolationNumber++;
                     people[i].goHospital(buildings[5]);
                 }
-                else if(people[i].getVirusDensity()>0.1&&restroom>0)//无症状的有概率进医院(核酸检测,病毒密度大于0.05才有可能检测出来)
-                    if(randDouble()<0.8)
-                    {
-                        if(judgeWhere(i)!=6)isolationNumber++;
-                        people[i].goHospital(buildings[5]);
-                    }
+                else if(people[i].getVirusDensity()>0.1&&restroom>0)//核酸检测,病毒密度大于0.1才有可能检测出来
+                {
+                    if(judgeWhere(i)!=6)
+                        isolationNumber++;
+                    people[i].goHospital(buildings[5]);
+                }
             }
             if(activityStatus==2||activityStatus==4)//如果被隔离则跳过
                 continue;

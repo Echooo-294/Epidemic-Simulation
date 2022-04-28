@@ -16,7 +16,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     {
         Resident adult;
         people[i]=adult;
-        people[i].setBrush(QBrush(Qt::green));
+        people[i].setBrush(QBrush("#75fa85"));
         people[i].setData(3,i);//在data(3)中存上序号，方便在退化为父类时仍能追踪到
     }
 
@@ -27,7 +27,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
         people[i%4*initPopulation/4+i/4].setHealthStatus(1);//全体人群从0开始感染
         people[i%4*initPopulation/4+i/4].setVirusDensity(0.03);//赋予初始病毒密度
         people[i%4*initPopulation/4+i/4].setData(1,"infected");//设置被感染的标志
-        people[i%4*initPopulation/4+i/4].setBrush(QBrush(Qt::red));//变红
+        people[i%4*initPopulation/4+i/4].setBrush(QBrush("#dc6b82"));//变红
         //incubation[i%4*initPopulation/4+i/4]=people[i%4*initPopulation/4+i/4];//并且添加到感染潜伏数组
     }
 
@@ -72,7 +72,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     this->buildings[10]=c1;
     Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7,this->height()*0.4));
     this->buildings[11]=c2;
-
+    //设置医院和隔离区容量
     this->buildings[5]->setRestRoom(initPopulation*0.2);
     this->buildings[6]->setRestRoom(initPopulation*0.4);
 
@@ -264,7 +264,6 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     for(int i=0;i<initPopulation;i++)
         scene->addItem(&this->people[i]);
     interval=400;//400ms
-    anima=new QGraphicsItemAnimation;//初始化
 }
 
 void MapQGraphics::mouseMoveEvent(QMouseEvent *event)
