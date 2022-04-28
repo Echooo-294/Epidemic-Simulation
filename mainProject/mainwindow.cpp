@@ -45,25 +45,29 @@ MainWindow::MainWindow(QWidget *parent) :
     //将地图上鼠标位置显示在状态栏中
     connect(ui->mapView,SIGNAL(mouseMovePoint(QPoint)),this,SLOT(get_Mouse_Point(QPoint)));
     connect(ui->mapView,SIGNAL(mousePressPoint(QPoint)),this,SLOT(get_Mouse_Point_Press(QPoint)));
-    //绘画初始化地图
-    this->mapInit();
 
-    //在主窗口左部上每2h更新统计结果,包括显示人数和视图
-    timer=new QTimer(this);//初始化计时器
-    connect(timer,&QTimer::timeout,this,&MainWindow::everyday);
-    timer->start(ui->mapView->interval);//代表2小时
+
+
+    //timer=new QTimer(this);//初始化计时器
+    //timer->start(ui->mapView->interval);//代表2小时
 
     //在主窗口上方添加图表，展示每日各个人群状态
-    chart = new Chart;
     //chart->setTitle("累计健康/累计感染");//设置图表名称
     //chart->legend()->hide();
+    chart = new Chart;
     chart->legend()->setAlignment(Qt::AlignRight);//在图表右侧显示曲线名称
     chart->setAnimationOptions(QChart::AllAnimations);//设置图表动画效果
     ui->graphicsView->setChart(chart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);//设置抗锯齿，让曲线看起来更加平滑
     //ui->graphicsView->setRubberBand(QChartView::HorizontalRubberBand);实现放大功能
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,Qt::white);
+    ui->label_9->setPalette(pa);
 
-
+    //开始分政策模拟
+    this->mapInit();
+    //在主窗口左部上每2h更新统计结果,包括显示人数和视图
+    connect(ui->mapView->timer1,&QTimer::timeout,this,&MainWindow::everyday);
 
 }
 
@@ -75,7 +79,7 @@ void MainWindow::mapInit()
     case 0:ui->mapView->policy1();break;
     case 1:ui->mapView->policy2();break;
     case 2:ui->mapView->policy3();break;
-    case 3:ui->mapView->policy4();
+    case 3:ui->mapView->policy4();break;
     }
 }
 

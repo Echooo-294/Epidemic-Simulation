@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1238</width>
-    <height>794</height>
+    <height>845</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,57 +36,14 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>820</x>
-       <y>130</y>
-       <width>151</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Comic Sans MS</family>
-       <pointsize>23</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-       <kerning>true</kerning>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>OpenHandCursor</cursorShape>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::WinPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="lineWidth">
-      <number>1</number>
-     </property>
-     <property name="text">
-      <string>模拟天数</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::AutoText</enum>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>250</y>
-      <width>1151</width>
-      <height>591</height>
+      <x>40</x>
+      <y>170</y>
+      <width>1141</width>
+      <height>671</height>
      </rect>
     </property>
     <property name="title">
@@ -95,10 +52,10 @@
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>20</y>
+       <x>40</x>
+       <y>30</y>
        <width>241</width>
-       <height>431</height>
+       <height>471</height>
       </rect>
      </property>
      <property name="title">
@@ -107,8 +64,8 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>27</y>
+        <x>20</x>
+        <y>40</y>
         <width>75</width>
         <height>16</height>
        </rect>
@@ -120,8 +77,8 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>85</y>
+        <x>20</x>
+        <y>110</y>
         <width>75</width>
         <height>16</height>
        </rect>
@@ -133,8 +90,8 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>114</y>
+        <x>30</x>
+        <y>150</y>
         <width>60</width>
         <height>16</height>
        </rect>
@@ -146,8 +103,8 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>143</y>
+        <x>20</x>
+        <y>200</y>
         <width>75</width>
         <height>16</height>
        </rect>
@@ -156,24 +113,11 @@
        <string>隔离人数：</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>172</y>
-        <width>105</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>无症状感染者：</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>201</y>
+        <y>280</y>
         <width>75</width>
         <height>16</height>
        </rect>
@@ -186,7 +130,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>230</y>
+        <y>330</y>
         <width>75</width>
         <height>16</height>
        </rect>
@@ -198,8 +142,8 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>56</y>
+        <x>20</x>
+        <y>70</y>
         <width>75</width>
         <height>16</height>
        </rect>
@@ -211,11 +155,18 @@
      <widget class="QLineEdit" name="lineEdit">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>27</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>20</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="inputMask">
        <string/>
@@ -226,14 +177,17 @@
       <property name="readOnly">
        <bool>true</bool>
       </property>
+      <property name="cursorMoveStyle">
+       <enum>Qt::LogicalMoveStyle</enum>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_2">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>56</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>61</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -243,10 +197,10 @@
      <widget class="QLineEdit" name="lineEdit_3">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>85</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>100</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -256,10 +210,10 @@
      <widget class="QLineEdit" name="lineEdit_4">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>114</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>140</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -269,23 +223,10 @@
      <widget class="QLineEdit" name="lineEdit_5">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>143</y>
-        <width>100</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_6">
-      <property name="geometry">
-       <rect>
-        <x>121</x>
-        <y>172</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>190</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -295,10 +236,10 @@
      <widget class="QLineEdit" name="lineEdit_7">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>201</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>270</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -308,10 +249,10 @@
      <widget class="QLineEdit" name="lineEdit_8">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>230</y>
-        <width>100</width>
-        <height>21</height>
+        <x>120</x>
+        <y>320</y>
+        <width>51</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="readOnly">
@@ -322,7 +263,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>280</y>
+        <y>380</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -335,7 +276,7 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>280</y>
+        <y>380</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -348,7 +289,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>330</y>
+        <y>420</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -363,73 +304,30 @@
        <string>请输入倍速</string>
       </property>
      </widget>
-     <widget class="QTimeEdit" name="timeEdit">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>380</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>15</pointsize>
-        <weight>75</weight>
-        <italic>false</italic>
-        <bold>true</bold>
-        <underline>false</underline>
-        <stylestrategy>PreferAntialias</stylestrategy>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="mouseTracking">
-       <bool>false</bool>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="frame">
-       <bool>true</bool>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-      <property name="buttonSymbols">
-       <enum>QAbstractSpinBox::UpDownArrows</enum>
-      </property>
-      <property name="correctionMode">
-       <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
-      </property>
-      <property name="dateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>2000</year>
-        <month>1</month>
-        <day>1</day>
-       </datetime>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>380</y>
-        <width>72</width>
+        <y>240</y>
+        <width>101</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>疫苗接种人数：</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_6">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>230</y>
+        <width>51</width>
         <height>31</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>17</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>时间：</string>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -437,7 +335,7 @@
      <property name="geometry">
       <rect>
        <x>350</x>
-       <y>30</y>
+       <y>-10</y>
        <width>781</width>
        <height>551</height>
       </rect>
@@ -455,6 +353,75 @@
      </property>
      <property name="midLineWidth">
       <number>1</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>80</y>
+       <width>72</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>17</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>时间：</string>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="timeEdit">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+       <stylestrategy>PreferAntialias</stylestrategy>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="buttonSymbols">
+      <enum>QAbstractSpinBox::UpDownArrows</enum>
+     </property>
+     <property name="correctionMode">
+      <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
+     </property>
+     <property name="dateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>2000</year>
+       <month>1</month>
+       <day>1</day>
+      </datetime>
      </property>
     </widget>
    </widget>

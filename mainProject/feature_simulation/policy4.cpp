@@ -52,8 +52,7 @@ void MapQGraphics::simulation4()
             if(people[i].data(2).toString()=="mijie")//密接者隔离
             {
                 people[i].goIsolate(buildings[6]);
-//                if(people[i].data(1).toString()=="infected")
-//                    people[i].setBrush(QBrush(Qt::red));
+                people[i].setData(2,"geli");
             }
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
