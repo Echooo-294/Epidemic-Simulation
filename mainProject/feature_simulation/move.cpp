@@ -97,38 +97,38 @@ void MapQGraphics::randMove(int i)
         if(p<0.25)//右
             {
                 if(px+distance<=bx+bw)
-                    //people[i].moveBy(distance,0);//一次移动10
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
+                    people[i].moveBy(distance,0);//一次移动10
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
                 else
-                    //people[i].moveBy(-distance,0);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
+                    people[i].moveBy(-distance,0);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
             }
             else if(p<0.5&&p>=0.25)//下
             {
                 if(py+distance<=by+bl)
-                    //people[i].moveBy(0,distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
+                    people[i].moveBy(0,distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
                 else
-                    //people[i].moveBy(0,-distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
+                    people[i].moveBy(0,-distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
             }
             else if(p<0.75&&p>=0.5)//左
             {
                 if(px-distance>=bx)
-                    //people[i].moveBy(-distance,0);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
+                    people[i].moveBy(-distance,0);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(-distance,0),time);
                 else
-                    //people[i].moveBy(distance,0);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
+                    people[i].moveBy(distance,0);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(distance,0),time);
             }
             else//上
             {
                 if(py-distance>=by)
-                    //people[i].moveBy(0,-distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
+                    people[i].moveBy(0,-distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,-distance),time);
                 else
-                    //people[i].moveBy(0,distance);
-                    moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
+                    people[i].moveBy(0,distance);
+                    //moveSilky(i,people[i].pos().toPoint()+QPoint(0,distance),time);
             }
     }
 }
@@ -149,9 +149,9 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
     //设置动画对象
     QGraphicsItemAnimation *anima=new QGraphicsItemAnimation;//初始化
     //设置运行轨迹，共200步
-    for(int j=0;j<200;j++)
-        anima->setPosAt(j / 200.0
-                        ,QPointF(sta.x()+dx*j/200,sta.y()+dy*j/200));
+    for(int j=0;j<50;j++)
+        anima->setPosAt(j / 50.0
+                        ,QPointF(sta.x()+dx*j/50,sta.y()+dy*j/50));
     anima->setItem(&people[i]);//设置对象
     anima->setTimeLine(tline);//设置时间轴
     //动画开始
