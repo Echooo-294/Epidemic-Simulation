@@ -12,7 +12,7 @@
 int initPopulation;//初始总人数
 int initInfection;//初始感染人数
 double updateTime=2;//更新间隔时间
-int policy=0;//政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
+int policy;//政策：0完全开放，1疫苗接种+不管控，2疫苗接种+适度管控，3疫苗接种+适度管控+零容忍
 Virus v;
 /*  double infectionP1=0.2,double infectionP2=0.8,\
       double openInfectionP=0.5,double closeInfectionP=0.7,\
