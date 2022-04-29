@@ -137,17 +137,19 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
     //---------------------实现动画效果-------------------------//
     //设置时间轴，动画时长为t ms
     tline=new QTimeLine(t);
-    int n=75;
+    int n=100;
     tline->setFrameRange(0,n);
     //设置动画对象
     anima=new QGraphicsItemAnimation;//初始化
     //设置运行轨迹，共n步
     for(int j=0;j<n;j++)
-        anima->setPosAt(j /n,QPointF(sta.x()+dx*j/n,sta.y()+dy*j/n));
+        anima->setPosAt(j /(double)n,QPointF(sta.x()+dx*j/n,sta.y()+dy*j/n));
     anima->setItem(&people[i]);//设置对象
     anima->setTimeLine(tline);//设置时间轴
+
     //动画开始
     tline->start();
+
 }
 
 void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3：继续上班；4：下班
