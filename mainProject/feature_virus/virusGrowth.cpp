@@ -21,7 +21,7 @@ void Resident::virusGrowth()
         k=0.6;
     else if(healthStatus==3)
         k=0.8;
-    const double P=(3/(4*immunity))*k;//病毒的增长概率和免疫力相关，也和病毒密度相关
+    const double P=(3/(4*immunity))*k;//病毒增长的概率和免疫力相关，也和病毒密度相关
     if(randDouble()<P)
     {
         if(virusDensity>=0&&virusDensity<boundary1)

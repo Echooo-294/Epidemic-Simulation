@@ -74,6 +74,23 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::recordAndreset()
+{
+    //记录上一次模拟的统计量
+    vec.append(healthNumber);
+    vec.append(infectionNumber);
+    vec.append(isolationNumber);
+    vec.append(seriousNumber);
+    vec.append(deadNumber);
+    vec.append(immunityNumber);
+    vec.append(day);
+    isolationNumber=0;
+    seriousNumber=0;
+    deadNumber=0;
+    immunityNumber=0;
+    day=1;
+    showTime=0;
+}
 
 void Widget::on_startBtn_clicked()
 {
@@ -103,5 +120,6 @@ void Widget::on_startBtn_clicked()
         mainwin->hide();
         this->show();
         delete mainwin;
+        recordAndreset();
     });
 }

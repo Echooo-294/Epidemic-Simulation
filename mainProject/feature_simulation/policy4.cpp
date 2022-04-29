@@ -10,12 +10,12 @@
 #include<mapqgraphics.h>
 #include<mainwindow.h>
 
-//疫苗接种+戴口罩+严格管控
+//疫苗接种+戴口罩+严格管控+零容忍
 void MapQGraphics::policy4()
 {
     policy=4;
-    v.setMaskEffect(0.6);//口罩影响
-    v.setSocialEffect(0.3);//严格管控
+    v.setMaskEffect(0.6);//卫生影响
+    v.setSocialEffect(0.4);//严格管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
 //    timer2=new QTimer(this);
@@ -33,7 +33,6 @@ void MapQGraphics::policy4()
 //每2小时全部人要做的
 void MapQGraphics::simulation4()
 {
-    updateShowTime();//时间更新
     //不同时间段活动
     if(showTime==6.0)
         path(1);
@@ -46,10 +45,10 @@ void MapQGraphics::simulation4()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
+        for(;i<initPopulation;i++)//遍历整个人群
         {
             //是否隔离
-            if(healthStatus>=2||people[i].data(2).toString()=="mijie")//密接者隔离
+            if(people[i].getVirusDensity()>0.05||people[i].data(2).toString()=="mijie")//密接者隔离
             {
                 people[i].goIsolate(buildings[6]);
                 people[i].setData(2,"geli");
@@ -95,6 +94,7 @@ void MapQGraphics::simulation4()
                     infecting3(i);
         }
     }
+    updateShowTime();//时间更新
 }
 
 

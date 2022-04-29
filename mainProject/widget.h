@@ -9,7 +9,7 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 #include <feature_timeAndStatistic/statistic.h>
-
+#include<QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -22,19 +22,18 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    //总人数初始化
     QLabel *initpoplab;
     QLabel *initinflab;
     QLabel *initpollab;
     QLineEdit *initpopline;
     QLineEdit *initinfline;
     QComboBox *initpolBox;
-
+    void recordAndreset();
 private slots:
     void on_startBtn_clicked();//确定按钮点击
 private:
     Ui::Widget *ui;
-
+    QVector<int> vec;
     MainWindow *mainwin = NULL;
 };
 #endif // WIDGET_H

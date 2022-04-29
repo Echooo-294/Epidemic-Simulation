@@ -137,7 +137,7 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
     //---------------------实现动画效果-------------------------//
     //设置时间轴，动画时长为t ms
     tline=new QTimeLine(t);
-    int n=100;
+    int n=50;
     tline->setFrameRange(0,n);
     //设置动画对象
     anima=new QGraphicsItemAnimation;//初始化

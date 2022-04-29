@@ -14,6 +14,8 @@
 void MapQGraphics::policy1()
 {
     policy=1;
+    v.setSocialEffect(1);
+    v.setMaskEffect(1);
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每400ms全部人要做的
 //    timer2=new QTimer(this);
@@ -31,7 +33,6 @@ void MapQGraphics::policy1()
 //每2小时全部人要做的
 void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医院
 {
-    updateShowTime();//时间更新
     //不同时间段活动
     if(showTime==6.0)
         path(1);
@@ -48,7 +49,7 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
+        for(;i<initPopulation;i++)//遍历整个人群
         {
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
@@ -73,6 +74,7 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
                     infecting1(i);
         }
     }
+    updateShowTime();//时间更新
 }
 
 

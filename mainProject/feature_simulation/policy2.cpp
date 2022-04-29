@@ -14,7 +14,7 @@
 void MapQGraphics::policy2()
 {
     policy=2;
-    v.setSocialEffect(0.8);
+    v.setSocialEffect(0.9);
     v.setMaskEffect(0.9);//影响只有一点点
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation2);//每500ms全部人要做的
@@ -33,7 +33,6 @@ void MapQGraphics::policy2()
 //每2小时全部人要做的
 void MapQGraphics::simulation2()
 {
-    updateShowTime();//时间更新
     //不同时间段活动
     if(showTime==6.0)
         path(1);
@@ -50,7 +49,7 @@ void MapQGraphics::simulation2()
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
+        for(;i<initPopulation;i++)//遍历整个人群
         {
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
@@ -75,6 +74,7 @@ void MapQGraphics::simulation2()
                     infecting1(i);
         }
     }
+    updateShowTime();//时间更新
 }
 
 

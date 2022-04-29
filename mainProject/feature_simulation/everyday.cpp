@@ -54,6 +54,7 @@ void MapQGraphics::everyday()
             people[i].goHome();
             buildings[6]->restRoomInc();
         }
+        //接种疫苗
         if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*75)//有上限
         {
             if(randDouble()<0.4)
@@ -63,8 +64,9 @@ void MapQGraphics::everyday()
                 immunityNumber++;
             }
         }
-        if(policy>=3&&activityStatus<=1&&sum2<=policy*30)//如果有管控政策，有上限
-            if(randDouble()>v.getSocialEffect()*1.8)//适度管控为0.5，严格管控为0.3
+        //居家隔离
+        if(policy>=3&&activityStatus<=1&&sum2<=policy*50)//如果有管控政策，有上限
+            if(randDouble()>v.getSocialEffect()*1.4)//适度管控为0.6，严格管控为0.4
             {
                 people[i].setActivityStatus(3);//设为居家隔离
                 sum2++;

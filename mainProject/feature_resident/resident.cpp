@@ -72,7 +72,7 @@ void Resident::updateHealthStatus()
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
             healthStatus=1;
-            virusDensity=0.03;//初始密度
+            virusDensity+=0.03;//初始密度
             if(activityStatus!=2&&activityStatus!=4)
                 setBrush(QBrush("#dc6b82"));
             infectionNumber++;//总感染+1

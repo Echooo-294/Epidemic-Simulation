@@ -21,7 +21,7 @@ Virus v;
 */
 int buildingNumber=12;//建筑数量
 
-//统计量初始值，通常在update
+//统计量初始值
 int healthNumber;//正常人数
 int infectionNumber;//总感染人数，包括隔离、无症状和重症
 int isolationNumber=0;//隔离人数，治疗也算隔离，每有一人被隔离或进入医院，则+1
@@ -40,5 +40,5 @@ void showStatistic()
     qDebug()<<"隔离人数："<<isolationNumber;
     qDebug()<<"重症人数："<<seriousNumber;
     qDebug()<<"死亡人数："<<deadNumber;
-//    qDebug()<<"疫苗接种人数："<<immunityNumber;
+    qDebug()<<"疫苗接种人数："<<immunityNumber;
 }
