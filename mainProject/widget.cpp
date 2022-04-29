@@ -66,7 +66,9 @@ Widget::Widget(QWidget *parent)
     QLabel *version=new QLabel(this);
     version->setText("v1.0");
     version->move(this->width()-version->width()+50,this->height()-20);
-
+    //用于保存统计量的组别数目
+    vec.resize(13);
+    vec[0]=0;
 }
 
 Widget::~Widget()
@@ -74,22 +76,17 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::recordAndreset()
+void Widget::record()
 {
     //记录上一次模拟的统计量
-    vec.append(healthNumber);
-    vec.append(infectionNumber);
-    vec.append(isolationNumber);
-    vec.append(seriousNumber);
-    vec.append(deadNumber);
-    vec.append(immunityNumber);
-    vec.append(day);
-    isolationNumber=0;
-    seriousNumber=0;
-    deadNumber=0;
-    immunityNumber=0;
-    day=1;
-    showTime=0;
+    int i=vec.at(0);
+    vec[i*6+1]=healthNumber;
+    vec[i*6+2]=infectionNumber;
+    vec[i*6+3]=seriousNumber;
+    vec[i*6+4]=deadNumber;
+    vec[i*6+5]=immunityNumber;
+    vec[i*6+6]=day;
+    vec[0]=(i+1)%2;
 }
 
 void Widget::on_startBtn_clicked()
@@ -109,6 +106,12 @@ void Widget::on_startBtn_clicked()
 
     healthNumber=initPopulation-initInfection;
     infectionNumber=initInfection;
+    isolationNumber=0;
+    seriousNumber=0;
+    deadNumber=0;
+    immunityNumber=0;
+    day=1;
+    showTime=0;
     policy=initpolBox->currentIndex();
     //点击开始按钮，界面跳转
     this->close();
@@ -120,6 +123,6 @@ void Widget::on_startBtn_clicked()
         mainwin->hide();
         this->show();
         delete mainwin;
-        recordAndreset();
+        record();
     });
 }

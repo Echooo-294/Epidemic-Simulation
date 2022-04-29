@@ -28,7 +28,7 @@ public:
     QLineEdit *initpopline;
     QLineEdit *initinfline;
     QComboBox *initpolBox;
-    void recordAndreset();
+    void record();
 private slots:
     void on_startBtn_clicked();//确定按钮点击
 private:
