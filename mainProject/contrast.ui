@@ -25,6 +25,9 @@
    <property name="text">
     <string>TextLabel</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -83,7 +86,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>220</x>
      <y>40</y>
      <width>131</width>
      <height>16</height>
@@ -92,8 +95,11 @@
    <property name="text">
     <string>TextLabel</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -147,7 +153,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
