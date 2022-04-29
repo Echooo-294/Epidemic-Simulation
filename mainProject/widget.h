@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QMessageBox>
 #include "mainwindow.h"
+#include "contrast.h"
 #include <feature_timeAndStatistic/statistic.h>
 #include<QVector>
 
@@ -31,9 +32,12 @@ public:
     void record();
 private slots:
     void on_startBtn_clicked();//确定按钮点击
+signals:
+    void give_init(QVector<int>);
 private:
     Ui::Widget *ui;
     QVector<int> vec;
     MainWindow *mainwin = NULL;
+    Contrast *cont=NULL;
 };
 #endif // WIDGET_H

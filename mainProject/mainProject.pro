@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     chart.cpp \
+    contrast.cpp \
     feature_resident/resident.cpp \
     feature_simulation/everyday.cpp \
     feature_simulation/move.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 
 HEADERS += \
     chart.h \
+    contrast.h \
     feature_resident/resident.h \
     feature_timeAndStatistic/statistic.h \
     feature_virus/virus.h \
@@ -47,6 +49,7 @@ HEADERS += \
     widget.h\
 
 FORMS += \
+    contrast.ui \
     mainwindow.ui \
     widget.ui
 

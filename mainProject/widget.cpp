@@ -120,10 +120,23 @@ void Widget::on_startBtn_clicked()
     mainwin = new MainWindow;
     mainwin->show();
 
+    cont=new Contrast;
+    connect(this,SIGNAL(give_init(QVector<int>)),cont,SLOT(get_init(QVector<int>)));
+
     connect(mainwin,&MainWindow::emitExit,this,[=](){
         mainwin->hide();
-        this->show();
-        delete mainwin;
         record();
+
+        emit give_init(vec);
+        cont->show();
+        connect(cont,&Contrast::emitExit,this,[=](){
+            cont->hide();
+            this->show();
+            delete cont;
+
+        });
+
+        delete mainwin;
+
     });
 }
