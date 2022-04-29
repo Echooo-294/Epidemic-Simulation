@@ -49,7 +49,7 @@ void MapQGraphics::simulation4()
         for(;i<initPopulation;i++)//遍历整个人群，注意死亡如何处理
         {
             //是否隔离
-            if(people[i].data(2).toString()=="mijie")//密接者隔离
+            if(healthStatus>=2||people[i].data(2).toString()=="mijie")//密接者隔离
             {
                 people[i].goIsolate(buildings[6]);
                 people[i].setData(2,"geli");
@@ -59,7 +59,7 @@ void MapQGraphics::simulation4()
             activityStatus=people[i].getActivityStatus();//活动状态
             if(healthStatus==4||activityStatus==4)//如果死亡/治疗中，则跳到下一个人
                 continue;
-            //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
+            //如果是感染者，且本身不在治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&healthStatus!=0)
             {
@@ -69,11 +69,20 @@ void MapQGraphics::simulation4()
                         isolationNumber++;
                     people[i].goHospital(buildings[5]);
                 }
-                else if(people[i].getVirusDensity()>0.1&&restroom>0)//核酸检测,病毒密度大于0.1才有可能检测出来
+                else if(healthStatus>=1&&restroom>0)//感染者有概率进医院
                 {
-                    if(judgeWhere(i)!=6)
-                        isolationNumber++;
-                    people[i].goHospital(buildings[5]);
+                    if(healthStatus==2&&randDouble()<0.8)
+                    {
+                        if(judgeWhere(i)!=6)
+                            isolationNumber++;
+                        people[i].goHospital(buildings[5]);
+                    }
+                    else if(healthStatus==1&&activityStatus==2&&randDouble()<0.6)
+                    {
+                        if(judgeWhere(i)!=6)
+                            isolationNumber++;
+                        people[i].goHospital(buildings[5]);
+                    }
                 }
             }
             if(activityStatus==2||activityStatus==4)//如果被隔离则跳过

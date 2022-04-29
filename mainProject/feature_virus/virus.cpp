@@ -55,6 +55,11 @@ void Virus::setSocialEffect(double value)
     socialEffect = value;
 }
 
+void Virus::setR0(double value)
+{
+    R0 = value;
+}
+
 double Virus::getInfectionP1() const
 {
     return infectionP1;

@@ -57,7 +57,7 @@ void MapQGraphics::simulation2()
             activityStatus=people[i].getActivityStatus();//活动状态
             if(healthStatus==4||activityStatus==4)//如果死亡/治疗中，则跳到下一个人
                 continue;
-            //如果是感染者，且本身不在隔离和治疗中，判断是否进入医院
+            //如果是感染者，且本身不在治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&healthStatus!=0)
             {

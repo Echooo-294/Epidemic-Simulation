@@ -4,7 +4,7 @@
 class Virus
 {
 public:
-    Virus(double infectionP1=0.2,double infectionP2=0.8,\
+    Virus(double infectionP1=0.5,double infectionP2=0.8,\
           double socialEffect=1,\
           double growthRate1=0.03,double growthRate2=0.05,\
           double maskEffect=1,double boundary1=0.3,double boundary2=0.75,double R0=3);
@@ -20,9 +20,10 @@ public:
 
     double getSocialEffect() const;
     void setSocialEffect(double value);
+    void setR0(double value);
 
 private:
-    double infectionP1;//潜伏期感染概率，默认=0.2
+    double infectionP1;//潜伏期感染概率，默认=0.5
     double infectionP2;//出症状感染概率，默认=0.8
     double socialEffect;//管控社交导致的感染概率，对应1，0.8，0.5，0.3
     double growthRate1;//潜伏期病毒增长率，默认=0.03
