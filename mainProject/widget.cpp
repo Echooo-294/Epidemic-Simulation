@@ -67,7 +67,7 @@ Widget::Widget(QWidget *parent)
     version->setText("v1.0");
     version->move(this->width()-version->width()+50,this->height()-20);
     //用于保存统计量的组别数目
-    vec.resize(13);
+    vec.resize(15);
     vec[0]=0;
 }
 
@@ -80,12 +80,13 @@ void Widget::record()
 {
     //记录上一次模拟的统计量
     int i=vec.at(0);
-    vec[i*6+1]=healthNumber;
-    vec[i*6+2]=infectionNumber;
-    vec[i*6+3]=seriousNumber;
-    vec[i*6+4]=deadNumber;
-    vec[i*6+5]=immunityNumber;
-    vec[i*6+6]=day;
+    vec[i*7+1]=healthNumber;
+    vec[i*7+2]=infectionNumber;
+    vec[i*7+3]=seriousNumber;
+    vec[i*7+4]=deadNumber;
+    vec[i*7+5]=immunityNumber;
+    vec[i*7+6]=day;
+    vec[i*7+7]=policy;
     vec[0]=(i+1)%2;
 }
 
