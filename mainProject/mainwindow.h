@@ -25,7 +25,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     Chart *chart;//图表元素
-
+    void reset();
     void mapInit();
     void everyday();
     ~MainWindow();

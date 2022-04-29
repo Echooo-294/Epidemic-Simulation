@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pa.setColor(QPalette::WindowText,Qt::white);
     ui->label_9->setPalette(pa);
 
+
     //开始分政策模拟
     this->mapInit();
     //在主窗口左部上每2h更新统计结果,包括显示人数和视图
@@ -71,15 +72,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+void MainWindow::reset()
+{
+//    healthNumber=0;
+//    infectionNumber=0;
+//    isolationNumber=0;
+//    seriousNumber=0;
+//    deadNumber=0;
+//    immunityNumber=0;
+    day=1;
+    showTime=0;
+}
+
 void MainWindow::mapInit()
 {
     //模拟疫情开始
     switch(policy)
     {
-    case 0:ui->mapView->policy1();break;
-    case 1:ui->mapView->policy2();break;
-    case 2:ui->mapView->policy3();break;
-    case 3:ui->mapView->policy4();break;
+    case 0:ui->mapView->policy1();ui->label_10->setText("完全开放政策");break;
+    case 1:ui->mapView->policy2();ui->label_10->setText("接种疫苗+基本不管控");break;
+    case 2:ui->mapView->policy3();ui->label_10->setText("接种疫苗+戴口罩+适度管控");break;
+    case 3:ui->mapView->policy4();ui->label_10->setText("接种疫苗+戴口罩+严格管控");break;
     }
 }
 
@@ -92,6 +105,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionexit_triggered()
 {
     //点击菜单中的退出，退出程序
+
     this->close();
 }
 
@@ -140,5 +154,6 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
 
 void MainWindow::on_actexit_triggered()
 {
+    reset();
     emit emitExit();
 }
