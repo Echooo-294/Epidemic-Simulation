@@ -46,7 +46,7 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     m_series2->append(m_x, m_y2);//加入初始点
     m_series2->setName("健康人数");
 
-    //死亡人数每日变化曲线设置为紫色
+    //疫苗接种人数每日变化曲线设置为紫色
     m_series3 = new QSplineSeries(this);
     QPen x(QColor(255,0,255));
     blue.setWidth(1);//设置曲线宽度

@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::Contrast *ui;
+
 signals:
     void emitExit();
 private slots:

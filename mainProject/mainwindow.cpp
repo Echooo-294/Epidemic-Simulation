@@ -151,9 +151,9 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
     //interval重新设置
     ui->mapView->interval=400/arg1.toFloat();
 }
-
+//退出按钮
 void MainWindow::on_actexit_triggered()
 {
-    reset();
     emit emitExit();
+    reset();
 }
