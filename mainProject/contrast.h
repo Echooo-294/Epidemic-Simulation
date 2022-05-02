@@ -15,6 +15,8 @@ class Contrast : public QWidget
 public:
     explicit Contrast(QWidget *parent = nullptr);
     void closeEvent(QCloseEvent *event);
+    void pieChart(QVector<int> vec);
+    void barChart(QVector<int> vec);
     ~Contrast();
 
 private:
