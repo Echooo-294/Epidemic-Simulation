@@ -57,7 +57,7 @@ public:
     //每天的病毒自然增长和治疗
     void everyday();
     //感染，实现在feature_virus/infecting.cpp
-    bool judgeInfected(int i,int j);//计算感染概率
+    bool judgeInfected(int i,int j,int where);//计算感染概率
     void infecting1(int i);//由感染者去感染他人，调用前需要确定是感染者
     //void infecting2(int i);//由健康人去被感染
     void infecting3(int i);

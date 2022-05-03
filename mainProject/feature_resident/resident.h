@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-21
+ * @Last Modified time: 2022-05-03
  */
 
 #ifndef RESIDENT_H
@@ -33,7 +33,6 @@ public:
     void setHealthStatus(int value);
     void setActivityStatus(int value);
     void setVaccine();//打疫苗，免疫力+1
-    void setImmunity(double value);
     void infNumInc();//传染人数+1
 
     void updateHealthStatus();//用于更新状态
@@ -53,12 +52,16 @@ public:
 
 private:
     double virusDensity;//病毒密度
-    int healthStatus;//健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
-    int activityStatus;//活动状态（自由活动0、密切接触1、独立隔离2、居家隔离3、治疗中4）
+    int healthStatus;
+    //健康状态（健康0、感染潜伏1、感染出症状2、重症3、死亡4）取决于病毒密度
+    int activityStatus;
+    //活动状态（自由活动0、密切接触1、独立隔离2、居家隔离3、治疗中4）
+
     //data1：表示感染，data2：表示密接，data3：记录序号
-    bool vaccine;//1表示接种了疫苗，0表示没有接种疫苗，感染概率因子为0.4，重症因子为0.2，免疫力+1
-    double immunity;
-    //免疫力0-1，adult：1，student：0.8，senior：0.6，和感染概率、治疗速度、治疗有效率相关
+
+    bool vaccine;
+    //1表示接种了疫苗，0表示没有接种疫苗，感染概率因子为0.5，免疫力+1
+    double immunity;//免疫力0.5-1，和感染概率、治疗速度相关
     int infNumber;//作为感染者时的传染人数，有传染人数上限R0
     int isolateDay;//隔离天数
 signals:

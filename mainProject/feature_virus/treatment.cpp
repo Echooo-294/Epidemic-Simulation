@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-17
+ * @Last Modified time: 2022-05-03
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
@@ -11,14 +11,17 @@
 
 void Resident::treatment(Space *h)
 {
-    const double recoveryRate=0.08;//治疗速率
-    const double successRate=0.9*immunity;//治疗有效率
+    //治疗速率，ln1.6=0.47，ln2=0.69，ln3=1.09，ln8=2.07
+    const double recoveryRate=\
+            log(exp(immunity+1))*0.12+randDouble()*0.01+virusDensity*0.03;
+    //治疗有效率
+    const double successRate=0.9;
     if (randDouble()<successRate)
         virusDensity-=recoveryRate;
     if(virusDensity<=0)
     {
         virusDensity=0;
-        immunity+=5;//免疫力+5
+        immunity+=3;//免疫力+3
         setData(1,"heal");//设置标志痊愈
         goHome();//出院回家
         h->restRoomInc();//剩余床位+1

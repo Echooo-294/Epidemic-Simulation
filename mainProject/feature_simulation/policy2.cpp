@@ -15,7 +15,7 @@ void MapQGraphics::policy2()
 {
     policy=2;
     v.setSocialEffect(0.9);
-    v.setMaskEffect(0.9);//影响只有一点点
+    v.setHealthEffect(0.9);//影响只有一点点
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation2);//每500ms全部人要做的
  //   timer2=new QTimer(this);

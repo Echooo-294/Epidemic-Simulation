@@ -121,11 +121,6 @@ double Resident::getImmunity() const
     return immunity;
 }
 
-void Resident::setImmunity(double value)
-{
-    immunity = value;
-}
-
 QPainterPath Resident::shape() const//返回被碰撞的形状
 {
     QPainterPath path;
