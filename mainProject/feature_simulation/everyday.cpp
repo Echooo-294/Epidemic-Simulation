@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-04-17
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-03
  */
 #include<feature_timeAndStatistic/statistic.h>
 #include<feature_resident/resident.h>
@@ -27,8 +27,6 @@ void MapQGraphics::everyday()
     int healthStatus=0;
     int activityStatus=0;
     int i=0;
-    int sum1=0;
-    int sum2=0;
     int isolateday=0;
     for(;i<initPopulation;i++)
     {
@@ -37,40 +35,52 @@ void MapQGraphics::everyday()
         if(activityStatus>=2)
             people[i].isolateDayInc();//隔离天数+1
         isolateday=people[i].getIsolateDay();
+
         //病毒自然增长
         if(healthStatus!=0&&healthStatus!=4)//如果非健康非死亡
             people[i].virusGrowth();
+
         //如果在治疗中
         if(activityStatus==4&&people[i].getHealthStatus()!=0)
-            people[i].treatment(buildings[5]);//治疗
-        //隔离相关
-        if(activityStatus==3&&healthStatus<2&&isolateday>3)//释放无症状、健康的居家隔离超过三天的人
+            people[i].treatment(buildings[5]);
+
+        healthStatus=people[i].getHealthStatus();//更新由于病毒增长和治疗带来的变化
+
+        //释放满足条件的独立隔离、居家隔离人员
+        if(activityStatus==2&&healthStatus==0&&isolateday>7)
         {
-            people[i].setActivityStatus(0);
-            people[i].setIsolateDay(0);
-        }
-        if(activityStatus==2&&people[i].getHealthStatus()==0&&isolateday>7)//把隔离区隔离时间大于7天的健康人释放
-        {
+            //把隔离区隔离时间大于7天的健康人释放
             people[i].goHome();
             buildings[6]->restRoomInc();
         }
-        //接种疫苗
-        if(policy>=2&&people[i].getVaccine()==0&&sum1<=policy*75)//有上限
+        else if(activityStatus==3&&healthStatus<2&&isolateday>3)
         {
-            if(randDouble()<0.4)
+            //释放无症状、健康的居家隔离超过三天的人
+            people[i].setActivityStatus(0);
+            people[i].setIsolateDay(0);
+        }
+
+    }
+    int j=0;
+    //政策2、3、4疫苗接种，有每日接种上限，取决于政策
+    if(policy>=2&&immunityNumber<initPopulation)
+        for(i=0;i<policy*100&&immunityNumber<=initPopulation;i++)
+        {
+            j=rand()%initPopulation;
+            if(people[j].getVaccine()==0)//由于随机导致的重复，接种速率日渐降低，这也符合实际
             {
-                people[i].setVaccine();
-                sum1++;
+                people[j].setVaccine();
                 immunityNumber++;
             }
         }
-        //居家隔离
-        if(policy>=3&&activityStatus<=1&&sum2<=policy*50)//如果有管控政策，有上限
-            if(randDouble()>v.getSocialEffect()*1.4)//适度管控为0.6，严格管控为0.4
-            {
-                people[i].setActivityStatus(3);//设为居家隔离
-                sum2++;
-            }
-    }
+    //政策3、4设置居家隔离，有每日新居家隔离人数上限，取决于政策
+    if(policy>=3)
+         for(i=0;i<policy*50;i++)
+         {
+             j=rand()%initPopulation;
+             if(people[j].getActivityStatus()<=1)//由于随机导致的重复，居家隔离速率日渐降低
+                 people[j].setActivityStatus(3);//设为居家隔离
+         }
+
 }
 

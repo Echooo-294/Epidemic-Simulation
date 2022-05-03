@@ -48,10 +48,18 @@ void MapQGraphics::simulation4()
         for(;i<initPopulation;i++)//遍历整个人群
         {
             //是否隔离
-            if(people[i].getVirusDensity()>0.05||people[i].data(2).toString()=="mijie")//密接者隔离
+//            if(people[i].getVirusDensity()>0.05||people[i].data(2).toString()=="mijie")//密接者隔离
+//            {
+//                if(activityStatus!=2&&activityStatus!=4)
+//                {
+//                    people[i].goIsolate(buildings[6]);
+//                    people[i].setData(2,"geli");
+//                }
+//            }
+            if(people[i].data(2).toString()=="mijie")//密接者隔离
             {
-                people[i].goIsolate(buildings[6]);
-                people[i].setData(2,"geli");
+                    people[i].goIsolate(buildings[6]);
+                    people[i].setData(2,"geli");
             }
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态

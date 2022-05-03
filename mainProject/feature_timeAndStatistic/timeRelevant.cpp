@@ -8,10 +8,6 @@
 #include "cstdlib"
 #include<feature_timeAndStatistic/statistic.h>
 //产生随机数
-int randInt()
-{
-    return rand();
-}
 double randDouble()//用于判断概率所需的随机数0-1，种子在主函数中设置
 {
     const int n=99;

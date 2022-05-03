@@ -29,7 +29,7 @@ extern int deadNumber;//死亡人数
 extern int immunityNumber;//疫苗接种人数
 extern int day;//天数
 extern double showTime;//时间
-int randInt();//返回任意int
+//rand() 返回任意正整数
 double randDouble();//返回0-1double
 void updateShowTime();//更新展示的时间
 void showStatistic();//展示统计结果
