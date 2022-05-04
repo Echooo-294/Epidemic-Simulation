@@ -186,6 +186,7 @@ void Resident::goIsolate(Space *h)
     if(h->getRestRoom()==0)
         return;
     activityStatus=2;//活动状态为隔离
+    isolateDay=0;
     setPos(1095+randDouble()*180,445+randDouble()*300);
     setBrush(QBrush("#fedc5e"));
     isolationNumber++;

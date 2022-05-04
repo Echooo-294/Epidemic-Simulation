@@ -49,7 +49,7 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
-        bool flag=0;
+//        bool flag=0;
 //        if(healthNumber<infectionNumber-isolationNumber)
 //            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群
@@ -77,16 +77,20 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
             }
             if(randDouble()<activityWill())//获得当前时间的活动意愿
                 randMove(i);//随机移动
-            //没隔离才可以进行感染
-            if(activityStatus<=1)
-            {
-                if(flag==0)//如果健康人多于感染人数-隔离人数
-                    if(healthStatus!=0&&people[i].getInfNumber()<v.getR0())
-                        infecting1(i);//如果是感染者且不在治疗且传染人数未超限，则去感染别人
-                if(flag==1)//如果健康人少于感染人数-隔离人数
-                    if(healthStatus==0)
-                        infecting2(i);//健康人去被感染
-            }
+            //如果是感染者且不在治疗和隔离中，则去感染别人
+            if(activityStatus<=1&&healthStatus!=0)
+                if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人
+                    infecting1(i);
+//            //没隔离才可以进行感染
+//            if(activityStatus<=1)
+//            {
+//                if(flag==0)//如果健康人多于感染人数-隔离人数
+//                    if(healthStatus!=0&&people[i].getInfNumber()<v.getR0())
+//                        infecting1(i);//如果是感染者且不在治疗且传染人数未超限，则去感染别人
+//                if(flag==1)//如果健康人少于感染人数-隔离人数
+//                    if(healthStatus==0)
+//                        infecting2(i);//健康人去被感染
+//            }
 
         }
     }

@@ -46,7 +46,7 @@ int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，
     int bw=0;
     int bl=0;
     //用于判断是否在建筑内
-    bool flag=0;
+    bool work=0;
     int j=0;
     for(;j<buildingNumber;j++)
     {
@@ -58,11 +58,11 @@ int MapQGraphics::judgeWhere(int i)//判断居民i是否位于某个建筑中，
         //判断是不是在第j个建筑中
         if(px>=bx&&px<=bx+bw&&py>=by&&py<=by+bl)
         {
-            flag=1;
+            work=1;
             break;
         }
     }
-    if(flag)
+    if(work)
         return j;
     else
         return -1;

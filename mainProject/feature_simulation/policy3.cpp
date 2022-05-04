@@ -14,7 +14,7 @@
 void MapQGraphics::policy3()
 {
     policy=3;
-    v.setHealthEffect(0.7);//卫生政策
+    v.setHealthEffect(0.6);//卫生政策
     v.setSocialEffect(0.6);//适度社交管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation3);//每500ms全部人要做的
@@ -34,9 +34,9 @@ void MapQGraphics::policy3()
 void MapQGraphics::simulation3()
 {
     //不同时间段活动
-    if(showTime==6.0)//仅上下班，不去堂食
+    if(day%7!=0&&showTime==6.0)//仅上下班，不去堂食
         path(1);
-    else if(showTime==20.0)
+    else if(day%7!=0&&showTime==20.0)
         path(4);
     else if(showTime==0.0)
         everyday();

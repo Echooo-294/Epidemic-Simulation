@@ -70,28 +70,28 @@ void MapQGraphics::infecting1(int i)
     }
 }
 
-void MapQGraphics::infecting2(int i)
-{
-    //调用前判断：不被隔离的健康人
-    //健康人去被感染，被感染到先设置data，延后状态和颜色更新
-    QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
-    qDebug()<<"infecting2";
-    if(list.isEmpty())
-        return;//如果没有碰撞到其他人，则返回
-    const int size =list.size();
-    int j=0;
-    const int where=judgeWhere(i);//判断在哪个建筑
-    for(;j<size;j++)
-    {
-        if(list[j]->data(1).toString()=="infected")//如果碰撞到感染者
-            if(judgeInfected(list[j]->data(3).toInt(),i,where))//随机判断是否被感染了，i是健康人，j是感染者
-            {
-                list[i]->setData(1,"infected");
-                qDebug()<<"infected";
-                return;//被感染就可以返回了
-            }
-    }
-}
+//void MapQGraphics::infecting2(int i)
+//{
+//    //调用前判断：不被隔离的健康人
+//    //健康人去被感染，被感染到先设置data，延后状态和颜色更新
+//    QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
+//    qDebug()<<"infecting2";
+//    if(list.isEmpty())
+//        return;//如果没有碰撞到其他人，则返回
+//    const int size =list.size();
+//    int j=0;
+//    const int where=judgeWhere(i);//判断在哪个建筑
+//    for(;j<size;j++)
+//    {
+//        if(list[j]->data(1).toString()=="infected")//如果碰撞到感染者
+//            if(judgeInfected(list[j]->data(3).toInt(),i,where))//随机判断是否被感染了，i是健康人，j是感染者
+//            {
+//                list[i]->setData(1,"infected");
+//                qDebug()<<"infected";
+//                return;//被感染就可以返回了
+//            }
+//    }
+//}
 
 void MapQGraphics::infecting3(int i)//从感染者出发去搜查密切接触者
 {
@@ -105,8 +105,9 @@ void MapQGraphics::infecting3(int i)//从感染者出发去搜查密切接触者
     const int where=judgeWhere(i);//判断在哪个建筑
     for(;j<size;j++)
     {
-        //if(people[i].getVirusDensity()>0.05)
-        list[j]->setData(2,"mijie");
+        //如果感染者核酸检测出来则设周围人为密接，即隔离速度为一天
+        if(people[i].getVirusDensity()>0.05)
+            list[j]->setData(2,"mijie");
         if(people[i].getInfNumber()>=v.getR0())//如果感染者传染人数超限，则退出
             return;
         if(list[j]->data(1).toString()!="infected")//如果未被感染
