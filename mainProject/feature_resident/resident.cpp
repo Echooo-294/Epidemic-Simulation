@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-03
  */
 
 #include<feature_resident/resident.h>
@@ -84,7 +84,11 @@ void Resident::updateHealthStatus()
         if(healthStatus==2&&activityStatus!=2&&activityStatus!=4)
             setBrush(QBrush("#a64036"));
         else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)
+        {
             setBrush(QBrush("#75fa85"));
+            infectionNumber--;//感染-1
+            healthNumber++;//健康+1
+        }
     }
     else if(oldHealthStatus==2)//旧状态为出症状
     {
@@ -135,6 +139,8 @@ Resident& Resident::operator=(Resident &a)
     activityStatus=a.getActivityStatus();
     vaccine=a.getVaccine();
     immunity=a.getImmunity();
+    infNumber=a.getInfNumber();
+    isolateDay=a.getIsolateDay();
     return *this;
 }
 

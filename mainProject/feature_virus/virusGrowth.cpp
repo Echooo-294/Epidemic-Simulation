@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-12
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-05-03
+ * @Last Modified time: 2022-05-04
  */
 #include<feature_resident/resident.h>
 #include<feature_virus/virus.h>
@@ -29,7 +29,9 @@ void Resident::virusGrowth()
         else if(virusDensity>=boundary2&&virusDensity<1)
             virusDensity+=v.getGrowthRate3();//重症后自然增长
     }
+    //每次病毒自然增长，有概率增加可传染人数
     if(p<0.1)
-        infNumber=0;
-
+        infNumber-=2;
+    else if(p<0.2)
+        infNumber--;
 }

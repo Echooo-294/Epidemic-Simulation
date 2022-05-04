@@ -15,6 +15,9 @@ bool MapQGraphics::judgeInfected(int i,int j,int where)//i为感染者，j为健
     //如果传染人数超限则返回
     if(people[i].getInfNumber()>=v.getR0())
         return 0;
+    //如果健康人处于隔离态
+    if(people[j].getActivityStatus()>=2)
+        return 0;
     double P=0;
     //病毒感染者是潜伏or出症状，两者概率不同
     if(people[i].getVirusDensity()<v.getBoundary1())
@@ -66,27 +69,30 @@ void MapQGraphics::infecting1(int i)
                 list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染
     }
 }
-/*
+
 void MapQGraphics::infecting2(int i)
 {
-    //调用前判断：健康人
+    //调用前判断：不被隔离的健康人
     //健康人去被感染，被感染到先设置data，延后状态和颜色更新
     QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
+    qDebug()<<"infecting2";
     if(list.isEmpty())
         return;//如果没有碰撞到其他人，则返回
     const int size =list.size();
     int j=0;
+    const int where=judgeWhere(i);//判断在哪个建筑
     for(;j<size;j++)
     {
         if(list[j]->data(1).toString()=="infected")//如果碰撞到感染者
-            if(judgeInfected(list[j]->data(3).toInt(),i))//随机判断是否被感染了，i是健康人，j是感染者
+            if(judgeInfected(list[j]->data(3).toInt(),i,where))//随机判断是否被感染了，i是健康人，j是感染者
             {
                 list[i]->setData(1,"infected");
-
+                qDebug()<<"infected";
+                return;//被感染就可以返回了
             }
     }
 }
-*/
+
 void MapQGraphics::infecting3(int i)//从感染者出发去搜查密切接触者
 {
     //调用前判断：感染者且不在治疗和隔离中

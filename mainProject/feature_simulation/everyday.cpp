@@ -32,6 +32,7 @@ void MapQGraphics::everyday()
     {
         healthStatus=people[i].getHealthStatus();
         activityStatus=people[i].getActivityStatus();
+
         if(activityStatus>=2)
             people[i].isolateDayInc();//隔离天数+1
         isolateday=people[i].getIsolateDay();

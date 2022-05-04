@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-04
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -61,10 +61,16 @@ void MapQGraphics::simulation2()
             if(activityStatus!=4&&healthStatus!=0)
             {
                 if(healthStatus==3&&restroom>0)//重症直接进入医院
+                {
                     people[i].goHospital(buildings[5]);
+                    isolationNumber++;
+                }
                 else if(healthStatus==2&&restroom>0)//有症状的有概率进医院
                     if(randDouble()<0.5)
+                    {
                         people[i].goHospital(buildings[5]);
+                        isolationNumber++;
+                    }
             }
             if(randDouble()<activityWill())//获得当前时间的活动意愿
                 randMove(i);//随机移动

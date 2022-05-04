@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-04
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -49,6 +49,9 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
         int i=0;
         int activityStatus=0;
         int healthStatus=0;
+        bool flag=0;
+//        if(healthNumber<infectionNumber-isolationNumber)
+//            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群
         {
             people[i].updateHealthStatus();//更新自身状态
@@ -61,17 +64,30 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
             if(activityStatus!=4&&healthStatus!=0)
             {
                 if(healthStatus==3&&restroom>0)//重症直接进入医院
+                {
                     people[i].goHospital(buildings[5]);
+                    isolationNumber++;
+                }
                 else if(healthStatus==2&&restroom>0)//出症状的有概率进医院
                     if(randDouble()<0.4)
+                    {
                         people[i].goHospital(buildings[5]);
+                        isolationNumber++;
+                    }
             }
             if(randDouble()<activityWill())//获得当前时间的活动意愿
                 randMove(i);//随机移动
-            //如果是感染者且不在治疗，则去感染别人
-            if(activityStatus<=1&&healthStatus!=0)
-                if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人
-                    infecting1(i);
+            //没隔离才可以进行感染
+            if(activityStatus<=1)
+            {
+                if(flag==0)//如果健康人多于感染人数-隔离人数
+                    if(healthStatus!=0&&people[i].getInfNumber()<v.getR0())
+                        infecting1(i);//如果是感染者且不在治疗且传染人数未超限，则去感染别人
+                if(flag==1)//如果健康人少于感染人数-隔离人数
+                    if(healthStatus==0)
+                        infecting2(i);//健康人去被感染
+            }
+
         }
     }
     updateShowTime();//时间更新
