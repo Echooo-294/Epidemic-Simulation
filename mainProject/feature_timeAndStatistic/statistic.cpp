@@ -26,14 +26,3 @@ int immunityNumber;//疫苗接种人数
 int day;//天数
 double showTime;//时间，起始为0点
 
-void showStatistic()
-{   
-    qDebug()<<"模拟天数："<<day;
-    qDebug()<<"存活人数："<<initPopulation-deadNumber;
-    qDebug()<<"正常人数："<<healthNumber;
-    qDebug()<<"感染者："<<infectionNumber;
-    qDebug()<<"隔离人数："<<isolationNumber;
-    qDebug()<<"重症人数："<<seriousNumber;
-    qDebug()<<"死亡人数："<<deadNumber;
-    qDebug()<<"疫苗接种人数："<<immunityNumber;
-}

@@ -48,10 +48,8 @@ void Resident::setVaccine()
     immunity++;
 }
 
-void Resident::updateHealthStatus()
+void Resident::updateHealthStatus(const int oldHealthStatus)//记录旧的健康状态
 {
-    const int oldHealthStatus=healthStatus;//记录旧的健康状态
-
     //根据密度更新健康状态，确认和密度绑定
     double boundary1=v.getBoundary1();//潜伏与出症状的密度界限
     double boundary2=v.getBoundary2();//非重症与重症的密度界限
@@ -72,7 +70,6 @@ void Resident::updateHealthStatus()
         if(data(1).toString()=="infected")//由健康变感染潜伏
         {
             healthStatus=1;
-            virusDensity+=0.03;//初始密度
             if(activityStatus!=2&&activityStatus!=4)
                 setBrush(QBrush("#dc6b82"));
             infectionNumber++;//总感染+1
@@ -82,8 +79,8 @@ void Resident::updateHealthStatus()
     else if(oldHealthStatus==1)
     {
         if(healthStatus==2&&activityStatus!=2&&activityStatus!=4)
-            setBrush(QBrush("#a64036"));
-        else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)
+            setBrush(QBrush("#e60012"));
+        else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)//无症状变健康
         {
             setBrush(QBrush("#75fa85"));
             infectionNumber--;//感染-1
@@ -96,7 +93,7 @@ void Resident::updateHealthStatus()
         {
             seriousNumber++;//重症+1
             if(activityStatus!=2&&activityStatus!=4)
-                setBrush(QBrush("#7c191e"));
+                setBrush(QBrush("#631216"));
         }
         else if(healthStatus==1)
             if(activityStatus!=2&&activityStatus!=4)
@@ -113,9 +110,9 @@ void Resident::updateHealthStatus()
         }
         else if(healthStatus==2)
         {
-            seriousNumber--;
+            seriousNumber--;//重症-1
             if(activityStatus!=2&&activityStatus!=4)
-                setBrush(QBrush("#a64036"));
+                setBrush(QBrush("#e60012"));
         }
     }
 }
@@ -159,7 +156,7 @@ void Resident::goHospital(Space *h)
         return;
     activityStatus=4;//设置活动状态为治疗中4
     setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);//设置位置
-    setBrush(QBrush("#2adedb"));
+    setBrush(QBrush("#001eff"));
     h->restRoomDec();//剩余床位-1
 }
 
@@ -188,7 +185,7 @@ void Resident::goIsolate(Space *h)
     activityStatus=2;//活动状态为隔离
     isolateDay=0;
     setPos(1095+randDouble()*180,445+randDouble()*300);
-    setBrush(QBrush("#fedc5e"));
+    setBrush(QBrush("#f6ff00"));
     isolationNumber++;
     h->restRoomDec();
 }

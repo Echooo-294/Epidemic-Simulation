@@ -15,17 +15,13 @@ public:
     double getGrowthRate3() const;
     double getBoundary1() const;
     double getBoundary2() const;
-
     double getHealthkEffect() const;
-    void setHealthEffect(double value);
     double getR0() const;
-
     double getSocialEffect() const;
+
+    void setHealthEffect(double value);
     void setSocialEffect(double value);
     void setR0(double value);
-
-
-
 private:
     double infectionP1;//潜伏期感染概率
     double infectionP2;//出症状感染概率

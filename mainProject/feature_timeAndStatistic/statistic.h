@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-12
+ * @Last Modified time: 2022-05-05
  */
 #ifndef STATISTIC_H
 #define STATISTIC_H
@@ -32,7 +32,6 @@ extern double showTime;//时间
 //rand() 返回任意正整数
 double randDouble();//返回0-1double
 void updateShowTime();//更新展示的时间
-void showStatistic();//展示统计结果
 
 
 #endif // STATISTIC_H

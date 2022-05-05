@@ -28,14 +28,17 @@ public:
     bool getVaccine() const;
     double getImmunity() const;
     int getInfNumber() const;
+    int getIsolateDay() const;
 
     void setVirusDensity(double value);
     void setHealthStatus(int value);
     void setActivityStatus(int value);
     void setVaccine();//打疫苗，免疫力+1
+    void isolateDayInc();//隔离天数+1
+    void setIsolateDay(int value);
     void infNumInc();//传染人数+1
 
-    void updateHealthStatus();//用于更新状态
+    void updateHealthStatus(const int oldHealthStatus);//用于更新状态
     void virusGrowth();//病毒自然增长，定义在feature_virus
     void treatment(Space *h);//治疗，定义在feature_virus
     QPainterPath shape() const override;//碰撞范围和形状
@@ -44,11 +47,6 @@ public:
     void goHospital(Space *h);//去医院
     void goHome();//从隔离区、医院回家
     void goIsolate(Space *h);//去隔离
-
-    int getIsolateDay() const;
-    void isolateDayInc();//隔离天数+1
-
-    void setIsolateDay(int value);
 
 private:
     double virusDensity;//病毒密度

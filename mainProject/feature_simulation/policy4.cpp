@@ -14,14 +14,18 @@
 void MapQGraphics::policy4()
 {
     policy=4;
+    //政策影响
     v.setHealthEffect(0.5);//卫生政策
     v.setSocialEffect(0.4);//严格社交管控
+    //设置医院和隔离区容量
+    buildings[5]->setRestRoom(initPopulation*0.25);
+    buildings[6]->setRestRoom(initPopulation*0.4);
+
+    //每interval ms全部人要做的
     timer1=new QTimer(this);//初始化计时器
-    connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
-//    timer2=new QTimer(this);
-//    connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
+    connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);
     timer1->start(interval);//代表2小时
-//    timer2->start(interval*12);//代表24小时
+
     //设置结束条件
     if(deadNumber>=initPopulation)
     {
@@ -47,17 +51,38 @@ void MapQGraphics::simulation4()
         int healthStatus=0;
         for(;i<initPopulation;i++)//遍历整个人群
         {
-            //密接者隔离，居家隔离者不会被独立隔离
-            if(activityStatus<=1&&people[i].data(2).toString()=="mijie")
-            {
-                    people[i].goIsolate(buildings[6]);
-                    people[i].setData(2,"geli");
-            }
-            people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
             if(healthStatus==4||activityStatus==4)//如果死亡/治疗中，则跳到下一个人
                 continue;
+
+            //更新自身状态
+            if(healthStatus==0&&people[i].data(1).toString()=="infected")//由健康变感染潜伏
+            {
+                people[i].setHealthStatus(1);
+                people[i].setVirusDensity(0.03);//赋予初始病毒密度
+                if(activityStatus!=2&&activityStatus!=4)
+                    people[i].setBrush(QBrush("#dc6b82"));
+                infectionNumber++;//总感染+1
+                healthNumber--;//正常-1
+            }
+
+//
+//            if(activityStatus<=1&&people[i].data(2).toString()=="mijie")
+//            {
+//                    people[i].goIsolate(buildings[6]);
+//                    people[i].setData(2,"geli");
+//            }
+            //密接者隔离，居家隔离的也会被独立隔离
+            if(activityStatus!=2&&activityStatus!=4)
+            {
+                if(people[i].data(2).toString()=="mijie"||people[i].getVirusDensity()>0.03)
+                {
+                    people[i].goIsolate(buildings[6]);
+                    people[i].setData(2,"geli");
+                }
+            }
+
             //如果是感染者，且本身不在治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&healthStatus!=0)
