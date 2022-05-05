@@ -38,7 +38,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     buildings = new Space*[buildingNumber];
 
     //初始化视图
-    scene=new QGraphicsScene(0,0,this->width()-5,this->height()-5);
+    scene=new QGraphicsScene(0,0,this->width(),this->height());
     this->setScene(scene);
 
 //    auto line = new QGraphicsLineItem;
@@ -51,7 +51,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 
     //初始化一系列建筑
     //继续添加建筑需要去修改statistic.cpp中的buildingNumber
-    Space *r1=new Space('R',150,200,"一号居民楼",QPoint(90,90));
+    Space *r1=new Space('R',150,200,"一号居民楼",QPoint(5,5));
     this->buildings[0]=r1;
     Space *r2=new Space('R',150,200,"二号居民楼",QPoint(this->width()-400,5));
     this->buildings[1]=r2;
@@ -73,7 +73,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     this->buildings[6]=z1;
     Space *c1=new Space('Z',150,150,"春晖园",QPoint(this->width()*0.05,this->height()*0.4));
     this->buildings[10]=c1;
-    Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7,this->height()*0.4));
+    Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7-25,this->height()*0.4));
     this->buildings[11]=c2;
     //设置医院和隔离区容量
     this->buildings[5]->setRestRoom(initPopulation*0.2);
