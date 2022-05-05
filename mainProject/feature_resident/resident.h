@@ -40,7 +40,7 @@ public:
 
     void updateHealthStatus(const int oldHealthStatus);//用于更新状态
     void virusGrowth();//病毒自然增长，定义在feature_virus
-    void treatment(Space *h);//治疗，定义在feature_virus
+    void treatment(Space **h);//治疗，定义在feature_virus
     QPainterPath shape() const override;//碰撞范围和形状
     Resident& operator=(Resident &a);//重载=运算符
     void goDeadth();//死亡函数，设置去墓地

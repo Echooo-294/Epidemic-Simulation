@@ -38,7 +38,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     buildings = new Space*[buildingNumber];
 
     //初始化视图
-    scene=new QGraphicsScene(0,0,this->width()-5,this->height()-5);
+    scene=new QGraphicsScene(0,0,this->width(),this->height());
     this->setScene(scene);
 
 //    auto line = new QGraphicsLineItem;
@@ -73,7 +73,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     this->buildings[6]=z1;
     Space *c1=new Space('Z',150,150,"春晖园",QPoint(this->width()*0.05,this->height()*0.4));
     this->buildings[10]=c1;
-    Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7,this->height()*0.4));
+    Space *c2=new Space('Z',150,150,"鸳鸯火锅",QPoint(this->width()*0.7-25,this->height()*0.4));
     this->buildings[11]=c2;
 
     Space *R[4]={r1,r2,r3,r4};

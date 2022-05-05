@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-05-04
+ * @Last Modified time: 2022-05-05
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -67,7 +67,6 @@ void MapQGraphics::simulation4()
                 healthNumber--;//正常-1
             }
 
-//
 //            if(activityStatus<=1&&people[i].data(2).toString()=="mijie")
 //            {
 //                    people[i].goIsolate(buildings[6]);

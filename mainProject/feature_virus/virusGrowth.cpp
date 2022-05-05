@@ -32,6 +32,6 @@ void Resident::virusGrowth()
     //每次病毒自然增长，有概率增加可传染人数
     if(p<0.1)
         infNumber-=2;
-    else if(p<0.2)
+    else if(p<0.4)
         infNumber--;
 }

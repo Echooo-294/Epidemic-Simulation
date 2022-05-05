@@ -9,7 +9,6 @@
 #include<mainwindow.h>
 #include<feature_timeAndStatistic/statistic.h>
 #include <QGraphicsItemAnimation>
-
 #include<QTimeLine>
 
 double MapQGraphics::activityWill()//一天中不同时间段活动意愿不同
@@ -149,7 +148,6 @@ void MapQGraphics::moveSilky(int i, QPoint des,int t)
 
     //动画开始
     tline->start();
-
 }
 
 void MapQGraphics::path(int c)//c--活动参数--1：上班；2：去食堂；3：继续上班；4：下班

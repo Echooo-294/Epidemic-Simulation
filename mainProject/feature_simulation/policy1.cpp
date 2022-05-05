@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-05-04
+ * @Last Modified time: 2022-05-05
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -17,8 +17,9 @@ void MapQGraphics::policy1()
     //政策影响
     v.setSocialEffect(1);
     v.setHealthEffect(1);
-    //设置医院容量
+    //设置医院和隔离区容量
     buildings[5]->setRestRoom(initPopulation*0.15);
+    buildings[6]->setRestRoom(initPopulation*0.2);
 
     //每interval ms全部人要做的
     timer1=new QTimer(this);//初始化计时器
