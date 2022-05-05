@@ -80,9 +80,9 @@ void Resident::updateHealthStatus(const int oldHealthStatus)//记录旧的健康
     {
         if(healthStatus==2&&activityStatus!=2&&activityStatus!=4)
             setBrush(QBrush("#e60012"));
-        else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)//无症状变健康
+        else if(healthStatus==0&&activityStatus!=4)//无症状变健康
         {
-            setBrush(QBrush("#75fa85"));
+            setBrush(QBrush("#f6ff00"));
             infectionNumber--;//感染-1
             healthNumber++;//健康+1
         }
@@ -184,7 +184,7 @@ void Resident::goIsolate(Space *h)
         return;
     activityStatus=2;//活动状态为隔离
     isolateDay=0;
-    setPos(1095+randDouble()*180,445+randDouble()*300);
+    setPos(h->getPosition().x()+randDouble()*180,h->getPosition().y()+randDouble()*300);
     setBrush(QBrush("#f6ff00"));
     isolationNumber++;
     h->restRoomDec();

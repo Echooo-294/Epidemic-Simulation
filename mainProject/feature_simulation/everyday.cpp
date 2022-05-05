@@ -43,7 +43,7 @@ void MapQGraphics::everyday()
 
         //如果在治疗中
         if(activityStatus==4&&people[i].getHealthStatus()!=0)
-            people[i].treatment(buildings[5]);
+            people[i].treatment(buildings);
 
         //更新由于病毒增长和治疗带来的变化
         people[i].updateHealthStatus(healthStatus);
