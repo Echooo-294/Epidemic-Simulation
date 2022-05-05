@@ -78,11 +78,15 @@ void Resident::updateHealthStatus(const int oldHealthStatus)//记录旧的健康
     }//旧状态为无症状
     else if(oldHealthStatus==1)
     {
-        if(healthStatus==2&&activityStatus!=2&&activityStatus!=4)
-            setBrush(QBrush("#e60012"));
-        else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)//无症状变健康
+        if(healthStatus==2)
         {
-            setBrush(QBrush("#75fa85"));
+            if(activityStatus!=2&&activityStatus!=4)
+                setBrush(QBrush("#e60012"));
+        }
+        else if(healthStatus==0)//无症状变健康
+        {
+            if(activityStatus!=2&&activityStatus!=4)
+                setBrush(QBrush("#75fa85"));
             infectionNumber--;//感染-1
             healthNumber++;//健康+1
         }
@@ -96,8 +100,10 @@ void Resident::updateHealthStatus(const int oldHealthStatus)//记录旧的健康
                 setBrush(QBrush("#631216"));
         }
         else if(healthStatus==1)
+        {
             if(activityStatus!=2&&activityStatus!=4)
                 setBrush(QBrush("#dc6b82"));
+        }
     }//旧状态为重症
     else if(oldHealthStatus==3)
     {
