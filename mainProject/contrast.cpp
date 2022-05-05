@@ -62,10 +62,11 @@ void Contrast::pieChart(QVector<int> vec)
     ui->verticalLayout_5->insertWidget(0, chartview_2);
 }
 
-void Contrast::barChart(QVector<int> vec)
+void Contrast:: barChart(QVector<int> vec)
 {
     QBarSet *set0 = new QBarSet("健康人数");
     QBarSet *set1 = new QBarSet("感染人数");
+    set1->setBrush(Qt::red);
     QBarSet *set2 = new QBarSet("重症人数");
     QBarSet *set3 = new QBarSet("死亡人数");
     QBarSet *set4 = new QBarSet("疫苗接种人数");

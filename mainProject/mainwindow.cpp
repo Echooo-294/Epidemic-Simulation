@@ -17,13 +17,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //基本设置
     this->setWindowTitle("疫情模拟系统");
-    QDesktopWidget *desk=QApplication::desktop();
-    this->resize(desk->width(),desk->height()-50);
+    //QDesktopWidget *desk=QApplication::desktop();
+    //this->resize(desk->width(),desk->height()-50);
     //界面布局
-    ui->groupBox->setGeometry(0,0,this->width(),this->height()*0.2);
-    ui->groupBox_3->setGeometry(0,this->height()*0.2,this->width(),this->height()*0.8);
-    ui->groupBox_2->setGeometry(0,0,ui->groupBox_3->width()*0.2,ui->groupBox_3->height());
-    ui->mapView->setGeometry(this->width()*0.2,0,ui->groupBox_3->width()*0.8,ui->groupBox_3->height()-50);
+    //ui->groupBox->setGeometry(0,0,this->width(),this->height()*0.2);
+    //ui->groupBox_3->setGeometry(0,this->height()*0.2,this->width(),this->height()*0.8);
+    //ui->groupBox_2->setGeometry(0,0,ui->groupBox_3->width()*0.2,ui->groupBox_3->height());
+    //ui->mapView->setGeometry(this->width()*0.2,0,ui->groupBox_3->width()*0.8,ui->groupBox_3->height()-50);
 
     //设置状态栏
     ui->statusbar->setSizeGripEnabled(false);//去掉状态栏右下角的三角
@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //chart->setTitle("累计健康/累计感染");//设置图表名称
     //chart->legend()->hide();
     chart = new Chart;
-    chart->legend()->setAlignment(Qt::AlignRight);//在图表右侧显示曲线名称
+    chart->legend()->setAlignment(Qt::AlignTop);//在图表上方显示曲线名称
     chart->setAnimationOptions(QChart::AllAnimations);//设置图表动画效果
     ui->graphicsView->setChart(chart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);//设置抗锯齿，让曲线看起来更加平滑
