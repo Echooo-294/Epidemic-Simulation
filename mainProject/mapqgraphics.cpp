@@ -6,7 +6,7 @@
 MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
     //初始化图形大小
-    //this->resize(1280,750);
+    this->resize(1280,750);
     this->setBackgroundBrush(Qt::gray);
 
     //initPopulation是定义在statistic.cpp中的初始总人数
