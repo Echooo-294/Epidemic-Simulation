@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-03
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-03
  */
 
 #include<feature_resident/resident.h>
@@ -84,7 +84,11 @@ void Resident::updateHealthStatus()
         if(healthStatus==2&&activityStatus!=2&&activityStatus!=4)
             setBrush(QBrush("#a64036"));
         else if(healthStatus==0&&activityStatus!=2&&activityStatus!=4)
+        {
             setBrush(QBrush("#75fa85"));
+            infectionNumber--;//感染-1
+            healthNumber++;//健康+1
+        }
     }
     else if(oldHealthStatus==2)//旧状态为出症状
     {
@@ -121,11 +125,6 @@ double Resident::getImmunity() const
     return immunity;
 }
 
-void Resident::setImmunity(double value)
-{
-    immunity = value;
-}
-
 QPainterPath Resident::shape() const//返回被碰撞的形状
 {
     QPainterPath path;
@@ -140,6 +139,8 @@ Resident& Resident::operator=(Resident &a)
     activityStatus=a.getActivityStatus();
     vaccine=a.getVaccine();
     immunity=a.getImmunity();
+    infNumber=a.getInfNumber();
+    isolateDay=a.getIsolateDay();
     return *this;
 }
 
@@ -185,6 +186,7 @@ void Resident::goIsolate(Space *h)
     if(h->getRestRoom()==0)
         return;
     activityStatus=2;//活动状态为隔离
+    isolateDay=0;
     setPos(1095+randDouble()*180,445+randDouble()*300);
     setBrush(QBrush("#fedc5e"));
     isolationNumber++;

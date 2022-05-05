@@ -14,20 +14,23 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     int i=0;
     for(;i<initPopulation;i++)//初始化居民
     {
-        Resident adult;
+        Resident adult(this,randDouble()*0.4+0.6);//免疫力0.6-1
         people[i]=adult;
         people[i].setBrush(QBrush("#75fa85"));
         people[i].setData(3,i);//在data(3)中存上序号，方便在退化为父类时仍能追踪到
     }
 
     //initInfection是定义在statistic.cpp中的初始感染人数
-    //incubation = new Resident[initPopulation];//给感染者数组直接构造initPopulation的空间，避免超量
+    //incubation = new Resident[initPopulation];
+    //给感染者数组直接构造initPopulation的空间，避免超量
+    int j=0;
     for(int i=0;i<initInfection;i++)//初始的感染者全部是感染潜伏
     {
-        people[i%4*initPopulation/4+i/4].setHealthStatus(1);//全体人群从0开始感染
-        people[i%4*initPopulation/4+i/4].setVirusDensity(0.03);//赋予初始病毒密度
-        people[i%4*initPopulation/4+i/4].setData(1,"infected");//设置被感染的标志
-        people[i%4*initPopulation/4+i/4].setBrush(QBrush("#dc6b82"));//变红
+        j=rand()%initPopulation;
+        people[j].setHealthStatus(1);//全体人群从0开始感染
+        people[j].setVirusDensity(0.03);//赋予初始病毒密度
+        people[j].setData(1,"infected");//设置被感染的标志
+        people[j].setBrush(QBrush("#dc6b82"));//变红
         //incubation[i%4*initPopulation/4+i/4]=people[i%4*initPopulation/4+i/4];//并且添加到感染潜伏数组
     }
 

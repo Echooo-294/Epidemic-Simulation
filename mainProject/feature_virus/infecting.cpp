@@ -10,25 +10,37 @@
 #include<feature_timeAndStatistic/statistic.h>
 #include"mapqgraphics.h"
 
-bool MapQGraphics::judgeInfected(int i,int j)//i为感染者，j为健康人
+bool MapQGraphics::judgeInfected(int i,int j,int where)//i为感染者，j为健康人
 {
+    //如果传染人数超限则返回
     if(people[i].getInfNumber()>=v.getR0())
-        return 0;//如果传染人数超限则返回
+        return 0;
+    //如果健康人处于隔离态
+    if(people[j].getActivityStatus()>=2)
+        return 0;
     double P=0;
-    if(people[i].getVirusDensity()<v.getBoundary1())//病毒感染者是潜伏or出症状，两者概率不同
+    //病毒感染者是潜伏or出症状，两者概率不同
+    if(people[i].getVirusDensity()<v.getBoundary1())
         P=v.getInfectionP1();
     else
         P=v.getInfectionP2();
+    //健康人是否接种了疫苗
     double vaccine=1;
-    if(people[j].getVaccine())//如果接种了疫苗
-        vaccine=0.4;
-    const double maskEffect=v.getMaskEffect();//政策——戴口罩、消毒
+    if(people[j].getVaccine())
+        vaccine=0.5;
+    //卫生政策
+    const double healthEffect=v.getHealthkEffect();
     //社交管控
     const double socialEffect=v.getSocialEffect();
     //和免疫力相关
     const double immunityP=3/(4*people[j].getImmunity());
+    //建筑相关
+    double  placeEffect=1;
+    if(where>=0)
+        placeEffect=buildings[where]->getInfectionRro();
+    //计算感染概率
+    P=P*vaccine*healthEffect*socialEffect*immunityP*placeEffect;
 
-    P=P*vaccine*maskEffect*socialEffect*immunityP;
     //随机数判断是否感染
     if(randDouble()<P)
     {
@@ -47,51 +59,59 @@ void MapQGraphics::infecting1(int i)
         return;//如果没有碰撞到其他人，则返回
     const int size=list.size();
     int j=0;
+    const int where=judgeWhere(i);//判断在哪个建筑
     for(;j<size;j++)
     {
         if(people[i].getInfNumber()>=v.getR0())//如果感染者传染人数超限，则退出
             return;
         if(list[j]->data(1).toString()!="infected")//如果未被感染
-            if(judgeInfected(i,list[j]->data(3).toInt()))//随机判断是否被感染了，i是感染者，j是健康人
+            if(judgeInfected(i,list[j]->data(3).toInt(),where))//随机判断是否被感染了，i是感染者，j是健康人
                 list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染
     }
 }
-/*
-void MapQGraphics::infecting2(int i)
-{
-    //调用前判断：健康人
-    //健康人去被感染，被感染到先设置data，延后状态和颜色更新
-    QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
-    if(list.isEmpty())
-        return;//如果没有碰撞到其他人，则返回
-    const int size =list.size();
-    int j=0;
-    for(;j<size;j++)
-    {
-        if(list[j]->data(1).toString()=="infected")//如果碰撞到感染者
-            if(judgeInfected(list[j]->data(2).toInt(),i))//随机判断是否被感染了，i是健康人，j是感染者
-            {
-                list[i]->setData(1,"infected");
 
-            }
-    }
-}
-*/
+//void MapQGraphics::infecting2(int i)
+//{
+//    //调用前判断：不被隔离的健康人
+//    //健康人去被感染，被感染到先设置data，延后状态和颜色更新
+//    QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
+//    qDebug()<<"infecting2";
+//    if(list.isEmpty())
+//        return;//如果没有碰撞到其他人，则返回
+//    const int size =list.size();
+//    int j=0;
+//    const int where=judgeWhere(i);//判断在哪个建筑
+//    for(;j<size;j++)
+//    {
+//        if(list[j]->data(1).toString()=="infected")//如果碰撞到感染者
+//            if(judgeInfected(list[j]->data(3).toInt(),i,where))//随机判断是否被感染了，i是健康人，j是感染者
+//            {
+//                list[i]->setData(1,"infected");
+//                qDebug()<<"infected";
+//                return;//被感染就可以返回了
+//            }
+//    }
+//}
+
 void MapQGraphics::infecting3(int i)//从感染者出发去搜查密切接触者
 {
+    //调用前判断：感染者且不在治疗和隔离中
+    //感染者去感染他人、搜查密切接触者
     QList<QGraphicsItem*> list=people[i].collidingItems();//返回碰撞图元QList
     if(list.isEmpty())
         return;//如果没有碰撞到其他人，则返回
     const int size=list.size();
     int j=0;
+    const int where=judgeWhere(i);//判断在哪个建筑
     for(;j<size;j++)
     {
+        //如果感染者核酸检测出来则设周围人为密接，即隔离速度为一天
         if(people[i].getVirusDensity()>0.05)
             list[j]->setData(2,"mijie");
         if(people[i].getInfNumber()>=v.getR0())//如果感染者传染人数超限，则退出
             return;
         if(list[j]->data(1).toString()!="infected")//如果未被感染
-            if(judgeInfected(i,list[j]->data(3).toInt()))//随机判断是否被感染了，i是感染者，j是健康人
+            if(judgeInfected(i,list[j]->data(3).toInt(),where))//随机判断是否被感染了，i是感染者，j是健康人
                 list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染
     }
 }

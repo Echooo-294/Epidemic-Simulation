@@ -22,13 +22,13 @@ Space::Space(char t,double l,double w,QString n,QPoint p) : QObject(nullptr),cap
     //居民楼
     case 'R':{
         setMoveMode(1);
-        setInfectionRro(1.0);
+        setInfectionRro(0.4);
         break;
     }
     //写字楼
     case 'W':{
         setMoveMode(1);
-        setInfectionRro(0.8);
+        setInfectionRro(1);
         break;
     }
     //医院
@@ -52,7 +52,7 @@ Space::Space(char t,double l,double w,QString n,QPoint p) : QObject(nullptr),cap
     //食堂
     case 'C':{
         setMoveMode(1);
-        setInfectionRro(0.8);
+        setInfectionRro(1.5);
         break;
     }
     }

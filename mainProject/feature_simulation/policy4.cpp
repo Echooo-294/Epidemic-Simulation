@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-04
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -14,8 +14,8 @@
 void MapQGraphics::policy4()
 {
     policy=4;
-    v.setMaskEffect(0.6);//卫生影响
-    v.setSocialEffect(0.4);//严格管控
+    v.setHealthEffect(0.5);//卫生政策
+    v.setSocialEffect(0.4);//严格社交管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation4);//每500ms全部人要做的
 //    timer2=new QTimer(this);
@@ -34,9 +34,9 @@ void MapQGraphics::policy4()
 void MapQGraphics::simulation4()
 {
     //不同时间段活动
-    if(showTime==6.0)
+    if(day%7!=0&&showTime==6.0)
         path(1);
-    else if(showTime==20.0)
+    else if(day%7!=0&&showTime==20.0)
         path(4);
     else if(showTime==0.0)
         everyday();
@@ -47,11 +47,11 @@ void MapQGraphics::simulation4()
         int healthStatus=0;
         for(;i<initPopulation;i++)//遍历整个人群
         {
-            //是否隔离
-            if(people[i].getVirusDensity()>0.05||people[i].data(2).toString()=="mijie")//密接者隔离
+            //密接者隔离，居家隔离者不会被独立隔离
+            if(activityStatus<=1&&people[i].data(2).toString()=="mijie")
             {
-                people[i].goIsolate(buildings[6]);
-                people[i].setData(2,"geli");
+                    people[i].goIsolate(buildings[6]);
+                    people[i].setData(2,"geli");
             }
             people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态

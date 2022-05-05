@@ -3,7 +3,7 @@
  * @Author: Echooo
  * @Date: 2022-03-21
  * @Last Modified by: Echooo
- * @Last Modified time: 2022-04-28
+ * @Last Modified time: 2022-05-04
  */
 #include<feature_resident/resident.h>
 #include<feature_timeAndStatistic/statistic.h>
@@ -14,8 +14,8 @@
 void MapQGraphics::policy3()
 {
     policy=3;
-    v.setMaskEffect(0.7);//卫生影响
-    v.setSocialEffect(0.6);//适度管控
+    v.setHealthEffect(0.6);//卫生政策
+    v.setSocialEffect(0.6);//适度社交管控
     timer1=new QTimer(this);//初始化计时器
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation3);//每500ms全部人要做的
 //    timer2=new QTimer(this);
@@ -34,9 +34,9 @@ void MapQGraphics::policy3()
 void MapQGraphics::simulation3()
 {
     //不同时间段活动
-    if(showTime==6.0)//仅上下班，不去堂食
+    if(day%7!=0&&showTime==6.0)//仅上下班，不去堂食
         path(1);
-    else if(showTime==20.0)
+    else if(day%7!=0&&showTime==20.0)
         path(4);
     else if(showTime==0.0)
         everyday();
@@ -57,10 +57,16 @@ void MapQGraphics::simulation3()
             if(activityStatus!=4&&healthStatus!=0)
             {
                 if(healthStatus==3&&restroom>0)//重症直接进入医院
+                {
                     people[i].goHospital(buildings[5]);
+                    isolationNumber++;
+                }
                 else if(healthStatus==2&&restroom>0)//有症状的有概率进医院
                     if(randDouble()<0.7)
+                    {
                         people[i].goHospital(buildings[5]);
+                        isolationNumber++;
+                    }
             }
             if(randDouble()<activityWill())//获得当前时间的活动意愿
                 randMove(i);//随机移动
