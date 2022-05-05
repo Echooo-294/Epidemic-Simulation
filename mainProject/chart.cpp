@@ -77,6 +77,7 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     m_axisX->setRange(0, 7);//设置x坐标轴的范围
     m_axisY->setRange(0, initPopulation+100);//设置y坐标轴的范围
 
+    //this->legend()->setAlignment(Qt::AlignTop);
     m_timer.start();
 }
 
