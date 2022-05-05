@@ -102,13 +102,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionexit_triggered()
-{
-    //点击菜单中的退出，退出程序
-
-    this->close();
-}
-
 void MainWindow::get_Mouse_Point(QPoint point)
 {
     //鼠标移动事件

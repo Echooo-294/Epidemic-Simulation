@@ -29,8 +29,6 @@ public:
     void mapInit();
     void everyday();
     ~MainWindow();
-public slots:
-    void on_actionexit_triggered();
 private:
     Ui::MainWindow *ui;
     //状态栏
