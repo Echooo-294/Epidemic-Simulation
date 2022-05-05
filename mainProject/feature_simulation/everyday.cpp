@@ -45,7 +45,9 @@ void MapQGraphics::everyday()
         if(activityStatus==4&&people[i].getHealthStatus()!=0)
             people[i].treatment(buildings[5]);
 
-        healthStatus=people[i].getHealthStatus();//更新由于病毒增长和治疗带来的变化
+        //更新由于病毒增长和治疗带来的变化
+        people[i].updateHealthStatus(healthStatus);
+        healthStatus=people[i].getHealthStatus();
 
         //释放满足条件的独立隔离、居家隔离人员
         if(activityStatus==2&&healthStatus==0&&isolateday>7)
@@ -60,7 +62,6 @@ void MapQGraphics::everyday()
             people[i].setActivityStatus(0);
             people[i].setIsolateDay(0);
         }
-
     }
     int j=0;
     //政策2、3、4疫苗接种，有每日接种上限，取决于政策
@@ -82,6 +83,5 @@ void MapQGraphics::everyday()
              if(people[j].getActivityStatus()<=1)//由于随机导致的重复，居家隔离速率日渐降低
                  people[j].setActivityStatus(3);//设为居家隔离
          }
-
 }
 

@@ -21,11 +21,12 @@ void Resident::treatment(Space *h)
     if(virusDensity<=0)
     {
         virusDensity=0;
-        immunity+=3;//免疫力+3
+        immunity+=5;//免疫力+5
         setData(1,"heal");//设置标志痊愈
         goHome();//出院回家
         h->restRoomInc();//剩余床位+1
-        infectionNumber--;//感染-1
-        healthNumber++;//健康+1
+        //数量变化在update中进行
+//        infectionNumber--;//感染-1
+//        healthNumber++;//健康+1
     }
 }

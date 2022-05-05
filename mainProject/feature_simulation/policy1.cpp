@@ -14,14 +14,17 @@
 void MapQGraphics::policy1()
 {
     policy=1;
+    //政策影响
     v.setSocialEffect(1);
     v.setHealthEffect(1);
+    //设置医院容量
+    buildings[5]->setRestRoom(initPopulation*0.15);
+
+    //每interval ms全部人要做的
     timer1=new QTimer(this);//初始化计时器
-    connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);//每400ms全部人要做的
-//    timer2=new QTimer(this);
-//    connect(timer2,&QTimer::timeout,this,&MapQGraphics::everyday);//每24h更新统计结果
+    connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);
     timer1->start(interval);//代表2小时
-//    timer2->start(interval*12);//代表24小时
+
     //设置结束条件
     if(deadNumber>=initPopulation)
     {
@@ -54,13 +57,24 @@ void MapQGraphics::simulation1() //完全开放唯一的措施是自行进入医
 //            flag=1;
         for(;i<initPopulation;i++)//遍历整个人群
         {
-            people[i].updateHealthStatus();//更新自身状态
             healthStatus=people[i].getHealthStatus();//健康状态
             activityStatus=people[i].getActivityStatus();//活动状态
             if(healthStatus==4||activityStatus==4)//如果死亡/治疗中，则跳到下一个人
                 continue;
+
+            //更新自身状态
+            if(healthStatus==0&&people[i].data(1).toString()=="infected")//由健康变感染潜伏
+            {
+                people[i].setHealthStatus(1);
+                people[i].setVirusDensity(0.03);//赋予初始病毒密度
+                if(activityStatus!=2&&activityStatus!=4)
+                    people[i].setBrush(QBrush("#dc6b82"));
+                infectionNumber++;//总感染+1
+                healthNumber--;//正常-1
+            }
+
             //如果是感染者，且本身不在治疗中，判断是否进入医院
-            int restroom=buildings[5]->getRestRoom();
+            const int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&healthStatus!=0)
             {
                 if(healthStatus==3&&restroom>0)//重症直接进入医院

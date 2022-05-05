@@ -106,7 +106,7 @@ void MapQGraphics::infecting3(int i)//从感染者出发去搜查密切接触者
     for(;j<size;j++)
     {
         //如果感染者核酸检测出来则设周围人为密接，即隔离速度为一天
-        if(people[i].getVirusDensity()>0.05)
+        if(people[i].getVirusDensity()>0.03)
             list[j]->setData(2,"mijie");
         if(people[i].getInfNumber()>=v.getR0())//如果感染者传染人数超限，则退出
             return;
