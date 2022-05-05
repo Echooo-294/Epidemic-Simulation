@@ -6,7 +6,7 @@
 MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 {
     //初始化图形大小
-    this->resize(1280,750);
+    //this->resize(1280,750);
     this->setBackgroundBrush(Qt::gray);
 
     //initPopulation是定义在statistic.cpp中的初始总人数
@@ -48,7 +48,7 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
 
     //初始化一系列建筑
     //继续添加建筑需要去修改statistic.cpp中的buildingNumber
-    Space *r1=new Space('R',150,200,"一号居民楼",QPoint(5,5));
+    Space *r1=new Space('R',150,200,"一号居民楼",QPoint(90,90));
     this->buildings[0]=r1;
     Space *r2=new Space('R',150,200,"二号居民楼",QPoint(this->width()-400,5));
     this->buildings[1]=r2;
