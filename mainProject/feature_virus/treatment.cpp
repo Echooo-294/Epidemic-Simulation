@@ -13,7 +13,7 @@ void Resident::treatment(Space **h)
 {
     //治疗速率，ln1.6=0.47，ln2=0.69，ln3=1.09，ln8=2.07
     const double recoveryRate=\
-            log(exp(immunity+1))*0.12+randDouble()*0.01+virusDensity*0.03;
+            log(exp(immunity+1))*0.07+randDouble()*0.01+virusDensity*0.03;
     //治疗有效率
     const double successRate=0.9;
     if (randDouble()<successRate)

@@ -64,8 +64,8 @@ void MapQGraphics::everyday()
         }
     }
     int j=0;
-    //政策2、3、4疫苗接种，有每日接种上限，取决于政策
-    if(policy>=2&&immunityNumber<initPopulation)
+    //政策2、3、4疫苗接种，有每日接种上限，取决于政策，第一天和周日不打疫苗
+    if(policy>=2&&immunityNumber<initPopulation&&day!=1&&day%7!=0)
         for(i=0;i<policy*100&&immunityNumber<=initPopulation;i++)
         {
             j=rand()%initPopulation;
@@ -75,8 +75,8 @@ void MapQGraphics::everyday()
                 immunityNumber++;
             }
         }
-    //政策3、4设置居家隔离，有每日新居家隔离人数上限，取决于政策
-    if(policy>=3)
+    //政策3、4设置居家隔离，有每日新居家隔离人数上限，取决于政策，第一天不隔离
+    if(policy>=3&&day!=1)
          for(i=0;i<policy*50;i++)
          {
              j=rand()%initPopulation;

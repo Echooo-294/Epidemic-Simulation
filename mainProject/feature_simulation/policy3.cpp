@@ -61,6 +61,16 @@ void MapQGraphics::simulation3()
                 healthNumber--;//正常-1
             }
 
+            //密接者和核酸检测隔离，居家隔离的也会被独立隔离
+            if(activityStatus!=2&&activityStatus!=4)
+            {
+                if(people[i].data(2).toString()=="mijie"||people[i].getVirusDensity()>0.1)
+                {
+                    people[i].goIsolate(buildings[6]);
+                    people[i].setData(2,"geli");
+                }
+            }
+
             //如果是感染者，且本身不在治疗中，判断是否进入医院
             int restroom=buildings[5]->getRestRoom();
             if(activityStatus!=4&&healthStatus!=0)
@@ -82,7 +92,7 @@ void MapQGraphics::simulation3()
             //如果是感染者且不在治疗和隔离中，则去感染别人
             if(activityStatus<=1&&healthStatus!=0)
                 if(people[i].getInfNumber()<v.getR0())//如果感染者感染人数未超限，则去感染他人
-                    infecting1(i);
+                    infecting2(i);
         }
     }
     updateShowTime();//时间更新

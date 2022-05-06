@@ -66,7 +66,7 @@ void MapQGraphics::simulation4()
 //                    people[i].goIsolate(buildings[6]);
 //                    people[i].setData(2,"geli");
 //            }
-            //密接者隔离，居家隔离的也会被独立隔离
+            //密接者和核酸检测隔离，居家隔离的也会被独立隔离
             if(activityStatus!=2&&activityStatus!=4)
             {
                 if(people[i].data(2).toString()=="mijie"||people[i].getVirusDensity()>0.03)
