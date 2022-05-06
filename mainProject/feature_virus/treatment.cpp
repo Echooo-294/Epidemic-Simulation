@@ -24,7 +24,7 @@ void Resident::treatment(Space **h)
         immunity+=5;//免疫力+5
         setData(1,"heal");//设置标志痊愈
         isolationNumber--;
-        goIsolate(h[6]);//出院回家
+        goIsolate(h[6]);//出院去隔离
         h[5]->restRoomInc();//剩余床位+1
         //数量变化在update中进行
 //        infectionNumber--;//感染-1

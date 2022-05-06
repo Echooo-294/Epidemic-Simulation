@@ -83,5 +83,11 @@ void MapQGraphics::everyday()
              if(people[j].getActivityStatus()<=1)//由于随机导致的重复，居家隔离速率日渐降低
                  people[j].setActivityStatus(3);//设为居家隔离
          }
+    //设置结束条件
+    if(deadNumber>=initPopulation)
+    {
+        timer1->stop();
+        return;
+    }
 }
 

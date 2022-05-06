@@ -115,8 +115,3 @@ void MapQGraphics::infecting3(int i)//从感染者出发去搜查密切接触者
                 list[j]->setData(1,"infected");//如果被感染则设置一个data标志，延后至更新状态时感染
     }
 }
-
-
-
-
-

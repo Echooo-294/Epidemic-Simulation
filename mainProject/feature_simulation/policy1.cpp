@@ -26,12 +26,6 @@ void MapQGraphics::policy1()
     connect(timer1,&QTimer::timeout,this,&MapQGraphics::simulation1);
     timer1->start(interval);//代表2小时
 
-    //设置结束条件
-    if(deadNumber>=initPopulation)
-    {
-        timer1->stop();
-        return;
-    }
 }
 
 //每2小时全部人要做的
