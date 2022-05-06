@@ -166,17 +166,17 @@ void Resident::goHospital(Space *h)
     h->restRoomDec();//剩余床位-1
 }
 
-void Resident::goHome()
+void Resident::goHome(Space **h)
 {
     double r=randDouble();
     if(r<0.25)
-        setPos(100,76);
+        setPos(h[0]->getPosition().x()+randDouble()*200,h[0]->getPosition().y()+randDouble()*150);
     else if(r<0.5)
-        setPos(100,671);
+        setPos(h[1]->getPosition().x()+randDouble()*200,h[1]->getPosition().y()+randDouble()*150);
     else if(r<0.75)
-        setPos(973,76);
+        setPos(h[2]->getPosition().x()+randDouble()*200,h[2]->getPosition().y()+randDouble()*150);
     else
-        setPos(973,671);//随便回一栋居民楼即可，但是不要集中
+        setPos(h[3]->getPosition().x()+randDouble()*200,h[3]->getPosition().y()+randDouble()*150);//随便回一栋居民楼即可，但是不要集中
     activityStatus=0;//设置活动状态为自由0
     healthStatus=0;//健康状态为健康
     isolateDay=0;//隔离时间归零
