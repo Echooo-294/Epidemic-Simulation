@@ -53,7 +53,7 @@ void MapQGraphics::everyday()
         if(activityStatus==2&&healthStatus==0&&isolateday>7)
         {
             //把隔离区隔离时间大于7天的健康人释放
-            people[i].goHome();
+            people[i].goHome(buildings);
             buildings[6]->restRoomInc();
         }
         else if(activityStatus==3&&healthStatus<2&&isolateday>3)

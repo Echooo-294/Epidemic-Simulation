@@ -119,7 +119,8 @@ void MainWindow::get_Mouse_Point_Press(QPoint point)
     if(item!=NULL)
     {
         QString str =item->data(1).toString();
-        curbuiLab->setText("当前建筑："+str);
+        if(item->data(1).toString()!="infected"&&item->data(1).toString()!="healthy")
+            curbuiLab->setText("当前建筑："+str);
     }
 }
 

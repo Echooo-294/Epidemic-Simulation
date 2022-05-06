@@ -45,7 +45,7 @@ public:
     Resident& operator=(Resident &a);//重载=运算符
     void goDeadth();//死亡函数，设置去墓地
     void goHospital(Space *h);//去医院
-    void goHome();//从隔离区、医院回家
+    void goHome(Space **h);//从隔离区、医院回家
     void goIsolate(Space *h);//去隔离
 
 private:
