@@ -19,7 +19,7 @@ void MapQGraphics::policy3()
     v.setSocialEffect(0.6);//适度社交管控
     //设置医院和隔离区容量
     buildings[5]->setRestRoom(initPopulation*0.2);
-    buildings[5]->setRestRoom(initPopulation*0.3);
+    buildings[6]->setRestRoom(initPopulation*0.3);
 
     //每interval ms全部人要做的
     timer1=new QTimer(this);//初始化计时器
