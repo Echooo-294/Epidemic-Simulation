@@ -143,7 +143,7 @@ void MainWindow::on_lineEdit_9_textChanged(const QString &arg1)
     ui->mapView->timer1->setInterval(ui->mapView->interval/arg1.toFloat());
     chart->m_timer.setInterval((ui->mapView->interval/arg1.toFloat())*12);
     //interval重新设置
-    ui->mapView->interval=400/arg1.toFloat();
+    //ui->mapView->interval=ui->mapView->interval/arg1.toFloat();
 }
 //退出按钮
 void MainWindow::on_actexit_triggered()
