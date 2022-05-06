@@ -68,13 +68,14 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
     m_series3->attachAxis(m_axisY);
 
     //可以理解为设置刻度格数
-    m_axisX->setTickCount(8);
+    m_axisX->setLabelsAngle(315);
+    m_axisX->setTickCount(6);
     int tickCount;
     if(initPopulation<100)tickCount=initPopulation/10;
-    else if(initPopulation<1000)tickCount=initPopulation/100;
+    else if(initPopulation<=1000)tickCount=initPopulation/200;
     else tickCount=initPopulation/1000;
     m_axisY->setTickCount(tickCount+1);
-    m_axisX->setRange(0, 7);//设置x坐标轴的范围
+    m_axisX->setRange(0, 5);//设置x坐标轴的范围
     m_axisY->setRange(0, initPopulation+100);//设置y坐标轴的范围
 
     //this->legend()->setAlignment(Qt::AlignTop);

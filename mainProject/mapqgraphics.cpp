@@ -41,14 +41,6 @@ MapQGraphics::MapQGraphics(QWidget *parent) : QGraphicsView(parent)
     scene=new QGraphicsScene(0,0,this->width(),this->height());
     this->setScene(scene);
 
-//    auto line = new QGraphicsLineItem;
-//    line->setLine(this->width()-195,0,this->width()-195,this->height());
-//    QPen pen6;
-//    pen6.setWidth(2);
-//    pen6.setColor(Qt::black);
-//    line->setPen(pen6);
-//    scene->addItem(line);
-
     //初始化一系列建筑
     //继续添加建筑需要去修改statistic.cpp中的buildingNumber
     Space *r1=new Space('R',150,200,"一号居民楼",QPoint(5,5));
